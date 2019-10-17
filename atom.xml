@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://asscreed.github.io/"/>
-  <updated>2019-10-16T15:11:33.246Z</updated>
+  <updated>2019-10-17T14:30:44.710Z</updated>
   <id>https://asscreed.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://asscreed.github.io/2019/10/17/test2/"/>
     <id>https://asscreed.github.io/2019/10/17/test2/</id>
     <published>2019-10-16T23:03:53.000Z</published>
-    <updated>2019-10-16T15:11:33.246Z</updated>
+    <updated>2019-10-17T14:30:44.710Z</updated>
     
-    <content type="html"><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p>]]></content>
+    <content type="html"><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p><p>aaaaaaaaaaaaaaaaaaaaaaaa</p><pre><code>if(int i=0; i&lt;=10;i++):    print(&quot;a test!!!!&quot;)</code></pre><pre><code>if(int i=0; i&lt;=10;i++):    print(&quot;a test!!!!&quot;)</code></pre>]]></content>
     
     <summary type="html">
     

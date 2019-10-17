@@ -4,6 +4,12 @@
     <title>test2</title>
     <url>/2019/10/17/test2/</url>
     <content><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p>
+<p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
+<pre><code>if(int i=0; i&lt;=10;i++):
+    print(&quot;a test!!!!&quot;)</code></pre><pre><code>
+if(int i=0; i&lt;=10;i++):
+    print(&quot;a test!!!!&quot;)</code></pre>
+
 ]]></content>
       <categories>
         <category>CTF</category>
