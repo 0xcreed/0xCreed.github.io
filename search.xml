@@ -3,14 +3,19 @@
   <entry>
     <title>test2</title>
     <url>/2019/10/17/test2/</url>
-    <content><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p>
-<p>aaaaaaaaaaaaaaaaaaaaaaaa</p>
-<pre><code>if(int i=0; i&lt;=10;i++):
+    <content><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p><p>aaaaaaaaaaaaaaaaaaaaaaaa</p><pre><code>if(int i=0; i&lt;=10;i++):
     print(&quot;a test!!!!&quot;)</code></pre><pre><code>
 if(int i=0; i&lt;=10;i++):
-    print(&quot;a test!!!!&quot;)</code></pre>
+    print(&quot;a test!!!!&quot;)</code></pre><a id="more"></a>
 
-]]></content>
+
+<pre><code>$(document).ready(function () {
+    alert(&#39;hello world&#39;);
+});</code></pre><pre><code>test()
+{
+    {print (::123);}
+
+}</code></pre>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
