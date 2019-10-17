@@ -1101,7 +1101,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #62a7c8;
+  background: #7177ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1363,8 +1363,11 @@ pre .javascript .function {
     width: 900px;
   }
 }
+#animate {
+  animation: iconAnimate 1.33s ease-in-out infinite;
+}
 .with-love {
-  color: #808080;
+  color: #ff0000;
   display: inline-block;
   margin: 0 5px;
 }
@@ -1915,6 +1918,13 @@ article:last-child .post-eof {
 .fb_like {
   align-self: center;
   height: 30px;
+}
+.post-copyright {
+  background-color: #f9f9f9;
+  border-left: 3px solid #ff1700;
+  list-style: none;
+  margin: 2em 0 0;
+  padding: 0.5em 1em;
 }
 .post-body p a {
   color: #0593d3;
