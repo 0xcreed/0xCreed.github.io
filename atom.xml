@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AssCreed</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://asscreed.github.io/"/>
+  <updated>2019-10-16T15:11:33.246Z</updated>
+  <id>https://asscreed.github.io/</id>
+  
+  <author>
+    <name>AssCreed</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test2</title>
+    <link href="https://asscreed.github.io/2019/10/17/test2/"/>
+    <id>https://asscreed.github.io/2019/10/17/test2/</id>
+    <published>2019-10-16T23:03:53.000Z</published>
+    <updated>2019-10-16T15:11:33.246Z</updated>
+    
+    <content type="html"><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p>]]></content>
+    
+    <summary type="html">
+    
+      附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面
+    
+    </summary>
+    
+    
+      <category term="CTF" scheme="https://asscreed.github.io/categories/CTF/"/>
+    
+    
+      <category term="tag1" scheme="https://asscreed.github.io/tags/tag1/"/>
+    
+      <category term="tag2" scheme="https://asscreed.github.io/tags/tag2/"/>
+    
+      <category term="tag3" scheme="https://asscreed.github.io/tags/tag3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://asscreed.github.io/2019/10/17/test/"/>
+    <id>https://asscreed.github.io/2019/10/17/test/</id>
+    <published>2019-10-16T20:41:46.000Z</published>
+    <updated>2019-10-16T12:43:30.739Z</updated>
+    
+    <content type="html"><![CDATA[<p>我之前都是先在CSDN上写好要发布的文章，然后再导出为Markdown文件。然后我就直接将文件复制到_post文件夹下，就行depoly,发布到我的博客网站上，我自己在电脑上浏览是正常的，图片也都能正确的显示出来，但是今天有个评论说不显示图片。我换了手机浏览博客，果然不显示。</p><p><img src="/2019/10/17/test/6.jpg" alt></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;我之前都是先在CSDN上写好要发布的文章，然后再导出为Markdown文件。然后我就直接将文件复制到_post文件夹下，就行depoly,发布到我的博客网站上，我自己在电脑上浏览是正常的，图片也都能正确的显示出来，但是今天有个评论说不显示图片。我换了手机浏览博客，果然不显示
+      
+    
+    </summary>
+    
+    
+    
+      <category term="图片" scheme="https://asscreed.github.io/tags/%E5%9B%BE%E7%89%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HelloHexo</title>
+    <link href="https://asscreed.github.io/2019/10/13/HelloHexo/"/>
+    <id>https://asscreed.github.io/2019/10/13/HelloHexo/</id>
+    <published>2019-10-13T10:24:52.000Z</published>
+    <updated>2019-10-13T02:25:50.755Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是一个测试<br>this is a test</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这是一个测试&lt;br&gt;this is a test&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://asscreed.github.io/2019/10/13/hello-world/"/>
+    <id>https://asscreed.github.io/2019/10/13/hello-world/</id>
+    <published>2019-10-13T01:49:25.231Z</published>
+    <updated>2019-10-13T01:49:25.231Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
