@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>test2</title>
-    <url>/2019/10/17/test2/</url>
-    <content><![CDATA[<p>asdasdasdasdasdadasdasdasdasd</p><p>aaaaaaaaaaaaaaaaaaaaaaaa</p><pre><code>if(int i=0; i&lt;=10;i++):
-    print(&quot;a test!!!!&quot;)</code></pre><pre><code>
-if(int i=0; i&lt;=10;i++):
-    print(&quot;a test!!!!&quot;)</code></pre><a id="more"></a>
-
-
-<pre><code>$(document).ready(function () {
-    alert(&#39;hello world&#39;);
-});</code></pre><pre><code>test()
-{
-    {print (::123);}
-
-}</code></pre>]]></content>
+    <title>第十届极客大挑战Write-up</title>
+    <url>/2019/10/18/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/</url>
+    <content><![CDATA[]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -24,35 +12,5 @@ if(int i=0; i&lt;=10;i++):
         <tag>tag2</tag>
         <tag>tag3</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>test</title>
-    <url>/2019/10/17/test/</url>
-    <content><![CDATA[<p>我之前都是先在CSDN上写好要发布的文章，然后再导出为Markdown文件。然后我就直接将文件复制到_post文件夹下，就行depoly,发布到我的博客网站上，我自己在电脑上浏览是正常的，图片也都能正确的显示出来，但是今天有个评论说不显示图片。我换了手机浏览博客，果然不显示。</p>
-<p><img src="/2019/10/17/test/6.jpg" alt></p>
-]]></content>
-      <tags>
-        <tag>图片</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HelloHexo</title>
-    <url>/2019/10/13/HelloHexo/</url>
-    <content><![CDATA[<p>这是一个测试<br>this is a test</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/10/13/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
 </search>
