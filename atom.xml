@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://asscreed.github.io/"/>
-  <updated>2019-10-18T01:22:57.641Z</updated>
+  <updated>2019-10-18T01:27:38.975Z</updated>
   <id>https://asscreed.github.io/</id>
   
   <author>
@@ -21,11 +21,11 @@
     <link href="https://asscreed.github.io/2019/10/18/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/"/>
     <id>https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/</id>
     <published>2019-10-18T01:22:57.000Z</published>
-    <updated>2019-10-18T01:22:57.641Z</updated>
+    <updated>2019-10-18T01:27:38.975Z</updated>
     
     <summary type="html">
     
-      附加一段文章摘要，字数最好在140字以内，会出现在meta的description里面
+      题目很有意思
     
     </summary>
     
@@ -33,11 +33,7 @@
       <category term="CTF" scheme="https://asscreed.github.io/categories/CTF/"/>
     
     
-      <category term="tag1" scheme="https://asscreed.github.io/tags/tag1/"/>
-    
-      <category term="tag2" scheme="https://asscreed.github.io/tags/tag2/"/>
-    
-      <category term="tag3" scheme="https://asscreed.github.io/tags/tag3/"/>
+      <category term="WEB" scheme="https://asscreed.github.io/tags/WEB/"/>
     
   </entry>
   
