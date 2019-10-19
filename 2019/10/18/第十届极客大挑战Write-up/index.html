@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571502795907.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571503296101.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571503618681.png">
-<meta property="og:updated_time" content="2019-10-19T17:06:03.622Z">
+<meta property="og:updated_time" content="2019-10-19T17:09:45.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十届极客大挑战Write-up">
 <meta name="twitter:description" content="题目很有意思.比赛地址:http://geek.sycsec.com:44444/challenge/index">
@@ -406,7 +406,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 01:06:03" itemprop="dateModified" datetime="2019-10-20T01:06:03+08:00">2019-10-20</time>
+                <time title="修改时间：2019-10-20 01:09:45" itemprop="dateModified" datetime="2019-10-20T01:09:45+08:00">2019-10-20</time>
               </span>
             
           
@@ -515,9 +515,10 @@
 <p> <img src="/2019/10/18/第十届极客大挑战Write-up/1571374878503.png" alt="1571374878503"></p>
 <p> 回到主页，查看源码</p>
 <p> <img src="/2019/10/18/第十届极客大挑战Write-up/1571374951634.png" alt="1571374951634"></p>
+<p> 提示我们条件竞争，从源码看我们输入u和p后，flag会写入到</p>
 </li>
 </ol>
-<pre><code>提示我们条件竞争，从源码看我们输入u和p后，flag会写入到</code></pre><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$savepath<span class="string">" . sha1($_GET['u'])</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$savepath<span class="string">" . sha1($_GET['u'])</span></span><br></pre></td></tr></table></figure>
 
 <p>​        0.1s后再把flag换成 you are too slow</p>
 <p>​        所以我们先一直访问存在flag的这个文件，然后在提交u和p，在flag生成的一瞬间把它读取</p>
@@ -537,12 +538,10 @@
 <p> 什么防护都没有 </p>
  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">'='</span><br><span class="line">'='</span><br></pre></td></tr></table></figure>
 
-
-
 </li>
 </ol>
-<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532"></p>
-<p>​    直接进后台</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532">    </p>
+<p>直接进后台</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387449879.png" alt="1571387449879"></p>
 <ol start="6">
 <li><p>RCE me: I don’t think U can system RCE, prove to me </p>

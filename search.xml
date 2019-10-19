@@ -38,9 +38,10 @@
 <p> <img src="/2019/10/18/第十届极客大挑战Write-up/1571374878503.png" alt="1571374878503"></p>
 <p> 回到主页，查看源码</p>
 <p> <img src="/2019/10/18/第十届极客大挑战Write-up/1571374951634.png" alt="1571374951634"></p>
+<p> 提示我们条件竞争，从源码看我们输入u和p后，flag会写入到</p>
 </li>
 </ol>
-<pre><code>提示我们条件竞争，从源码看我们输入u和p后，flag会写入到</code></pre><figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$savepath<span class="string">" . sha1($_GET['u'])</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$savepath<span class="string">" . sha1($_GET['u'])</span></span><br></pre></td></tr></table></figure>
 
 <p>​        0.1s后再把flag换成 you are too slow</p>
 <p>​        所以我们先一直访问存在flag的这个文件，然后在提交u和p，在flag生成的一瞬间把它读取</p>
@@ -60,12 +61,10 @@
 <p> 什么防护都没有 </p>
  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">'='</span><br><span class="line">'='</span><br></pre></td></tr></table></figure>
 
-
-
 </li>
 </ol>
-<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532"></p>
-<p>​    直接进后台</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532">    </p>
+<p>直接进后台</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387449879.png" alt="1571387449879"></p>
 <ol start="6">
 <li><p>RCE me: I don’t think U can system RCE, prove to me </p>
