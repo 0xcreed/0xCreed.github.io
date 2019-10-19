@@ -86,6 +86,8 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571375756868.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571375974330.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571386357741.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571387426532.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571387449879.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571495997995.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571497597408.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571499066521.png">
@@ -99,7 +101,7 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571502795907.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571503296101.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/1571503618681.png">
-<meta property="og:updated_time" content="2019-10-19T17:01:15.234Z">
+<meta property="og:updated_time" content="2019-10-19T17:06:03.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十届极客大挑战Write-up">
 <meta name="twitter:description" content="题目很有意思.比赛地址:http://geek.sycsec.com:44444/challenge/index">
@@ -404,7 +406,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-10-20 01:01:15" itemprop="dateModified" datetime="2019-10-20T01:01:15+08:00">2019-10-20</time>
+                <time title="修改时间：2019-10-20 01:06:03" itemprop="dateModified" datetime="2019-10-20T01:06:03+08:00">2019-10-20</time>
               </span>
             
           
@@ -453,7 +455,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3k</span>
+              <span>2.9k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -539,11 +541,10 @@
 
 </li>
 </ol>
-<pre><code>![1571387426532](1571387426532.png)
-
-直接进后台
-
-![1571387449879](1571387449879.png)</code></pre><ol start="6">
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532"></p>
+<p>​    直接进后台</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387449879.png" alt="1571387449879"></p>
+<ol start="6">
 <li><p>RCE me: I don’t think U can system RCE, prove to me </p>
 <p> 这道题学到了很多！</p>
 <p> 打开网页看看</p>
@@ -563,13 +564,28 @@
 </ol>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571497597408.png" alt="1571497597408"></p>
 <p>查看某些关键参数</p>
-<pre><code>- 如系统信息</code></pre><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499066521.png" alt="1571499066521"></p>
-<pre><code>- disable_functions</code></pre><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499768310.png" alt="1571499768310"></p>
+<ul>
+<li>​    如系统信息</li>
+</ul>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499066521.png" alt="1571499066521"></p>
+<ul>
+<li>disable_functions</li>
+</ul>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499768310.png" alt="1571499768310"></p>
 <p>命令执行函数都被禁止了</p>
-<pre><code>- allow_url_*</code></pre><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571498825445.png" alt="1571498825445"></p>
+<ul>
+<li>allow_url_*</li>
+</ul>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571498825445.png" alt="1571498825445"></p>
 <p>关于这两个参数可以参考这篇文章<a href="https://www.cnblogs.com/So7cool/p/9795712.html" target="_blank" rel="noopener">php伪协议</a></p>
-<pre><code>- sendmail_*</code></pre><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499021494.png" alt="1571499021494"></p>
-<pre><code>- open_basedir</code></pre><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571500306817.png" alt="1571500306817"></p>
+<ul>
+<li>sendmail_*</li>
+</ul>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571499021494.png" alt="1571499021494"></p>
+<ul>
+<li>open_basedir</li>
+</ul>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/1571500306817.png" alt="1571500306817"></p>
 <p>并没有限制我们目录。如果有可以参考这篇<a href="https://skysec.top/2019/04/12/%E4%BB%8EPHP%E5%BA%95%E5%B1%82%E7%9C%8Bopen-basedir-bypass/" target="_blank" rel="noopener">文章</a>绕过</p>
 <p>既然不能执行命令那就用var_dump(scandir())来查看文件信息</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://114.116.44.23:40001/?code=$&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[_]($&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[__]);&amp;_=assert&amp;__=var_dump(eval($_GET[a]))&amp;a=var_dump(scandir(%27/tmp/%27));</span><br></pre></td></tr></table></figure>
