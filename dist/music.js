@@ -15,7 +15,7 @@ const ap = new APlayer({
 	{
         name: "寂静之声",
         artist: '贵族乐团',
-        url: 'http://m10.music.126.net/20191021221226/2b30b2f9316f70980dfa2d9b42e34884/ymusic/1afe/5d54/eaf3/311c9c4bdcd21fad00d9b1a26838d911.mp3',
+        url: '寂静之声.mp3',
         cover: 'https://p1.music.126.net/Ix3X6A1jsuNR8NQNumhFlQ==/65970697683595.jpg?param=130y130',
       },
 	  {
