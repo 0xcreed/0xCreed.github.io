@@ -1,0 +1,14 @@
+#hexo robots.txt
+User-agent: *
+
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+
+Sitemap: https://asscreed.github.io/search.xml
+Sitemap: https://asscreed.github.io/sitemap.xml
