@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>wireshark</title>
+    <url>/2019/11/03/wireshark/</url>
+    <content><![CDATA[<h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p>Ctrl+M 标记/取消标记<br> shift+ctrl+N/B 下/上一个被标记的数据包</p><h2 id="二、过滤器语法"><a href="#二、过滤器语法" class="headerlink" title="二、过滤器语法"></a>二、过滤器语法</h2><h3 id="1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法"><a href="#1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法" class="headerlink" title="1.捕获过滤器的BPF(Berkeley Packet Filter)语法"></a>1.捕获过滤器的BPF(Berkeley Packet Filter)语法</h3><h4 id><a href="#" class="headerlink" title></a></h4><table>
+<thead>
+<tr>
+<th align="center">限定词</th>
+<th align="center">说明</th>
+<th align="center">例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Type</td>
+<td align="center">指出名字或数字所代表的意义</td>
+<td align="center">host、net、port</td>
+</tr>
+<tr>
+<td align="center">Dir</td>
+<td align="center">指明传输方向是前往还是来自名字或数字</td>
+<td align="center">src、dst</td>
+</tr>
+<tr>
+<td align="center">Proto</td>
+<td align="center">限定所要匹配的协议</td>
+<td align="center">ether、ip、tcp、udp、http、ftp</td>
+</tr>
+</tbody></table><a id="more"></a>
+
+<p>使用BPF语法创建的过滤器被称为表达式，每个表达式包含一个或多个原语。每个原语包含一个或多个限定词，然后跟着一个ID名字或者数字</p>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">|<span class="string">&lt;----------原语---------&gt;</span>|<span class="string">&lt;操作符&gt;</span>|<span class="string">&lt;-----原语----&gt;</span>|</span><br><span class="line"> dst   host   192.168.0.10   &amp;&amp;    tcp   port   80</span><br><span class="line">|<span class="string">限定词</span>|<span class="string">限定词</span>|<span class="string">&lt;----ID----&gt;</span>|<span class="string">      </span>|<span class="string">限定词</span>|<span class="string">限定词</span>|<span class="string">ID</span>|</span><br></pre></td></tr></table></figure>
+
+<p>可以使用3中逻辑运算符对原语进行组合</p>
+<ul>
+<li>连接运算符 &amp;&amp;</li>
+<li>选择运算符 ||</li>
+<li>否定运算符 !</li>
+</ul>
+<p>例：<br> <code>src 192.168.0.10 &amp;&amp; port 80</code><br> 只捕获源地址是192.168.0.10和源端口或目的端口是80的流量</p>
+<p><code>ether host 00-1a-a0-52-e2-a0</code><br> 根据MAC地址捕获</p>
+<h4 id="常用捕获过滤器表达式样例"><a href="#常用捕获过滤器表达式样例" class="headerlink" title="常用捕获过滤器表达式样例"></a>常用捕获过滤器表达式样例</h4><table>
+<thead>
+<tr>
+<th align="center">过滤器</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tcp[13]&amp;32==32</td>
+<td align="center">设置URG位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]&amp;16==16</td>
+<td align="center">设置ACK位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]&amp;8==8</td>
+<td align="center">设置PSH位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]&amp;4==4</td>
+<td align="center">设置RST位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]&amp;2==2</td>
+<td align="center">设置SYN位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]&amp;1==1</td>
+<td align="center">设置FIN位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp[13]==18</td>
+<td align="center">TCP SYN-ACK数据包</td>
+</tr>
+<tr>
+<td align="center">ether host 00:00:00:00:00:00(你的MAC地址)</td>
+<td align="center">流入或流出你MAC地址的流量</td>
+</tr>
+<tr>
+<td align="center">!ether host 00:00:00:00:00:00(你的MAC地址)</td>
+<td align="center">不流入或流出你MAC地址的流量</td>
+</tr>
+<tr>
+<td align="center">broadcast</td>
+<td align="center">仅广播流量</td>
+</tr>
+<tr>
+<td align="center">icmp</td>
+<td align="center">ICMP流量</td>
+</tr>
+<tr>
+<td align="center">icmp[0:2]==0x0301</td>
+<td align="center">ICMP目标不可达、主机不可达</td>
+</tr>
+<tr>
+<td align="center">ip</td>
+<td align="center">仅IPv4流量</td>
+</tr>
+<tr>
+<td align="center">ip6</td>
+<td align="center">仅IPv6流量</td>
+</tr>
+<tr>
+<td align="center">udp</td>
+<td align="center">仅UDP流量</td>
+</tr>
+</tbody></table>
+<h3 id="2-协议域过滤器"><a href="#2-协议域过滤器" class="headerlink" title="2.协议域过滤器"></a>2.协议域过滤器</h3><p>BPF语法还提供了协议域过滤器，可以坚持协议头中的每一字节来过滤<br> 例：<br> <code>icmp[0]==3</code><br> 返回icmp包的第1个字节的整形值比较，只捕获代表目标不可达信息(类型3)的ICMP数据包</p>
+<p><code>icmp[0:2]==0x0301</code><br> 捕获所有类型3代码1表示的目标不可达、主机不可达的ICMP数据包</p>
+<p><code>tcp[13]&amp;4==4</code><br> 只捕获带有RST标志的TCP数据包(RST标志位在TCP包偏移13字节，00000100)</p>
+<h3 id="-1"><a href="#-1" class="headerlink" title></a></h3><h3 id="3-显示过滤器"><a href="#3-显示过滤器" class="headerlink" title="3.显示过滤器"></a>3.显示过滤器</h3><p><a href="https://www.wireshark.org/docs/dfref/" target="_blank" rel="noopener">显示过滤器参考</a></p>
+<p>常用显示过滤器</p>
+<table>
+<thead>
+<tr>
+<th align="center">过滤器</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">!tcp.port==3389</td>
+<td align="center">排除RDP流量</td>
+</tr>
+<tr>
+<td align="center">tcp.flags.syn==1</td>
+<td align="center">具有SYN标志位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">tcp.flags.rst==1</td>
+<td align="center">具有RST标志位的TCP数据包</td>
+</tr>
+<tr>
+<td align="center">!arp</td>
+<td align="center">排除ARP流量</td>
+</tr>
+<tr>
+<td align="center">http</td>
+<td align="center">所有HTTP流量</td>
+</tr>
+<tr>
+<td align="center">tcp.port==23 || tcp.port==21</td>
+<td align="center">文本管理流量（Telnet或FTP）</td>
+</tr>
+<tr>
+<td align="center">smtp || pop || imap</td>
+<td align="center">文本email流量（SMTP、POP或IMAP）</td>
+</tr>
+</tbody></table>
+<h2 id="三、导出对象"><a href="#三、导出对象" class="headerlink" title="三、导出对象"></a>三、导出对象</h2><p>CTF竞赛中最常见的就是HTTP协议了，而且通信主机少容易分析。</p>
+<p>利用导出对象可以快速的判断这段流量在干嘛。</p>
+<p><img src="/2019/11/03/wireshark/image-20191103145931434.png" alt="image-20191103145931434"></p>
+<p>选择HTTP…</p>
+<p><img src="/2019/11/03/wireshark/image-20191103155828631.png" alt="image-20191103155828631"></p>
+<p>很清晰的可以看到http请求。</p>
+<p>很明显是个攻击者对服务器发起了sql注入攻击</p>
+<p>根据它的HTTP请求，攻击者获得了那些数据我们同样也能得到。</p>
+<p>而且传输过程中的所有文件都能截获。</p>
+<p><img src="/2019/11/03/wireshark/image-20191103170050584.png" alt="image-20191103170050584"></p>
+<p>通过右下角的SAVA可以完整的保存传输的文件。</p>
+<p><a href="https://www.cnblogs.com/20175211lyz/p/11626297.html" target="_blank" rel="noopener">参考文章</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>wireshark</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>php弱类型</title>
     <url>/2019/11/01/php%E5%BC%B1%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h2 id="弱类型与强类型"><a href="#弱类型与强类型" class="headerlink" title="弱类型与强类型"></a>弱类型与强类型</h2><p>通常语言有强类型和弱类型两种，强类型指的是强制数据类型的语言，就是说，一个变量一旦被定义了某个类型，如果不经过强制类型转换，这个变量就一直是这个类型，在变量使用之前必须声明变量的类型和名称，且不经强制转换不允许两种不同类型的变量互相操作。而弱类型语言，不会检查变量类型，可以随时的转换变量类型。</p><a id="more"></a>
@@ -33,6 +202,7 @@
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'message'</span>])) &#123;</span><br><span class="line">    $message = json_decode($_POST[<span class="string">'message'</span>]);</span><br><span class="line">    $key =<span class="string">"abc"</span>;</span><br><span class="line">    <span class="keyword">if</span> ($message-&gt;key == $key) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">"~~~~"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p> 输入一个数组进行json解码，如果解码后的message与key值相同，会得到flag，主要思想还是弱类型进行绕过，我们不知道key值是什么，但是我们知道一件事就是它肯定是字符串，这样就可以了，上文讲过，两个等号时会转化成同一类型再进行比较，直接构造一个数值就可以相等了。最终payload message={“key”:0}。 如果$key中的字符串开头并不是字母，则需要我们去爆破。</p>
+<p><a href="https://www.cnblogs.com/anbus/p/10000571.html" target="_blank" rel="noopener">参考文章</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
