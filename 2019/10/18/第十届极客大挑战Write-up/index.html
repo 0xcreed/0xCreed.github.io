@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233348553.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233555540.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233648512.png">
-<meta property="og:updated_time" content="2019-11-01T13:43:40.788Z">
+<meta property="og:updated_time" content="2019-11-03T03:53:23.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十届极客大挑战Write-up">
 <meta name="twitter:description" content="题目很有意思.比赛地址:http://geek.sycsec.com:44444/challenge/index">
@@ -284,7 +284,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">6</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">8</span></a>
 
   </li>
       
@@ -328,7 +328,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">2</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">3</span></a>
 
   </li>
       
@@ -444,7 +444,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-01 21:43:40" itemprop="dateModified" datetime="2019-11-01T21:43:40+08:00">2019-11-01</time>
+                <time title="修改时间：2019-11-03 11:53:23" itemprop="dateModified" datetime="2019-11-03T11:53:23+08:00">2019-11-03</time>
               </span>
             
           
@@ -618,7 +618,7 @@
 <p>把readflag下载下来，反编译了一下</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571502795907.png" alt="1571502795907"></p>
 <p>那么思路也就清晰起来了，bypass disable_functions  执行readflag</p>
-<p>我们这里利用的劫持库函数，从而执行命令</p>
+<p>我们这里利用LD_PRELOAD劫持共享库，从而执行命令</p>
 <p>具体原理看看<a href="https://www.cnblogs.com/leixiao-/p/10612798.html" target="_blank" rel="noopener">出题人的博客</a>和<a href="https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD" target="_blank" rel="noopener">bypass_disablefunc_via_LD_PRELOAD</a></p>
 <p>首先上传恶意so文件，上面的github项目中有，注意操作系统位数</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/1571503296101.png" alt="1571503296101"></p>
@@ -690,7 +690,7 @@
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115415135.png" alt="image-20191031115415135"></p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115443975.png" alt="image-20191031115443975"></p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115642982.png" alt="image-20191031115642982"></p>
-<p>经过测试不能带xml声明，Connect-Type改成xml</p>
+<p>经过测试不能带<a href="https://4o4notfound.org/index.php/archives/29/" target="_blank" rel="noopener">xml</a>声明，Connect-Type改成xml</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031122255387.png" alt="image-20191031122255387"></p>
 <p>利用PHP<a href="https://www.smi1e.top/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8Ephp%E4%BC%AA%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">伪协议</a>和base64加密读取文件内容</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031124114147.png" alt="image-20191031124114147"></p>
@@ -889,7 +889,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -915,7 +915,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -989,14 +989,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">12k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">11 分钟</span>
+    <span title="站点阅读时长">13 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
