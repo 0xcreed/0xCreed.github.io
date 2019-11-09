@@ -72,7 +72,16 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191103145931434.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191103155828631.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191103170050584.png">
-<meta property="og:updated_time" content="2019-11-03T15:16:25.611Z">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107184246441.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107184812717.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107221151317.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107221334510.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107222451205.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107223755881.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107234940949.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235545698.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235710539.png">
+<meta property="og:updated_time" content="2019-11-07T15:59:03.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wireshark">
 <meta name="twitter:description" content="CTF竞赛中wireshark的基本使用">
@@ -217,7 +226,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">5</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
 
   </li>
       
@@ -261,7 +270,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">3</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
 
   </li>
       
@@ -366,11 +375,19 @@
                 
               
 
-              <time title="创建时间：2019-11-03 12:54:35 / 修改时间：23:16:25" itemprop="dateCreated datePublished" datetime="2019-11-03T12:54:35+08:00">2019-11-03</time>
+              <time title="创建时间：2019-11-03 12:54:35" itemprop="dateCreated datePublished" datetime="2019-11-03T12:54:35+08:00">2019-11-03</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-07 23:59:03" itemprop="dateModified" datetime="2019-11-07T23:59:03+08:00">2019-11-07</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -418,7 +435,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.5k</span>
+              <span>2.2k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -428,7 +445,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
           
             <div class="post-description">CTF竞赛中wireshark的基本使用</div>
@@ -478,6 +495,39 @@
 <p>而且传输过程中的所有文件都能截获。</p>
 <p><img src="/2019/11/03/wireshark/image-20191103170050584.png" alt="image-20191103170050584"></p>
 <p>通过右下角的SAVA可以完整的保存传输的文件。</p>
+<h2 id="四、实战"><a href="#四、实战" class="headerlink" title="四、实战"></a>四、实战</h2><p>流量分析就是个大杂烩，什么都能加。</p>
+<p>比如php语言，http，tcp/ip协议，各种加解密，隐写，sql注入等等</p>
+<p><a href="https://pan.baidu.com/s/1rLlbRyapHrTOWUc3BfVafQ" target="_blank" rel="noopener">ok.pcapng</a> 提取码: 7y3a</p>
+<p>先使用 统计-协议分级功能，查看流量包具体的有哪些协议。</p>
+<p><img src="/2019/11/03/wireshark/image-20191107184246441.png" alt="image-20191107184246441"></p>
+<p>百分之九十以上是TCP协议。</p>
+<p>然后使用 文件-导出对象-HTTP 查看具体的HTTP请求和是否有文件传输</p>
+<p><img src="/2019/11/03/wireshark/image-20191107184812717.png" alt="image-20191107184812717"></p>
+<p>从这些HTTP请求中，应该是通过upload.php上传了file_5d81f9f4d22d41.67475082.php</p>
+<p>然后一直与file_5d81f9f4d22d41.67475082.php进行交互。</p>
+<p>利用 追踪流的功能查看完整的报文</p>
+<p><img src="/2019/11/03/wireshark/image-20191107221151317.png" alt="image-20191107221151317"></p>
+<p>选择HTTP流</p>
+<p><img src="/2019/11/03/wireshark/image-20191107221334510.png" alt="image-20191107221334510"></p>
+<p>一个标准的冰蝎马</p>
+<p>冰蝎马会先从客户端得到一个加密密匙，用于流量加密。</p>
+<p><img src="/2019/11/03/wireshark/image-20191107222451205.png" alt="image-20191107222451205"></p>
+<p>我们追踪一下pass=790的流量。这里我们选择追踪TCP流，方便后面查看其他流</p>
+<p><img src="/2019/11/03/wireshark/image-20191107223755881.png" alt="image-20191107223755881"></p>
+<p>得到解密密匙  <code>d59042be6e437849</code></p>
+<p>解密脚本如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$post=<span class="string">''</span>; <span class="comment"># 放入你要解密的内容</span></span><br><span class="line">$str=openssl_decrypt($post, <span class="string">"AES128"</span>, <span class="string">'d59042be6e437849'</span>);</span><br><span class="line">$file=fopen(<span class="string">"1.txt"</span>,<span class="string">"w+"</span>);</span><br><span class="line">fwrite($file,$str);</span><br><span class="line">fclose($file);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/11/03/wireshark/image-20191107234940949.png" alt="image-20191107234940949"></p>
+<p>得到一个字符串但目前不知道有什么用</p>
+<p>应该在流量包中还有我们没有发现的东西</p>
+<p>一可以通过搜索关键字的16进制，二可以通过查阅完整TCP流。</p>
+<p>1.flag的16进制为 <code>666c6167</code></p>
+<p><img src="/2019/11/03/wireshark/image-20191107235545698.png" alt="image-20191107235545698"></p>
+<p>2.调整流，大致浏览报文。</p>
+<p>在第8个流 ，发现了不一样的东西</p>
+<p><img src="/2019/11/03/wireshark/image-20191107235710539.png" alt="image-20191107235710539"></p>
+<p>通过导出对象，把这个SQLite文件导出</p>
 <p><a href="https://www.cnblogs.com/20175211lyz/p/11626297.html" target="_blank" rel="noopener">参考文章</a></p>
 
     </div>
@@ -545,6 +595,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2019/11/04/Md5Crack/" rel="prev" title="Md5Crack">
+                  Md5Crack <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -596,7 +650,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、快捷键"><span class="nav-number">1.</span> <span class="nav-text">一、快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、过滤器语法"><span class="nav-number">2.</span> <span class="nav-text">二、过滤器语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法"><span class="nav-number">2.1.</span> <span class="nav-text">1.捕获过滤器的BPF(Berkeley Packet Filter)语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用捕获过滤器表达式样例"><span class="nav-number">2.1.1.</span> <span class="nav-text">常用捕获过滤器表达式样例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-协议域过滤器"><span class="nav-number">2.2.</span> <span class="nav-text">2.协议域过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-显示过滤器"><span class="nav-number">2.3.</span> <span class="nav-text">3.显示过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、导出对象"><span class="nav-number">3.</span> <span class="nav-text">三、导出对象</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、快捷键"><span class="nav-number">1.</span> <span class="nav-text">一、快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、过滤器语法"><span class="nav-number">2.</span> <span class="nav-text">二、过滤器语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法"><span class="nav-number">2.1.</span> <span class="nav-text">1.捕获过滤器的BPF(Berkeley Packet Filter)语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用捕获过滤器表达式样例"><span class="nav-number">2.1.1.</span> <span class="nav-text">常用捕获过滤器表达式样例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-协议域过滤器"><span class="nav-number">2.2.</span> <span class="nav-text">2.协议域过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-显示过滤器"><span class="nav-number">2.3.</span> <span class="nav-text">3.显示过滤器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、导出对象"><span class="nav-number">3.</span> <span class="nav-text">三、导出对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实战"><span class="nav-number">4.</span> <span class="nav-text">四、实战</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -615,7 +669,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -641,7 +695,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -682,6 +736,10 @@
           <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">PH牛</a>
         </li>
       
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
     </ul>
   </div>
 
@@ -715,14 +773,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">11k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">10 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
