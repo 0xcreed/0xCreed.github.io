@@ -81,7 +81,15 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107234940949.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235545698.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235710539.png">
-<meta property="og:updated_time" content="2019-11-07T15:59:03.359Z">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191109230229511.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191109233659468.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191109231824174.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/2019110711452061.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114526761.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114541741.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114557647.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114605559.png">
+<meta property="og:updated_time" content="2019-11-09T15:44:24.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wireshark">
 <meta name="twitter:description" content="CTF竞赛中wireshark的基本使用">
@@ -226,7 +234,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">13</span></a>
 
   </li>
       
@@ -270,7 +278,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">4</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">7</span></a>
 
   </li>
       
@@ -386,7 +394,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-07 23:59:03" itemprop="dateModified" datetime="2019-11-07T23:59:03+08:00">2019-11-07</time>
+                <time title="修改时间：2019-11-09 23:44:24" itemprop="dateModified" datetime="2019-11-09T23:44:24+08:00">2019-11-09</time>
               </span>
             
           
@@ -435,7 +443,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.2k</span>
+              <span>2.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -497,7 +505,8 @@
 <p>通过右下角的SAVA可以完整的保存传输的文件。</p>
 <h2 id="四、实战"><a href="#四、实战" class="headerlink" title="四、实战"></a>四、实战</h2><p>流量分析就是个大杂烩，什么都能加。</p>
 <p>比如php语言，http，tcp/ip协议，各种加解密，隐写，sql注入等等</p>
-<p><a href="https://pan.baidu.com/s/1rLlbRyapHrTOWUc3BfVafQ" target="_blank" rel="noopener">ok.pcapng</a> 提取码: 7y3a</p>
+<p>3CTF复赛的一道流量分析题</p>
+<p><a href="https://pan.baidu.com/s/1rLlbRyapHrTOWUc3BfVafQ" target="_blank" rel="noopener">ok.pcapng</a> 提取码: 7y3a </p>
 <p>先使用 统计-协议分级功能，查看流量包具体的有哪些协议。</p>
 <p><img src="/2019/11/03/wireshark/image-20191107184246441.png" alt="image-20191107184246441"></p>
 <p>百分之九十以上是TCP协议。</p>
@@ -528,7 +537,27 @@
 <p>在第8个流 ，发现了不一样的东西</p>
 <p><img src="/2019/11/03/wireshark/image-20191107235710539.png" alt="image-20191107235710539"></p>
 <p>通过导出对象，把这个SQLite文件导出</p>
-<p><a href="https://www.cnblogs.com/20175211lyz/p/11626297.html" target="_blank" rel="noopener">参考文章</a></p>
+<p>然后这题主要是解密<code>Chrome</code>浏览器的保存密码的<code>Login Data</code>数据库（就是个SQLIte3数据库），</p>
+<p>可以通过离线的方式导出密码。需要使用用户登录密码解密master key file 获得master key。再用master key解密DPAPI blob 。<br> 解这题主要需要明文密码、<code>blob</code>、<code>master key</code>。主要是322，524，654号数据包：</p>
+<p>使用DB Browser for SQLite打开SQLite文件</p>
+<p><img src="/2019/11/03/wireshark/image-20191109230229511.png" alt="image-20191109230229511"></p>
+<p>导出加密后的blob</p>
+<p>在最后一个流中(11)，发现返回的字符串和之前的不一样，</p>
+<p>解密POST包</p>
+<p><img src="/2019/11/03/wireshark/image-20191109233659468.png" alt="image-20191109233659468"></p>
+<p>得到文件路径</p>
+<p>返回的密文就是<code>master key</code></p>
+<p><img src="/2019/11/03/wireshark/image-20191109231824174.png" alt="image-20191109231824174"></p>
+<p>复制到文件或者导出对象</p>
+<p>最后利用 windows password recovery来解密 </p>
+<p>  选择Utils -&gt; DPAPI Decoder and Analyser -&gt; Decrypt DPAPI data blob <img src="/2019/11/03/wireshark/2019110711452061.png" alt="在这里插入图片描述"> </p>
+<p> <img src="/2019/11/03/wireshark/20191107114526761.png" alt="在这里插入图片描述"> </p>
+<p> <img src="/2019/11/03/wireshark/20191107114541741.png" alt="在这里插入图片描述"> </p>
+<p> SID就是之前路径中的S-1-5-21-2127750816-4215895028-2373289296-1001<br> password就是p@ssw0rd<br> 然后解密 </p>
+<p> <img src="/2019/11/03/wireshark/20191107114557647.png" alt="在这里插入图片描述"> </p>
+<p> <img src="/2019/11/03/wireshark/20191107114605559.png" alt="在这里插入图片描述"> </p>
+<p><a href="https://blog.csdn.net/yh1013024906/article/details/102952104" target="_blank" rel="noopener">参考文章1</a></p>
+<p><a href="https://cloud.tencent.com/developer/news/90236" target="_blank" rel="noopener">参考文章2</a></p>
 
     </div>
 
@@ -669,7 +698,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -695,7 +724,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -773,14 +802,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">11k</span>
+    <span title="站点总字数">22k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">10 分钟</span>
+    <span title="站点阅读时长">20 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
