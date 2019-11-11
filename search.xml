@@ -506,6 +506,13 @@
 <p>修改XFF头</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029220337766.png" alt="image-20191029220337766"></p>
 <p>得到flag</p>
+<h2 id="Eval-evil-code-Lamber是个老实人，他会执行你给他的代码。"><a href="#Eval-evil-code-Lamber是个老实人，他会执行你给他的代码。" class="headerlink" title="Eval evil code: Lamber是个老实人，他会执行你给他的代码。"></a>Eval evil code: Lamber是个老实人，他会执行你给他的代码。</h2><p>这里有两个限制</p>
+<p>一、提交的恶意代码不能带有参数，二、输入正确的验证码</p>
+<p>第二个好解决，直接用md5<a href="https://0xcreed.github.io/2019/11/04/Md5Crack/">碰撞脚本</a></p>
+<p>第一个就要利用PHP的丰富的内置函数来构造参数。</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191111224322216.png" alt="image-20191111224322216"></p>
+<p>接着读取readflag.php</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191111224528382.png" alt="image-20191111224528382"></p>
 <h2 id="Jiang‘s-Secret-我在那放了一个秘密！"><a href="#Jiang‘s-Secret-我在那放了一个秘密！" class="headerlink" title="Jiang‘s Secret:我在那放了一个秘密！"></a>Jiang‘s Secret:我在那放了一个秘密！</h2><p>打开主页</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029231444787.png" alt="image-20191029231444787"></p>
 <p>查看源码</p>
