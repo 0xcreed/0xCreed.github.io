@@ -78,6 +78,9 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107221334510.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107222451205.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107223755881.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191111115823331.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191111115909128.png">
+<meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191111120005244.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107234940949.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235545698.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/image-20191107235710539.png">
@@ -89,7 +92,7 @@
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114541741.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114557647.png">
 <meta property="og:image" content="https://asscreed.github.io/2019/11/03/wireshark/20191107114605559.png">
-<meta property="og:updated_time" content="2019-11-09T15:44:24.230Z">
+<meta property="og:updated_time" content="2019-11-11T04:04:51.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wireshark">
 <meta name="twitter:description" content="CTF竞赛中wireshark的基本使用">
@@ -394,7 +397,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-09 23:44:24" itemprop="dateModified" datetime="2019-11-09T23:44:24+08:00">2019-11-09</time>
+                <time title="修改时间：2019-11-11 12:04:51" itemprop="dateModified" datetime="2019-11-11T12:04:51+08:00">2019-11-11</time>
               </span>
             
           
@@ -527,12 +530,17 @@
 <p>解密脚本如下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$post=<span class="string">''</span>; <span class="comment"># 放入你要解密的内容</span></span><br><span class="line">$str=openssl_decrypt($post, <span class="string">"AES128"</span>, <span class="string">'d59042be6e437849'</span>);</span><br><span class="line">$file=fopen(<span class="string">"1.txt"</span>,<span class="string">"w+"</span>);</span><br><span class="line">fwrite($file,$str);</span><br><span class="line">fclose($file);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p>然后发现第二个流的最后一个流量</p>
+<p><img src="/2019/11/03/wireshark/image-20191111115823331.png" alt="image-20191111115823331"></p>
+<p><img src="/2019/11/03/wireshark/image-20191111115909128.png" alt="image-20191111115909128"></p>
+<p><img src="/2019/11/03/wireshark/image-20191111120005244.png" alt="image-20191111120005244"></p>
 <p><img src="/2019/11/03/wireshark/image-20191107234940949.png" alt="image-20191107234940949"></p>
 <p>得到一个字符串但目前不知道有什么用</p>
 <p>应该在流量包中还有我们没有发现的东西</p>
-<p>一可以通过搜索关键字的16进制，二可以通过查阅完整TCP流。</p>
+<p>一、可以通过搜索关键字的16进制，二、可以通过查阅完整TCP流。</p>
 <p>1.flag的16进制为 <code>666c6167</code></p>
 <p><img src="/2019/11/03/wireshark/image-20191107235545698.png" alt="image-20191107235545698"></p>
+<p>第521个包</p>
 <p>2.调整流，大致浏览报文。</p>
 <p>在第8个流 ，发现了不一样的东西</p>
 <p><img src="/2019/11/03/wireshark/image-20191107235710539.png" alt="image-20191107235710539"></p>
@@ -550,6 +558,7 @@
 <p><img src="/2019/11/03/wireshark/image-20191109231824174.png" alt="image-20191109231824174"></p>
 <p>复制到文件或者导出对象</p>
 <p>最后利用 windows password recovery来解密 </p>
+<p>(没有 windows password recovery所以图是盗的<a href="https://blog.csdn.net/yh1013024906/article/details/102952104" target="_blank" rel="noopener">yyqx</a>大佬的)</p>
 <p>  选择Utils -&gt; DPAPI Decoder and Analyser -&gt; Decrypt DPAPI data blob <img src="/2019/11/03/wireshark/2019110711452061.png" alt="在这里插入图片描述"> </p>
 <p> <img src="/2019/11/03/wireshark/20191107114526761.png" alt="在这里插入图片描述"> </p>
 <p> <img src="/2019/11/03/wireshark/20191107114541741.png" alt="在这里插入图片描述"> </p>
