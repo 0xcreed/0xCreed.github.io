@@ -8,9 +8,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>tag1</tag>
-        <tag>tag2</tag>
-        <tag>tag3</tag>
+        <tag>复现</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -49,8 +48,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WEB</tag>
         <tag>复现</tag>
+        <tag>WEB</tag>
       </tags>
   </entry>
   <entry>
@@ -485,7 +484,7 @@
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115415135.png" alt="image-20191031115415135"></p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115443975.png" alt="image-20191031115443975"></p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031115642982.png" alt="image-20191031115642982"></p>
-<p>经过测试不能带<a href="https://4o4notfound.org/index.php/archives/29/" target="_blank" rel="noopener">xml</a>声明，Connect-Type改成xml</p>
+<p>改成<a href="https://4o4notfound.org/index.php/archives/29/" target="_blank" rel="noopener">xml</a>形式，Connect-Type改成xml</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031122255387.png" alt="image-20191031122255387"></p>
 <p>利用PHP<a href="https://www.smi1e.top/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8Ephp%E4%BC%AA%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">伪协议</a>和base64加密读取文件内容</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191031124114147.png" alt="image-20191031124114147"></p>
@@ -513,6 +512,7 @@
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191111224322216.png" alt="image-20191111224322216"></p>
 <p>接着读取readflag.php</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191111224528382.png" alt="image-20191111224528382"></p>
+<p>参考skysec的<a href="https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/" target="_blank" rel="noopener">文章</a></p>
 <h2 id="Jiang‘s-Secret-我在那放了一个秘密！"><a href="#Jiang‘s-Secret-我在那放了一个秘密！" class="headerlink" title="Jiang‘s Secret:我在那放了一个秘密！"></a>Jiang‘s Secret:我在那放了一个秘密！</h2><p>打开主页</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191029231444787.png" alt="image-20191029231444787"></p>
 <p>查看源码</p>
