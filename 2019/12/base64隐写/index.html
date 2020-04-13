@@ -69,7 +69,7 @@
 <meta property="og:site_name" content="0xCreed">
 <meta property="og:description" content="打省赛的时候遇到的记录一下吧">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-18T12:32:43.182Z">
+<meta property="og:updated_time" content="2020-04-13T10:31:27.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="base64隐写">
 <meta name="twitter:description" content="打省赛的时候遇到的记录一下吧">
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">14</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
 
   </li>
       
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">10</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">13</span></a>
 
   </li>
       
@@ -362,11 +362,19 @@
                 
               
 
-              <time title="创建时间：2019-12-18 19:44:08 / 修改时间：20:32:43" itemprop="dateCreated datePublished" datetime="2019-12-18T19:44:08+08:00">2019-12-18</time>
+              <time title="创建时间：2019-12-18 19:44:08" itemprop="dateCreated datePublished" datetime="2019-12-18T19:44:08+08:00">2019-12-18</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-13 18:31:27" itemprop="dateModified" datetime="2020-04-13T18:31:27+08:00">2020-04-13</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -445,6 +453,8 @@
 <h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp936 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">flag = <span class="string">'Tr0y&#123;Base64isF4n&#125;'</span>  <span class="comment"># flag</span></span><br><span class="line">bin_str = <span class="string">''</span>.join([bin(ord(c)).replace(<span class="string">'0b'</span>, <span class="string">''</span>).zfill(<span class="number">8</span>) <span class="keyword">for</span> c <span class="keyword">in</span> flag])</span><br><span class="line">base64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'0.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f0, open(<span class="string">'1.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f1:  <span class="comment"># '0.txt'是明文, '1.txt'用于存放隐写后的 base64</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f0.readlines():</span><br><span class="line">        rowstr = base64.b64encode(line.replace(<span class="string">'\n'</span>, <span class="string">''</span>))</span><br><span class="line">        equalnum = rowstr.count(<span class="string">'='</span>)</span><br><span class="line">        <span class="keyword">if</span> equalnum <span class="keyword">and</span> len(bin_str):</span><br><span class="line">            offset = int(<span class="string">'0b'</span> + bin_str[:equalnum * <span class="number">2</span>], <span class="number">2</span>)</span><br><span class="line">            char = rowstr[len(rowstr) - equalnum - <span class="number">1</span>]</span><br><span class="line">            rowstr = rowstr.replace(char, base64chars[base64chars.index(char) + offset])</span><br><span class="line">            bin_str = bin_str[equalnum * <span class="number">2</span>:]</span><br><span class="line">        f1.write(rowstr + <span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure>
 
 <h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp936 -*-</span></span><br><span class="line">b64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'1.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    bin_str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        stegb64 = <span class="string">''</span>.join(line.split())</span><br><span class="line">        rowb64 = <span class="string">''</span>.join(stegb64.decode(<span class="string">'base64'</span>).encode(<span class="string">'base64'</span>).split())</span><br><span class="line">        offset = abs(b64chars.index(stegb64.replace(<span class="string">'='</span>, <span class="string">''</span>)[<span class="number">-1</span>]) - b64chars.index(rowb64.replace(<span class="string">'='</span>, <span class="string">''</span>)[<span class="number">-1</span>]))</span><br><span class="line">        equalnum = stegb64.count(<span class="string">'='</span>)  <span class="comment"># no equalnum no offset</span></span><br><span class="line">        <span class="keyword">if</span> equalnum:</span><br><span class="line">            bin_str += bin(offset)[<span class="number">2</span>:].zfill(equalnum * <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">''</span>.join([chr(int(bin_str[i:i + <span class="number">8</span>], <span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>, len(bin_str), <span class="number">8</span>)])  <span class="comment"># 8 位一组</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">github有个工具</span><br><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/jerrita/</span>b64steg</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -583,7 +593,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -609,7 +619,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -699,14 +709,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">98k</span>
+    <span title="站点总字数">116k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">1:29</span>
+    <span title="站点阅读时长">1:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
