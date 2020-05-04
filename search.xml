@@ -116,7 +116,7 @@ sudo apt-get install sublime-text</code></p>
 <p>按ctrl+shift+p,调出隐藏窗口,先安装包控制</p>
 </li>
 </ol>
-<pre><code>![](kali安装与配置/image-20200422201255164.png)
+<pre><code>![image-20200422201255164.png](kali安装与配置/image-20200422201255164.png)
 
 Perferences-&gt;Package Control-&gt;install Package
 
