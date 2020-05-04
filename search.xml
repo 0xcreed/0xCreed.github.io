@@ -1,6 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>kali安装与配置</title>
+    <url>/2020/04/kali%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>两个月前 我输入了这条神奇的命令 <code>rm /*</code>少了一个点，然后重装了一下kali</p><p>昨天安装软件的时候突然发现 <code>/dev/sda1</code>空间用完了 吐了</p><p>再也不玩高级的分区模式了</p><p>今天重新安装，分区选新手模式了！</p><p>这里主要记录一下如何配置kali</p><h3 id="1-安装谷歌输入法"><a href="#1-安装谷歌输入法" class="headerlink" title="1.安装谷歌输入法"></a>1.安装谷歌输入法</h3><p>如果下载速度慢，选择挂代理或者换源</p><ol>
+<li><p>先更新仓库</p>
+<p> <code>sudo apt-get clean</code></p>
+<p> <code>sudo apt-get update</code></p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422165456991.png" alt="image-20200422165456991"></p>
+</li>
+</ol><a id="more"></a>
+
+
+
+
+
+
+<ol start="2">
+<li><p>安装fcitx</p>
+<p> <code>sudo apt-get install fcitx</code></p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422165915271.png" alt="image-20200422165915271"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>安装谷歌拼音</p>
+<p> <code>sudo apt-get install fcitx-googlepinyin</code></p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422170051383.png" alt="image-20200422170051383"></p>
+</li>
+</ol>
+<ol start="4">
+<li><p>配置fcitx</p>
+<p> <code>fcitx-config-gtk3</code></p>
+<p> 设置Google拼音到第一位</p>
+<p> ![image-20200422170623716](kali安装与配置/image-20200422170623716.png</p>
+</li>
+<li><p>重启</p>
+<p> <code>sudo reboot</code></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422171933298.png" alt="image-20200422171933298"></p>
+</li>
+</ol>
+<h3 id="2-安装破解版BurpSuit"><a href="#2-安装破解版BurpSuit" class="headerlink" title="2.安装破解版BurpSuit"></a>2.安装破解版BurpSuit</h3><ol>
+<li><p>安装JAVA8</p>
+<p> <code>cd /opt/</code></p>
+<p> <code>sudo wget https://repo.huaweicloud.com/java/jdk/8u202-b08/jdk-8u202-linux-x64.tar.gz</code></p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422173241147.png" alt="image-20200422173241147"></p>
+</li>
+</ol>
+<ol start="2">
+<li><p>解压</p>
+<p> <code>sudo tar -zxvf jdk-8u202-linux-x64.tar.gz</code></p>
+</li>
+<li><p>设置环境变量</p>
+<p>  <code>sudo mousepad ~/.bashrc</code></p>
+<p> 最下面加上</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#JAVA</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=~/opt/jdk1.8.0_202</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$&#123;JAVA_HOME&#125;</span>/lib</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$&#123;JAVA_HOME&#125;</span>/bin/:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+
+<p> <img src="/2020/04/kali安装与配置/image-20200422174554381.png" alt="image-20200422174554381"></p>
+</li>
+<li><p>修改/etc/profile</p>
+<p> <code>sudo mousepad /etc/profile</code></p>
+<p> 添加</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 加载.bashrc文件</span></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">test</span> -f .bashrc ; <span class="keyword">then</span></span><br><span class="line"><span class="built_in">source</span> .bashrc </span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+
+<p> 避免每次进shell都要更新配置文件</p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422175335303.png" alt="image-20200422175335303"></p>
+</li>
+<li><p>安装并注册</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo update-alternatives --install /usr/bin/java java /opt/jdk1.8.0_202/bin/java 1</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_202/bin/javac 1</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> java /opt/jdk1.8.0_202/bin/java</span><br><span class="line"></span><br><span class="line">sudo update-alternatives --<span class="built_in">set</span> javac /opt/jdk1.8.0_202/bin/javac</span><br></pre></td></tr></table></figure>
+
+<p> <img src="/2020/04/kali安装与配置/image-20200422175852100.png" alt="image-20200422175852100"></p>
+</li>
+<li><p>破解burpsuit</p>
+<p><code>sudo mkdir /opt/burpsuit</code></p>
+<p><code>sudo mv burp-loader-keygen-2020_1.jar burpsuite_pro_v2020.1.jar /opt/burpsuit/</code></p>
+</li>
+</ol>
+<p><img src="/2020/04/kali安装与配置/image-20200422183206266.png" alt="image-20200422183206266"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422193327897.png" alt="image-20200422193327897"></p>
+<p>运行加载器后，正常破解即可</p>
+<p>7.创建快捷方式</p>
+<p><code>sudo rm -rf /usr/bin/burpsuite</code> </p>
+<p> <code>sudo touch /usr/bin/burpsuite</code></p>
+<p> <code>sudo mousepad /usr/bin/burpsuite</code></p>
+<p>添加以下内容</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="built_in">cd</span> /opt/burpsuit &amp;&amp; java -noverify -Xbootclasspath/p:burp-loader-keygen-2020_1.jar -jar burpsuite_pro_v2020.1.jar</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/04/kali安装与配置/image-20200422194026070.png" alt></p>
+<p>增加执行权限</p>
+<p><code>sudo chmod +x /usr/bin/burpsuite</code></p>
+<p>修改快捷方式</p>
+<p><code>sudo mousepad /usr/share/applications/kali-burpsuite.desktop</code> </p>
+<p><img src="/2020/04/kali安装与配置/image-20200422194502658.png" alt="image-20200422194502658"></p>
+<p>把<code>Exec=sh -c &quot;java -jar /usr/bin/burpsuite</code>改为<code>Exec=sh -c &quot;/usr/bin/burpsuite</code></p>
+<p>然后命令行和图标都能运行了</p>
+<h3 id="3-安装Subline-text3"><a href="#3-安装Subline-text3" class="headerlink" title="3.安装Subline text3"></a>3.安装Subline text3</h3><ol>
+<li><p>安装GPG</p>
+<p> <code>wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -</code></p>
+<p> <img src="/2020/04/kali安装与配置/image-20200422195424105.png" alt="image-20200422195424105"></p>
+</li>
+<li><p>确保apt被设置为https源</p>
+<p>  <code>sudo apt-get install apt-transport-https</code></p>
+</li>
+</ol>
+<p>​    </p>
+<ol start="3">
+<li><p>选择稳定版本</p>
+<p><code>echo &quot;deb https://download.sublimetext.com/ apt/stable/&quot; | sudo tee /etc/apt/sources.list.d/sublime-text.list</code></p>
+</li>
+<li><p>安装sublime-text3</p>
+<p><code>sudo apt-get update
+sudo apt-get install sublime-text</code></p>
+<p>可能会很慢，建议代理</p>
+</li>
+<li><p>汉化sublime</p>
+<p>按ctrl+shift+p,调出隐藏窗口,先安装包控制</p>
+</li>
+</ol>
+<pre><code>![](kali安装与配置/image-20200422201255164.png)
+
+Perferences-&gt;Package Control-&gt;install Package
+
+![image-20200422201619067](kali安装与配置/image-20200422201619067.png)
+
+之后输入 Localizations 安装对应插件 回车确认 即可实现汉化</code></pre><ol start="6">
+<li><p>安装SublimeREPL 同理</p>
+</li>
+<li><p>安装anaconda</p>
+<p>配置anaconda, 首选项-&gt;Package Settings -&gt; Anaconda -&gt;Settings -User</p>
+<p>粘贴以下内容</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;    </span><br><span class="line">true<span class="attr">"anaconda_linting"</span>: <span class="literal">false</span>,</span><br><span class="line">true<span class="attr">"python_interpreter"</span>: <span class="string">"/usr/bin/python3.7"</span>,</span><br><span class="line">    <span class="attr">"suppress_explicit_completions"</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">"suppress_word_completion"</span>:<span class="literal">true</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>设置快捷键 ，首选项-&gt;快捷键设置 在user这栏填上</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">"keys"</span>: [<span class="string">"f5"</span>],</span><br><span class="line">    <span class="attr">"caption"</span>: <span class="string">"SublimeREPL: Python - RUN current file"</span>,</span><br><span class="line">    <span class="attr">"command"</span>: <span class="string">"run_existing_window_command"</span>,</span><br><span class="line">    <span class="attr">"args"</span>: &#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="string">"repl_python_run"</span>,</span><br><span class="line">        <span class="attr">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="attr">"keys"</span>: [<span class="string">"ctrl+f5"</span>],</span><br><span class="line">    <span class="attr">"caption"</span>: <span class="string">"SublimeREPL: Python - PDB current file"</span>,</span><br><span class="line">    <span class="attr">"command"</span>: <span class="string">"run_existing_window_command"</span>,</span><br><span class="line">    <span class="attr">"args"</span>: &#123;</span><br><span class="line">        <span class="attr">"id"</span>: <span class="string">"repl_python_pdb"</span>,</span><br><span class="line">        <span class="attr">"file"</span>: <span class="string">"config/Python/Main.sublime-menu"</span>&#125;</span><br><span class="line">    &#125;,   </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>f5运行python  ctrl+f5 pdb调试python</p>
+</li>
+<li><p>注册码</p>
+ <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">----- BEGIN LICENSE -----</span><br><span class="line">Member J2TeaM</span><br><span class="line">Single User License</span><br><span class="line">EA7E<span class="number">-1011316</span></span><br><span class="line">D7DA350E <span class="number">1</span>B8B0760 <span class="number">972</span>F8B60 F3E64036</span><br><span class="line">B9B4E234 F356F38F <span class="number">0</span>AD1E3B7 <span class="number">0E9</span>C5FAD</span><br><span class="line">FA0A2ABE <span class="number">25</span>F65BD8 D51458E5 <span class="number">3923</span>CE80</span><br><span class="line"><span class="number">87428428</span> <span class="number">79079</span>A01 AA69F319 A1AF29A4</span><br><span class="line">A684C2DC <span class="number">0</span>B1583D4 <span class="number">19</span>CBD290 <span class="number">217618</span>CD</span><br><span class="line"><span class="number">5653E0</span>A0 BACE3948 BB2EE45E <span class="number">422</span>D2C87</span><br><span class="line">DD9AF44B <span class="number">99</span>C49590 D2DBDEE1 <span class="number">75860</span>FD2</span><br><span class="line"><span class="number">8</span>C8BB2AD B2ECE5A4 EFC08AF2 <span class="number">25</span>A9B864</span><br><span class="line">------ END LICENSE ------</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装AWVS13"><a href="#4-安装AWVS13" class="headerlink" title="4.安装AWVS13"></a>4.安装AWVS13</h3><p> awvs安装包下载 <code>http://0verflow.cn/?p=1463</code></p>
+</li>
+</ol>
+<pre><code>![image-20200422221053236](kali安装与配置/image-20200422221053236.png)
+
+![image-20200422221147845](kali安装与配置/image-20200422221147845.png)</code></pre><p><img src="/2020/04/kali安装与配置/image-20200422221208598.png" alt="image-20200422221208598"></p>
+<h3 id="4-安装nessus"><a href="#4-安装nessus" class="headerlink" title="4.安装nessus"></a>4.安装nessus</h3><p><a href="https://www.tenable.com/downloads/nessus?loginAttempted=true" target="_blank" rel="noopener">Nessus官网</a>下载对于版本的安装包</p>
+<p><img src="/2020/04/kali安装与配置/image-20200422230607599.png" alt="image-20200422230607599"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422230308965.png" alt="image-20200422230308965"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422230627297.png" alt="image-20200422230627297"></p>
+<p>接下来账号密码随意，记得就行</p>
+<p>进入这个页面后</p>
+<p><img src="/2020/04/kali安装与配置/image-20200422230745749.png" alt="image-20200422230745749"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422231111879.png" alt="image-20200422231111879"></p>
+<p>得到challenge code</p>
+<p>然后去<a href="https://zh-cn.tenable.com/products/nessus/nessus-essentials?tns_redirect=true" target="_blank" rel="noopener">官网注册</a>一个账号，邮箱必须是有效的 得到activation code </p>
+<p>到<code>https://plugins.nessus.org/offline.php</code>提交它们，下载插件包</p>
+<p><img src="/2020/04/kali安装与配置/image-20200422235202520.png" alt="image-20200422235202520"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200423001848981.png" alt="image-20200423001848981"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200423001748972.png" alt="image-20200423001748972"></p>
+<p>将plugin_feed_info.inc文件替换到<code>/opt/nessus/var/nessus/</code>目录 和<code>/opt/nessus/lib/nessus/plugins/</code>目录</p>
+<p><img src="/2020/04/kali安装与配置/image-20200423002118121.png" alt="image-20200423002118121"></p>
+<h3 id="5-安装pip"><a href="#5-安装pip" class="headerlink" title="5.安装pip"></a>5.安装pip</h3><ol>
+<li><p>pip3</p>
+<p> <code>sudo apt-get install python3-pip</code></p>
+</li>
+<li><p>pip2</p>
+<p> <code>curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</code></p>
+<p> <code>sudo python2 get-pip.py</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>kali</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C段扫描脚本</title>
     <url>/2020/03/C%E6%AE%B5%E6%89%AB%E6%8F%8F%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
@@ -36,7 +213,7 @@
 <p><img src="/2020/03/2020北邮校赛/image-20200327205642253.png" alt="image-20200327205642253"></p>
 <p>根据提示应该是改XFF头</p>
 <p><img src="/2020/03/2020北邮校赛/image-20200327205656797.png" alt="image-20200327205656797"></p>
-<h3 id="3-你传你🐎呢"><a href="#3-你传你🐎呢" class="headerlink" title="3.你传你🐎呢"></a>3.你传你🐎呢</h3><p>这道题有蛋痛的地方是正常上传后，查看报文是Nginx服务器，然后就一直在搞user.ini。后面服务器错误的回包发现是Apache 。。。然后直接上传.htaccess，文件内容： SetHandler application/x-httpd-php </p>
+<h3 id="3-你传你🐎呢"><a href="#3-你传你🐎呢" class="headerlink" title="3.你传你🐎呢"></a>3.你传你🐎呢</h3><p>先上传.htaccess，文件内容： SetHandler application/x-httpd-php </p>
 <p><img src="/2020/03/2020北邮校赛/image-20200327202846073.png" alt="image-20200327202846073"></p>
 <p>接着上传马</p>
 <p><img src="/2020/03/2020北邮校赛/image-20200327202924100.png" alt="image-20200327202924100"></p>
