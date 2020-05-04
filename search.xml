@@ -154,7 +154,7 @@ sudo apt-get install sublime-text</code></p>
 <p><img src="/2020/04/kali安装与配置/image-20200423001748972.png" alt="image-20200423001748972"></p>
 <p>将plugin_feed_info.inc文件替换到<code>/opt/nessus/var/nessus/</code>目录 和<code>/opt/nessus/lib/nessus/plugins/</code>目录</p>
 <p><img src="/2020/04/kali安装与配置/image-20200423002118121.png" alt="image-20200423002118121"></p>
-<h3 id="5-安装pip2"><a href="#5-安装pip2" class="headerlink" title="5.安装pip2"></a>5.安装pip2</h3><ol>
+<h3 id="5-安装pip"><a href="#5-安装pip" class="headerlink" title="5.安装pip"></a>5.安装pip</h3><ol>
 <li><p>pip3</p>
 <p> <code>sudo apt-get install python3-pip</code></p>
 </li>
