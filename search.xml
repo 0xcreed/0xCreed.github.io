@@ -113,16 +113,10 @@ sudo apt-get install sublime-text</code></p>
 <p>可能会很慢，建议代理</p>
 </li>
 <li><p>汉化sublime</p>
-<p>按ctrl+shift+p,调出隐藏窗口,先安装包控制</p>
+<p>按ctrl+shift+p,调出隐藏窗口,先安装包控制<br><img src="/2020/04/kali安装与配置/image-20200422201255164.png" alt="image-20200422201255164"></p>
+<p>Perferences-&gt;Package Control-&gt;install Package<br><img src="/2020/04/kali安装与配置/image-20200422201619067.png" alt="image-20200422201619067"></p>
+<p>之后输入 Localizations 安装对应插件 回车确认 即可实现汉化</p>
 </li>
-</ol>
-<pre><code>![image-20200422201255164.png](kali安装与配置/image-20200422201255164.png)
-
-Perferences-&gt;Package Control-&gt;install Package
-
-![image-20200422201619067](kali安装与配置/image-20200422201619067.png)
-
-之后输入 Localizations 安装对应插件 回车确认 即可实现汉化</code></pre><ol start="6">
 <li><p>安装SublimeREPL 同理</p>
 </li>
 <li><p>安装anaconda</p>
@@ -160,7 +154,7 @@ Perferences-&gt;Package Control-&gt;install Package
 <p><img src="/2020/04/kali安装与配置/image-20200423001748972.png" alt="image-20200423001748972"></p>
 <p>将plugin_feed_info.inc文件替换到<code>/opt/nessus/var/nessus/</code>目录 和<code>/opt/nessus/lib/nessus/plugins/</code>目录</p>
 <p><img src="/2020/04/kali安装与配置/image-20200423002118121.png" alt="image-20200423002118121"></p>
-<h3 id="5-安装pip"><a href="#5-安装pip" class="headerlink" title="5.安装pip"></a>5.安装pip</h3><ol>
+<h3 id="5-安装pip2"><a href="#5-安装pip2" class="headerlink" title="5.安装pip2"></a>5.安装pip2</h3><ol>
 <li><p>pip3</p>
 <p> <code>sudo apt-get install python3-pip</code></p>
 </li>
