@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2020/04/kali安装与配置/image-20200423001748972.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2020/04/kali安装与配置/image-20200423002118121.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2020/04/kali安装与配置/image-20200513224644533.png">
-<meta property="og:updated_time" content="2020-05-14T02:35:19.830Z">
+<meta property="og:updated_time" content="2020-05-21T01:18:09.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kali安装与配置">
 <meta name="twitter:description" content="已经是两个月来第一次重装kali了！！！">
@@ -241,7 +241,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">20</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">17</span></a>
 
   </li>
       
@@ -285,7 +285,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">14</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">13</span></a>
 
   </li>
       
@@ -401,7 +401,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-14 10:35:19" itemprop="dateModified" datetime="2020-05-14T10:35:19+08:00">2020-05-14</time>
+                <time title="修改时间：2020-05-21 09:18:09" itemprop="dateModified" datetime="2020-05-21T09:18:09+08:00">2020-05-21</time>
               </span>
             
           
@@ -643,7 +643,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proxychains git <span class="built_in">clone</span> https://github.com/EmpireProject/Empire.git</span><br></pre></td></tr></table></figure>
 
 <p>2.更新&amp;&amp;安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get install make g++ python-dev swig python-pip libxml2-dev default-jdk libssl1.0.0 libssl-dev build-essential</span><br><span class="line"><span class="built_in">cd</span> /Empire/setup</span><br><span class="line">sudo pip2 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get install make \</span><br><span class="line">g++ \ </span><br><span class="line">python-dev \</span><br><span class="line">swig python-pip \</span><br><span class="line">libxml2-dev \</span><br><span class="line">default-jdk \</span><br><span class="line">libssl1.0.2 \</span><br><span class="line">libssl-dev \</span><br><span class="line">build-essential</span><br><span class="line"><span class="built_in">cd</span> /Empire/setup</span><br><span class="line">sudo pip2 install -r requirements.txt</span><br></pre></td></tr></table></figure>
 
 <p>如果碰到pyinstaller安装失败就运行下面的语句</p>
 <p> <code>pip2 install pyinstaller --no-use-pep517</code></p>
@@ -658,7 +658,7 @@
 <p>这下应该不会报错了</p>
 <p>接着</p>
 <p><code>sudo ./reset.sh</code></p>
-<p>接着可能会报缺少什么什么包，缺啥直接装啥</p>
+<p>接着可能会报缺少什么什么包，缺啥直接装啥(加上sudo)</p>
 <p>最后reset.sh 运行成功就安装成功了</p>
 
     </div>
@@ -713,8 +713,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2020/03/C段扫描脚本/" rel="next" title="C段扫描脚本">
-                  <i class="fa fa-chevron-left"></i> C段扫描脚本
+                <a href="/2020/03/2020北邮校赛/" rel="next" title="2020北邮校赛">
+                  <i class="fa fa-chevron-left"></i> 2020北邮校赛
                 </a>
               
             </div>
@@ -723,8 +723,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2020/05/De1CTF2020-复现/" rel="prev" title="De1CTF2020-WP">
-                  De1CTF2020-WP <i class="fa fa-chevron-right"></i>
+                <a href="/2020/05/De1CTF2020-复现/" rel="prev" title="De1CTF2020-复现">
+                  De1CTF2020-复现 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -797,7 +797,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -823,7 +823,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -913,14 +913,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">162k</span>
+    <span title="站点总字数">172k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:27</span>
+    <span title="站点阅读时长">2:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
