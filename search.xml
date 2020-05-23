@@ -277,13 +277,12 @@
 <li><p>注册码</p>
  <figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">----- BEGIN LICENSE -----</span><br><span class="line">Member J2TeaM</span><br><span class="line">Single User License</span><br><span class="line">EA7E<span class="number">-1011316</span></span><br><span class="line">D7DA350E <span class="number">1</span>B8B0760 <span class="number">972</span>F8B60 F3E64036</span><br><span class="line">B9B4E234 F356F38F <span class="number">0</span>AD1E3B7 <span class="number">0E9</span>C5FAD</span><br><span class="line">FA0A2ABE <span class="number">25</span>F65BD8 D51458E5 <span class="number">3923</span>CE80</span><br><span class="line"><span class="number">87428428</span> <span class="number">79079</span>A01 AA69F319 A1AF29A4</span><br><span class="line">A684C2DC <span class="number">0</span>B1583D4 <span class="number">19</span>CBD290 <span class="number">217618</span>CD</span><br><span class="line"><span class="number">5653E0</span>A0 BACE3948 BB2EE45E <span class="number">422</span>D2C87</span><br><span class="line">DD9AF44B <span class="number">99</span>C49590 D2DBDEE1 <span class="number">75860</span>FD2</span><br><span class="line"><span class="number">8</span>C8BB2AD B2ECE5A4 EFC08AF2 <span class="number">25</span>A9B864</span><br><span class="line">------ END LICENSE ------</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-安装AWVS13"><a href="#4-安装AWVS13" class="headerlink" title="4.安装AWVS13"></a>4.安装AWVS13</h3><p> awvs安装包下载 <code>http://0verflow.cn/?p=1463</code></p>
 </li>
 </ol>
-<pre><code>![image-20200422221053236](kali安装与配置/image-20200422221053236.png)
-
-![image-20200422221147845](kali安装与配置/image-20200422221147845.png)</code></pre><p><img src="/2020/04/kali安装与配置/image-20200422221208598.png" alt="image-20200422221208598"></p>
-<h3 id="4-安装nessus"><a href="#4-安装nessus" class="headerlink" title="4.安装nessus"></a>4.安装nessus</h3><p><a href="https://www.tenable.com/downloads/nessus?loginAttempted=true" target="_blank" rel="noopener">Nessus官网</a>下载对于版本的安装包</p>
+<h3 id="4-安装AWVS13"><a href="#4-安装AWVS13" class="headerlink" title="4.安装AWVS13"></a>4.安装AWVS13</h3><pre><code>awvs安装包下载 `http://0verflow.cn/?p=1463`</code></pre><p><img src="/2020/04/kali安装与配置/image-20200422221053236.png" alt="image-20200422221053236"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422221147845.png" alt="image-20200422221147845"></p>
+<p><img src="/2020/04/kali安装与配置/image-20200422221208598.png" alt="image-20200422221208598"></p>
+<h3 id="5-安装nessus"><a href="#5-安装nessus" class="headerlink" title="5.安装nessus"></a>5.安装nessus</h3><p><a href="https://www.tenable.com/downloads/nessus?loginAttempted=true" target="_blank" rel="noopener">Nessus官网</a>下载对于版本的安装包</p>
 <p><img src="/2020/04/kali安装与配置/image-20200422230607599.png" alt="image-20200422230607599"></p>
 <p><img src="/2020/04/kali安装与配置/image-20200422230308965.png" alt="image-20200422230308965"></p>
 <p><img src="/2020/04/kali安装与配置/image-20200422230627297.png" alt="image-20200422230627297"></p>
@@ -299,7 +298,7 @@
 <p><img src="/2020/04/kali安装与配置/image-20200423001748972.png" alt="image-20200423001748972"></p>
 <p>将plugin_feed_info.inc文件替换到<code>/opt/nessus/var/nessus/</code>目录 和<code>/opt/nessus/lib/nessus/plugins/</code>目录</p>
 <p><img src="/2020/04/kali安装与配置/image-20200423002118121.png" alt="image-20200423002118121"></p>
-<h3 id="5-安装pip"><a href="#5-安装pip" class="headerlink" title="5.安装pip"></a>5.安装pip</h3><ol>
+<h3 id="6-安装pip"><a href="#6-安装pip" class="headerlink" title="6.安装pip"></a>6.安装pip</h3><ol>
 <li><p>pip2</p>
 <p> <code>curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</code></p>
 <p> <code>sudo python2 get-pip.py</code></p>
@@ -308,7 +307,7 @@
 <p> <code>sudo apt-get install python3-pip</code></p>
 </li>
 </ol>
-<h3 id="6-安装Empire"><a href="#6-安装Empire" class="headerlink" title="6.安装Empire"></a>6.安装Empire</h3><p>1.下载Empire</p>
+<h3 id="7-安装Empire"><a href="#7-安装Empire" class="headerlink" title="7.安装Empire"></a>7.安装Empire</h3><p>1.下载Empire</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">proxychains git <span class="built_in">clone</span> https://github.com/EmpireProject/Empire.git</span><br></pre></td></tr></table></figure>
 
 <p>2.更新&amp;&amp;安装依赖</p>
