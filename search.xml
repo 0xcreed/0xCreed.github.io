@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>8月刷题记录</title>
+    <url>/2020/08/8%E6%9C%88%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="5f009fcbc2b0de4941c96eff7cb453a11fee8496f66f917ebd4d5ab99dad522b">4ac725d673ec0a1fda6167b61c1fb1191936a59b639edaa9e9df4b6173d899bc54f89a190f25042158c73eaa2f5f818c5567b53e8026115705e0c1e5a4dd75bd5dfea8c195c2a07bfcfe3525c3c8f2a1121a516df1a8683b94b958211afb6e704e0b211f1526f7b5232d0f6576af06786ad9fc94abae05cbc22594a5ae4815a5676805e7dc15b88ed127ab73829f51ad3b5fa7523a37c7c1d3ad2eece08516b9bb54de2395356e472d99c61ad3886ff6e1e57ffc967816afc63272964dd92553fcd78bdf1da71cc7e9173637ca75aef36f959dd5d1ed42b25ddbc3f7968c350bc52e6efcce1c5917ad6e8158980e9b9546c14badbd5266fe4d89af8e7e3abc54154f6bfde2676234dd6c9fa0199082b0164fca0074dc5e17ccd6384aa290b067f690a7cf0e220b30fb5d1bed361c6249742d9528b3896a28ecd83467e818dd4d62b47cbcce3696e8c90cb5c578865c866b3244b86d512a9efa372f70128bca3ac19a9239a90c35b2f29b06aa7dd31821c45f4306ff1824171b0a8aadf82a74aeae32e37408272e88b1421911f4b48c4e9d3d2444cbf6ca4956e7aeb1e0ac27af3a8f57544e4ca9b3b0daca128bf5385bd41911c584013ac3e4753d80b5d271e28a869f31aecbdadb863534e051459e07cb5ce6318649e88f82aa783a1cd88f2083185034c0261db9a065f76b3fc7405932e8540fa488bd3c348896f8e7da63b8a931d393b32cba1cb89d768fd6b495e6754d5af4142dfa8c40b6f35affb79d023adc502247fb830d2422141dd4591d6fc37605b68796a0326d7a22c93ae1df00b2d91d797c80f7685587269b165a5da71be0951169b07e305d3c1b6a59a97b6aead2b607c21790b3beb3862ca2a21afdcb857b600cb6cfc021ae61f84c264ed0152cfdb8a31187c48babbc6320503a2a2ce1dc4bba33abdec264c872e35b37e2c8559b03dc48140aef4f4c7dca14bfce3bb50e56a75cd40a430652c6deb4c73d701500a7b67faa475698f396c177ebe825a64232ba6e4b929370523f8457c725409f39ee324f36a716a70d1895e6b6c9247c748230626dd734b1e65c81e4de5bd22445714354d7e3bd5e79e116c37b523029a75e369bb892948e792baeb74aa09f1f86e7a297937160dc8c2d30243166d8d510bf35ae91c7544211f0e2c3d8a2a87e9a619dcfc26e06a046593db69389d9aba25e647439c151b30f6f89c7bae2adf203a63240718cbb10978d7daa39ab870e7d46b78f467433351787614ec0659ff386977ab6077c21858bf3882c3304667b3bcb92383564fed9a006d51ab569fd9a79046ac529601b42f9bc06bd6e99c5f78c47aca66576846f09c6af21e8edb4dfc032a6584fa9ff08b61ba9dd9195860ffbe4b65a147848f1a85e5a57e2833fbb644b93c9036fca0d09d9ce3821fed369aa101262aeead20f863caea50967d4708042ee7d6ffc56925f0fb40d3528ad854aac290de66ea67049e22cbd031990f46f12e1d6927c3ccaa63724783ef1fd0b63deaf2bff5cd9b46933db4fd63ce3dd15d8e6d5f927aeaba2dc815cfb44a50766863a89ffeb97df11fb425656649c648e910df6247df5ea4363bde2eb74e117dddb09b781d6d0bf697a2ff491917ade8a00190fac6a5e62d6b9abefc23281c4f643f51cf8bee5750e1ebf56977386a01fff362eb132fcbfc42939455f3c7c467341139525eec4e299064a074c9b3db6323e378dca7312d07354c3c41c5af6e786bcd7be3fdcc68334235608196c99ade6691d0ed959ca135b68c5518acca2aa589efcf3925764cc09ecfa7a344c1b89e0ef8288bba0f4c41c5b0ed8301626dc3315b9743b5126d6cc4c11d15582bdc897186322c2fa9ea5173cf77bb37884e9688830f6233f5c216726744f3a85a7a03c48be7e90475f88735b65efafd7580f43272f5b9192d2d17fa3b9059d7805b682350137416141e36b414e41356549f9fef51267f6c1f6f810659ce41ef887d948ab77e858f5a78a65f93eb687084676b3d61c4e9ce254ccdf24a2f8fe42406bdc5a79586c6afa72c6e0d0f4a3b1d5d7ffcf5145eea5bc111dd8c4e3722bd8a929b7da832b8779b6ffb87166f8bcee8147fbd55326089e8f09f0948921bb24000b42bee4d3fbef250fbdecba5f05cba680b2a2d3a46172a3e9c038980e4b424076d86a1e089787cb2437ad6cf3a4d450b578e92926b74aac097c98487fc6f9251492f84eee2b15c2a8a311df3d1c9dfe8da83111b730342607ad1787ecb6e6f8210d4560fc0339c05703ec09c995e8ffa8a2f53bc720c2617fee166ac9a2f77fc0c809d9b4aa2ae655045d37fb7d083cfbf7237e6ce06163bdbfa3459c3ac21cfe5767b344a25858d370372a51979a4ab0f04d763da75a15e9a85e357ad670246fb031d7c45f8847b72622fe8da90f6d3a92500949466d5c27f752b878f5d3cb59c0af89ed7c6609b7be5b3684c6385af6a68441716e3599785c41ad2c3ce896610a411e7f987a4fd799d7bb6c7d6940a52065e8d8b47e50ac44580cc34832e100bf61c04e66a5a1e47109097505c00ff082a3763aba5cee1b35fcb2725483b68c322492a92851017ea0463b854dc3c7041f33bf6addae1bd807f3740e8994d4deca16e5afd7048546cdee7d9f5d65970cb0fd3cc7206f910d74cb057ae43563bc8c99dc13fbc5a1214a9fcdeaddaf3a4aabdf2674f0bf63052fb6bd882c515892fc4d2477136ec9c164daa93537304b1e2c7b6c447b255d5244fb64cabe97c9539a45766a909c03c1703d8bf305c903bc3f404aba8758705c48bb085bb80bfce62653d086d9b3962343d54981ce3f62d2e3edada41032275ce8d8b6c8ca13b86942034b299cc160349a3393af2aaefd3f83314477aec1c5dd8604f0a575823b0d04887d90bd3d8c3b66c31e0a42b1d214a56a01363ba6fc61d591479be51a8119e3c295e03011c064bd31b8ab72318a81c4043820af98bab3ef81ff215b5bd307557af9cae1ed5463c32935e3ec05b3b2f0113c7382bb4a8c05558101f5aee021a7055920d33f8141494c1153b0daf16b4d1466a65c84464cd80636458f62147dd4b3e66b5e1b45214b07f1ac7c7bec72cbdd9223b0c5d5085d219d97208328c32341b31bfcbdb4507050d50ca0661356a8a209d8d27cf0f348d700fd5161c967b9d6961fa9cd879482d7242dc9ba96c17af90208cc25de33a7a3ec229272e1a1a06c9dfa35592a3d2bf794ea2604e0a3f40add9627e1d9d3b476c9fd1209f7dd3860e9c85cbc08db26f5b7319fb326f533a36b4d0f1b63ced2701e77ff07d4954d51086fdf85cb09679bcfc6144353a94e4d4e3699ca2b1cc1b5e89c0874667d08f1b9cc79dc67faefa2684422271142d1e52b43500b9a4b5d57ca3ce2c35e42f3d61bab88a231f62aea038a15f895c4441ca1beba265d248bdc939b50ae09504142359a20b93288dc9fc7aca7ec50e838fc56ea43d0d5169f60135b33694cf30180cb6b88c3c8421ade5f9abb0186f51f10235cd343fdbf40f622a996a5a93dbefbde4a63b6097fe4a59b29c7a57c61c81c4e6e1a86e83e995fbb732dff8135861f318fb1bee906d55d80b452e56da68b36aab57e2655d26a9cb949567cca39e74a7baac39a72af1a62e0f886439cc26d985d17fc308084257a31f162ddbe1a9c01200e6178b252ac5a4f0e6b66f234d8f09d179f4f298ed3070e5bcff3d14f5c8e2239a77db62143d10c89063c4963aca5952d217a4edd105e09ecca87fd47ee4b28e9bc3cf82056260f6f04ca89eee71637431710a4b58c8b7ea2ec7c166f1819cdbe77b0ea502d8d1106ee22669de5ebd30c7cebff9bf1bd02e606ede74ae6627586ff81438b5c47bf02e014a9a85f0d46deb1ab592ffd4f5ad4530128d026ec814e957aa9aaad62a6e9eba9311ea82b240c27bc7d0ef57a0977777f49d199fe0d71355d720eb998476cd1dcd888a6b40a9b34a25475bf7fb4fc852e41c613a2ac03079eb9f3495020229815e0638dd186b90ffd7d10f3a3cce3b2e61ef75c1b46928bbf1728690fc631f40023ea2699572c39432e2d794cf14c7abe42ed69c4266bd656c926a907d87963f1877cd0c4a9b3945be2e9e84fd5ec3a297a31dc82aa1b7f9c122da8f6a5470f43ff53db22bd67b9ee2f157b611c3a44adee75b5d245295249ee47321e0d60a4f7f52f912ddf3852aa8a6b4f1553e4930d8a9102a523eb0cec8fd4783bbfc36f412b7041b608ba9b61a05c405368f9bdf01127a24aa1a541db1eac2cfa72531a2b25da2dabd9c43f41fe92420c8e157fef916f60879a11c777942a3712f1bea46f63ef4dee6a473c782975ca3bd4e6626cf20221e03c9d2bca3e8c0806243751a2c7d1da8f145d848f5f5e93ac3dcf737756cafb8b2736594916adde51d0eb1d5f25451c2d56970ebd2516d08d63fc2341788528670a7adc2ece2b261f0c128b1add60ecf48e0aaaa80bc3887947338107e35f38c2c97caa9a080fd33b5a1ca9510e38381fd77b20de4e06f9ab3ac55a34c7486b405ba6ef40a659f29965ffee832bcbad60fe49bc0b61b07b3933c112df2648af178dc63d1fc8f75f1024c79ee6da6852115e8839bd976ad2f76a073a45ad26e7f1418f4d490421646a7666a6e84f0b15add09a6f9b447529e31e27c161d304508dae1a4cf68d3f450e772a3ff24adcaa44f19aecead916a3cd509170d8b7538d04b6d0a12c61c17ebd28ff99c44558e7b0190963428467506d51f0f3f4c3ad0c578a00e323b2f8adbd05ee333fecdfd99bd527dcc98ab337fb6ec4177fc3e092a793fdc5f30368746afb6f04ec7da70d732cdcf450bb12798c5fe716234ea414109db16d063b0b2aaaa8bd48617b2b1027b456dadbbc842390531be30385515e1f6434c288b88c5ed6a138be6d434b9d7651b3f97b61c28432868c0301580613a3db17c2190b3b8bbbf64c9f98d3c5ee390b4c2a540a1e35ee61f2882f2124fad0611f297327dad1c3673c145ecb15f7610c99b544088db3e14ffad278b779306746228fb64017d5b77857e9e901192ef31f66c4367c8b53f935caf4d6f1163e93525f38f22a4d47d2440991918fc0f6d600e63c9f1898ed90634125d1e246b3f847294d0d2118aa04cf14c59813c70f96a9a934a67654242c79626c2f1c6beaab55de0011e2e0521a0215c4419facd468f15ebcc9cdee4739e24767a1422eab7649abcba5516c19ee36fb2c67117248915922191df155abf521182582e1d6ad33413128f70c0dd1eaa208f1b3df1bf1367e2cda8542f7cf447e62091cf75ef82f73bc64398f8a14b71a0a7bcfe4a8876a8f05ab1c25db8337e227434943ad7e125d4f3ac326e9a286f2bb6a5f4bf2f9cb66d38e6f7a5208350f63b0ecbfeab2130373fd0f3bccfb4bf9bf115b3c09e28b11c08b3ea60250054582fb585cacf55d333677df63b8f4b1d4bc433555fe71062dc302775ac49737bea2078d4c4c0cf3f040a066ab3cdf8477c40ca7cbd0f651f9a9919ac1bb2cbf21138ec6cdfda9e7219d52c128cc46dc4bed30c4633c9d16e940f6815f5c0c3728a69c9eb53da1d19a0fabbdd32647fb0bc8fa62565766657e9bf4d01bf118591287f2bf831d791269bd506fa72217800b14c3c864a64dbd08d250ffce5770b548eca2da4e2e4b6c14f4880208dcd67ab22fdea2cca91d7609cbb19a11dd4802577d8e89c7dc608c5021f4eb99f9c2ead0fb21dcc01b6a9e94a086cdbca1c931cf618b55bc5944c6733c069fe84e9919c0da482fb44d0e3b4f5a69b367649f79e21b3672af4fab3e1726bc2c99ab6fbadc85b3114af7401dad612e0f562ecee71c80a35d785fa86729793565f7557f52f308997a5a664b92ed6571aff734e7c495cbccdea0842485685db772653235c82d88dc46b4397c24c83b552c22662d0444947957bc98c4c000f44b47b762dd7d3cde59630d3c8227793210ef98940f8934f4900fd3ac0f2034df9a449bb03bc2bda9672f5cfa1c931069e1ed0a49b435a66bff2ba441043df3bfd4688449a53602b3681b31501fdc098c0ae1d418e079adb8215a289500164f20f784f49a1c7966ee3ebebd6464e0b750b024daa3a2d2e8838b887a4a52b293be5ad57f026619b8e6bd1fa480167537b2365078a3a932836a75cd9c84a14897c04d79eff2f3c36eff5de3ab6c7004afc106c8f7b17acbcf9d1119363394099002028bf24df6ffdbc2859bbce03a866a3094cc2821c0e97398b6f99d32567eeb7bc2d12bb2e8a6f9834403e053bb29ab445c69f2ac1f21cf48ae8f99b8c1e2b34575d19dbd30ad01d9554251b8a6048cbfd303d4bda7a8d38171ef8720dc95d029aff41390bde0cdbdc24a331d9e63f8e0a312a1179ff023c0bd689c966fba5a2ad25c363f2d4d2e11227263cc94143c5bc5b652042e468f18ee117e6cf68d48c80ca5da09f69d982a20903c2d96ca004b29f0632905c3a2473b3cd57a4e2c036c2ca316249a335ef8dddcbe2903bec5bd61d4ce0746585e4dac62f1fb26ca4fedd0a046f6001599f3965eb903a14d13a6400fed6ae380e09291ed211c9388e030f72872bb4794e623db2a53be486f2e0ddad57ce7d047aa8671</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>刷题</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java13环境配置</title>
+    <url>/2020/07/Java13%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>更新ButpSuit后，发现Java8带不动它。所以更新下Java版本。</p><p>先下载<a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" rel="noopener">Java JDK</a>，我这里是下载的安装包(建议使用，解压版要手动设置注册表关联jar文件)。这里需要注意的是高版本的Java不再提供JRE，这个需要我们自己生成。</p><p>先进入安装目录，然后打开CMD，执行命令 <code>.\bin\jlink.exe --module-path jmods --add-modules java.desktop --output jre</code></p><a id="more"></a>
+
+
+<p><img src="/2020/07/Java13环境配置/image-20200727181313035.png" alt="image-20200727181313035"></p>
+<p>jre文件夹会生成在 Java13 目录下</p>
+<p>接着 配置下环境变量</p>
+<p><img src="/2020/07/Java13环境配置/image-20200727181412326.png" alt="image-20200727181412326"></p>
+<p>在Path中增加</p>
+<p><img src="/2020/07/Java13环境配置/image-20200727181456215.png" alt="image-20200727181456215"></p>
+<p>后面发现因为Java版本的更新，之前的破解方法(有条件还是支持正版吧)，并不能直接使用。</p>
+<p><img src="/2020/07/Java13环境配置/image-20200727204757484.png" alt="image-20200727204757484"></p>
+<p>主要增加了<code>BurpSuitLoader_v2020.7.jar</code> 这个<a href="https://github.com/x-Ai/BurpSuiteLoader/releases/tag/v1.1" target="_blank" rel="noopener">文件</a> </p>
+<p>打开CMD，利用加载器运行burpsuit</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">java <span class="attribute">--illegal-access</span>=permit <span class="attribute">-Dfile-encoding</span>=utf-8 -noverify -javaagent:BurpSuiteLoader_v2020.7.jar -jar burpsuite_pro_v2020.7.jar</span><br></pre></td></tr></table></figure>
+
+<p>接着打开注册机，按正常的流程破解就行</p>
+<p><img src="/2020/07/Java13环境配置/image-20200727205614759.png" alt="image-20200727205614759"></p>
+<p>后面利用第一条命令即可运行BurpSuit</p>
+<p>写个批处理也行</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">pushd E:\CTFtools\web\burpsuite_pro_2020<span class="number">.7</span></span><br><span class="line">java --illegal-access=permit -Dfile-encoding=utf<span class="number">-8</span> -noverify -javaagent:BurpSuiteLoader_v2020<span class="number">.7</span>.jar -jar burpsuite_pro_v2020<span class="number">.7</span>.jar</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>环境配置</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>环境配置</tag>
+        <tag>Burpsuit</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DASCTF_7月赛</title>
     <url>/2020/07/DASCTF-7%E6%9C%88%E8%B5%9B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-Ezinclude"><a href="#1-Ezinclude" class="headerlink" title="1.Ezinclude"></a>1.Ezinclude</h3><p>  URL的请求加了个unix时间戳，只能写脚本淦。后面测试发现gqy.jpg和/gqy.jpg回显相同，可以判断文件名前拼接了路径，这种情况无法使用wrapper等手段的。同时waf也会过滤 <code>../</code>。尝试多次都没包含成功，就强行用了下伪协议成功了，后面看了源码醉了，如果f参数的开头给出一个目录再穿越就可以绕过waf了。这里的伪协议就相当于目录。</p><a id="more"></a>
@@ -251,8 +304,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>web</tag>
         <tag>python</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
