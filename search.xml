@@ -684,8 +684,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>复现</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -2229,8 +2229,8 @@ Content-Type: multipart/from-data;boundary=xxx
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>WP</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
 </search>
