@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>phpstrom+xdebug调试代码</title>
+    <url>/2021/01/phpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​        接下来想审计几个开源的cms，工欲善其事必先利其器，这里我用的是phpstrom+xdebug+phpstudy的组合。安装phpstrom和phpstudy这个不多说。</p><h3 id="phpstudy"><a href="#phpstudy" class="headerlink" title="phpstudy"></a>phpstudy</h3><p>​        注意这里不要使用apache作为中间件，这样会导致调试过程中会话丢失(大概1分钟不到)。</p><a id="more"></a>
+
+<p>先启动nginx和mysql</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119185312944.png" alt="image-20210119185312944"></p>
+<p>再新建网站</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119190147445.png" alt="image-20210119190147445"></p>
+<p>这个默认配置就行，注意使用cms推荐的php版本。</p>
+<p>打开网站能正常访问就行。</p>
+<p>同时在 管理-&gt;php扩展-&gt; 勾选xdebug</p>
+<p>勾选profile和trace(修改php.ini也一样)</p>
+<p>打开对应版本的php.ini文件</p>
+<p>在<code>[xdebug]</code>项添加idekey和打开远程调试</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119190431600.png" alt="image-20210119190431600"></p>
+<h3 id="phpstorm"><a href="#phpstorm" class="headerlink" title="phpstorm"></a>phpstorm</h3><p>​        将网站根目录作为项目打开</p>
+<p>打开设置选择php版本</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191031796.png" alt="image-20210119191031796"></p>
+<p>下拉php列表</p>
+<p>配置服务器和phpstudy相同就行</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191134264.png" alt="image-20210119191134264"></p>
+<p>下拉调试</p>
+<p>选择DBGp代理</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191229837.png" alt="image-20210119191229837"></p>
+<p>这里要注意的是这三个值要和php.ini中的对应</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">xdebug.idekey</span>=PHPSTORM </span><br><span class="line"><span class="attr">xdebug.remote_host</span>=localhost </span><br><span class="line"><span class="attr">xdebug.remote_port</span>=<span class="number">9000</span></span><br></pre></td></tr></table></figure>
+
+<p>在phpstorm 右上角添加配置</p>
+<p>选择php web页面</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191734997.png" alt="image-20210119191734997"></p>
+<p>点击 验证测试xdebug没问题</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191827554.png" alt="image-20210119191827554"></p>
+<h3 id="浏览器安装Xdebug-helper"><a href="#浏览器安装Xdebug-helper" class="headerlink" title="浏览器安装Xdebug helper"></a>浏览器安装Xdebug helper</h3><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192132260.png" alt="image-20210119192132260"></p>
+<p>在扩展选项中填写IDE key</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192225930.png" alt="image-20210119192225930"></p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>先下好断点</p>
+<p>然后点击监听</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192018629.png" alt="image-20210119192018629"></p>
+<p>Shift+F10 运行</p>
+<p>接着在浏览器将Xdebug helper选择debug模式</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192710255.png" alt="image-20210119192710255"></p>
+<p>再去触发相应的代码，就能在断点处停下了</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119193010239.png" alt="image-20210119193010239"></p>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>​        1.建议在phpstorm选择php5.4以上的版本。(这里网站是phpstudy在跑是5.3)</p>
+<p>这里我在phpstorm选择php5.3版本，所以debug会报一个会话未暂停的警告</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194221935.png" alt="image-20210119194221935"></p>
+<p>只要修改版本高于5.4即可</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194306049.png" alt="image-20210119194306049"></p>
+<p>2.对于运行在5.4及其以上的cms，调试时可以不使用phpstudy(需要xdebug),在右上角添加配置时选择php内置服务器即可</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194552083.png" alt="image-20210119194552083"></p>
+<p>这里是自己起了php-cgi监听，可以看到访问的请求，两种运行方法各有优劣。</p>
+]]></content>
+      <categories>
+        <category>环境搭建</category>
+      </categories>
+      <tags>
+        <tag>phpstorm</tag>
+        <tag>调试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>H1ve搭建问题</title>
     <url>/2021/01/H1ve%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="1-找不到PWD"><a href="#1-找不到PWD" class="headerlink" title="1.找不到PWD"></a>1.找不到PWD</h3><p><img src="/2021/01/H1ve搭建问题/E:%5Cblog%5Csource%5C_posts%5CH1ve%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%5Cimage-20210107150823208.png" alt="image-20210107150823208"></p><p>H1ve的版本是1.1.3</p><p>使用</p><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">docker-compose -f single<span class="selector-class">.yml</span> up</span><br></pre></td></tr></table></figure><p><img src="/2021/01/H1ve搭建问题/E:%5Cblog%5Csource%5C_posts%5CH1ve%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%5Cimage-20210107151152146.png" alt="image-20210107151152146"></p><p>这里警告PWD未定义，所以我们在项目下创建<code>.env</code>定义一下就行</p><p><img src="/2021/01/H1ve搭建问题/E:%5Cblog%5Csource%5C_posts%5CH1ve%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%5Cimage-20210107151304373.png" alt="image-20210107151304373"></p><h3 id="2-访问过慢"><a href="#2-访问过慢" class="headerlink" title="2.访问过慢"></a>2.访问过慢</h3><p>这个问题其实是个css文件引起的，引用的这个css文件的域名被墙了 - -！</p><p>导致这个问题后面偶然才发现的</p><p><img src="/2021/01/H1ve搭建问题/E:%5Cblog%5Csource%5C_posts%5CH1ve%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%5Cimage-20210107153325242.png" alt="image-20210107153325242"></p><p>我的解决办法是把<code>all.css</code>下载下来放到服务器上，再修改引用的URL</p><a id="more"></a>
@@ -1391,8 +1452,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>复现</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>

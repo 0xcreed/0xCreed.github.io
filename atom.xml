@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://0xcreed.jxustctf.top/"/>
-  <updated>2021-01-07T08:00:57.226Z</updated>
+  <updated>2021-01-19T11:47:32.804Z</updated>
   <id>https://0xcreed.jxustctf.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>phpstrom+xdebug调试代码</title>
+    <link href="https://0xcreed.jxustctf.top/2021/01/phpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81/"/>
+    <id>https://0xcreed.jxustctf.top/2021/01/phpstrom-xdebug调试代码/</id>
+    <published>2021-01-19T10:39:28.000Z</published>
+    <updated>2021-01-19T11:47:32.804Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​        接下来想审计几个开源的cms，工欲善其事必先利其器，这里我用的是phpstrom+xdebug+phpstudy的组合。安装phpstrom和phpstudy这个不多说。</p><h3 id="phpstudy"><a href="#phpstudy" class="headerlink" title="phpstudy"></a>phpstudy</h3><p>​        注意这里不要使用apache作为中间件，这样会导致调试过程中会话丢失(大概1分钟不到)。</p><a id="more"></a><p>先启动nginx和mysql</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119185312944.png" alt="image-20210119185312944"></p><p>再新建网站</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119190147445.png" alt="image-20210119190147445"></p><p>这个默认配置就行，注意使用cms推荐的php版本。</p><p>打开网站能正常访问就行。</p><p>同时在 管理-&gt;php扩展-&gt; 勾选xdebug</p><p>勾选profile和trace(修改php.ini也一样)</p><p>打开对应版本的php.ini文件</p><p>在<code>[xdebug]</code>项添加idekey和打开远程调试</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119190431600.png" alt="image-20210119190431600"></p><h3 id="phpstorm"><a href="#phpstorm" class="headerlink" title="phpstorm"></a>phpstorm</h3><p>​        将网站根目录作为项目打开</p><p>打开设置选择php版本</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191031796.png" alt="image-20210119191031796"></p><p>下拉php列表</p><p>配置服务器和phpstudy相同就行</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191134264.png" alt="image-20210119191134264"></p><p>下拉调试</p><p>选择DBGp代理</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191229837.png" alt="image-20210119191229837"></p><p>这里要注意的是这三个值要和php.ini中的对应</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">xdebug.idekey</span>=PHPSTORM </span><br><span class="line"><span class="attr">xdebug.remote_host</span>=localhost </span><br><span class="line"><span class="attr">xdebug.remote_port</span>=<span class="number">9000</span></span><br></pre></td></tr></table></figure><p>在phpstorm 右上角添加配置</p><p>选择php web页面</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191734997.png" alt="image-20210119191734997"></p><p>点击 验证测试xdebug没问题</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119191827554.png" alt="image-20210119191827554"></p><h3 id="浏览器安装Xdebug-helper"><a href="#浏览器安装Xdebug-helper" class="headerlink" title="浏览器安装Xdebug helper"></a>浏览器安装Xdebug helper</h3><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192132260.png" alt="image-20210119192132260"></p><p>在扩展选项中填写IDE key</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192225930.png" alt="image-20210119192225930"></p><h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>先下好断点</p><p>然后点击监听</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192018629.png" alt="image-20210119192018629"></p><p>Shift+F10 运行</p><p>接着在浏览器将Xdebug helper选择debug模式</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119192710255.png" alt="image-20210119192710255"></p><p>再去触发相应的代码，就能在断点处停下了</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119193010239.png" alt="image-20210119193010239"></p><h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>​        1.建议在phpstorm选择php5.4以上的版本。(这里网站是phpstudy在跑是5.3)</p><p>这里我在phpstorm选择php5.3版本，所以debug会报一个会话未暂停的警告</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194221935.png" alt="image-20210119194221935"></p><p>只要修改版本高于5.4即可</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194306049.png" alt="image-20210119194306049"></p><p>2.对于运行在5.4及其以上的cms，调试时可以不使用phpstudy(需要xdebug),在右上角添加配置时选择php内置服务器即可</p><p><img src="/2021/01/phpstrom-xdebug调试代码/E:%5Cblog%5Csource%5C_posts%5Cphpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81%5Cimage-20210119194552083.png" alt="image-20210119194552083"></p><p>这里是自己起了php-cgi监听，可以看到访问的请求，两种运行方法各有优劣。</p>]]></content>
+    
+    <summary type="html">
+    
+      配置php代码审计的环境，挺折磨的！
+    
+    </summary>
+    
+    
+      <category term="环境搭建" scheme="https://0xcreed.jxustctf.top/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    
+    
+      <category term="phpstorm" scheme="https://0xcreed.jxustctf.top/tags/phpstorm/"/>
+    
+      <category term="调试" scheme="https://0xcreed.jxustctf.top/tags/%E8%B0%83%E8%AF%95/"/>
+    
+  </entry>
   
   <entry>
     <title>H1ve搭建问题</title>
@@ -308,9 +333,9 @@
       <category term="CTF" scheme="https://0xcreed.jxustctf.top/categories/CTF/"/>
     
     
-      <category term="CTF" scheme="https://0xcreed.jxustctf.top/tags/CTF/"/>
-    
       <category term="复现" scheme="https://0xcreed.jxustctf.top/tags/%E5%A4%8D%E7%8E%B0/"/>
+    
+      <category term="CTF" scheme="https://0xcreed.jxustctf.top/tags/CTF/"/>
     
   </entry>
   
@@ -484,29 +509,6 @@
       <category term="XXE" scheme="https://0xcreed.jxustctf.top/tags/XXE/"/>
     
       <category term="注入" scheme="https://0xcreed.jxustctf.top/tags/%E6%B3%A8%E5%85%A5/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>base64隐写</title>
-    <link href="https://0xcreed.jxustctf.top/2019/12/base64%E9%9A%90%E5%86%99/"/>
-    <id>https://0xcreed.jxustctf.top/2019/12/base64隐写/</id>
-    <published>2019-12-18T11:44:08.000Z</published>
-    <updated>2020-04-13T10:31:27.707Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这种base64隐写特征很明显，就是你会得到一大堆base64的字符串但却无法解码。写过这题就很简单，但base64的原理值得我们去研究一下。<a href="https://www.tr0y.wang/2017/06/14/Base64steg/index.html" target="_blank" rel="noopener">参考文章</a></p><h2 id="生成正常的有等号的base64字符串"><a href="#生成正常的有等号的base64字符串" class="headerlink" title="生成正常的有等号的base64字符串"></a>生成正常的有等号的base64字符串</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line">b64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'0.txt'</span>,<span class="string">'wb+'</span>) <span class="keyword">as</span> fp:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100</span>):</span><br><span class="line">        ran_str = <span class="string">''</span>.join(random.sample(string.ascii_letters + string.digits, <span class="number">13</span>))</span><br><span class="line">        base64str = base64.b64encode(ran_str)</span><br><span class="line">        fp.write(base64str + <span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure><a id="more"></a><h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp936 -*-</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">flag = <span class="string">'Tr0y&#123;Base64isF4n&#125;'</span>  <span class="comment"># flag</span></span><br><span class="line">bin_str = <span class="string">''</span>.join([bin(ord(c)).replace(<span class="string">'0b'</span>, <span class="string">''</span>).zfill(<span class="number">8</span>) <span class="keyword">for</span> c <span class="keyword">in</span> flag])</span><br><span class="line">base64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'0.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f0, open(<span class="string">'1.txt'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f1:  <span class="comment"># '0.txt'是明文, '1.txt'用于存放隐写后的 base64</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f0.readlines():</span><br><span class="line">        rowstr = base64.b64encode(line.replace(<span class="string">'\n'</span>, <span class="string">''</span>))</span><br><span class="line">        equalnum = rowstr.count(<span class="string">'='</span>)</span><br><span class="line">        <span class="keyword">if</span> equalnum <span class="keyword">and</span> len(bin_str):</span><br><span class="line">            offset = int(<span class="string">'0b'</span> + bin_str[:equalnum * <span class="number">2</span>], <span class="number">2</span>)</span><br><span class="line">            char = rowstr[len(rowstr) - equalnum - <span class="number">1</span>]</span><br><span class="line">            rowstr = rowstr.replace(char, base64chars[base64chars.index(char) + offset])</span><br><span class="line">            bin_str = bin_str[equalnum * <span class="number">2</span>:]</span><br><span class="line">        f1.write(rowstr + <span class="string">'\n'</span>)</span><br></pre></td></tr></table></figure><h2 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: cp936 -*-</span></span><br><span class="line">b64chars = <span class="string">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'1.txt'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    bin_str = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">        stegb64 = <span class="string">''</span>.join(line.split())</span><br><span class="line">        rowb64 = <span class="string">''</span>.join(stegb64.decode(<span class="string">'base64'</span>).encode(<span class="string">'base64'</span>).split())</span><br><span class="line">        offset = abs(b64chars.index(stegb64.replace(<span class="string">'='</span>, <span class="string">''</span>)[<span class="number">-1</span>]) - b64chars.index(rowb64.replace(<span class="string">'='</span>, <span class="string">''</span>)[<span class="number">-1</span>]))</span><br><span class="line">        equalnum = stegb64.count(<span class="string">'='</span>)  <span class="comment"># no equalnum no offset</span></span><br><span class="line">        <span class="keyword">if</span> equalnum:</span><br><span class="line">            bin_str += bin(offset)[<span class="number">2</span>:].zfill(equalnum * <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">''</span>.join([chr(int(bin_str[i:i + <span class="number">8</span>], <span class="number">2</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">0</span>, len(bin_str), <span class="number">8</span>)])  <span class="comment"># 8 位一组</span></span><br></pre></td></tr></table></figure><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">github有个工具</span><br><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/jerrita/</span>b64steg</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      打省赛的时候遇到的记录一下吧
-    
-    </summary>
-    
-    
-      <category term="CTF" scheme="https://0xcreed.jxustctf.top/categories/CTF/"/>
-    
-    
-      <category term="base64" scheme="https://0xcreed.jxustctf.top/tags/base64/"/>
     
   </entry>
   
