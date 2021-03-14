@@ -3,7 +3,22 @@
   <entry>
     <title>DedeCMSv5.7SP2代码审计</title>
     <url>/2021/03/DedeCMSv5-7SP2%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="cookie伪造导致任意前台用户登录"><a href="#cookie伪造导致任意前台用户登录" class="headerlink" title="cookie伪造导致任意前台用户登录"></a><strong>cookie伪造导致任意前台用户登录</strong></h3><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="审计环境"><a href="#审计环境" class="headerlink" title="审计环境"></a>审计环境</h3><p>PHP7.0</p><p>Apache</p><p>PHPSTORM</p><p>这里需要注意的是</p><p>dedecms在php5.4以上会因为session_register()等函数已移除，无法正常运行</p><p>在include/userlogin.class.php中代码替换,被替换代码大致在288到304行之间,代码如下:</p><p>代码如下:</p><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserIDTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserIDTag] = <span class="variable">$this</span>-&gt;userID;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserTypeTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserTypeTag] = <span class="variable">$this</span>-&gt;userType;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserChannelTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserChannelTag] = <span class="variable">$this</span>-&gt;userChannel;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserNameTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserNameTag] = <span class="variable">$this</span>-&gt;userName;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserPurviewTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserPurviewTag] = <span class="variable">$this</span>-&gt;userPurview;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepAdminStyleTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepAdminStyleTag] = <span class="variable">$adminstyle</span>;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+
+
+
+
+<p>替换为如下代码:</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserIDTag] = <span class="variable">$this</span>-&gt;keepUserIDTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserIDTag] = <span class="variable">$this</span>-&gt;userID;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserTypeTag] = <span class="variable">$this</span>-&gt;keepUserTypeTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserTypeTag] = <span class="variable">$this</span>-&gt;userType;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserChannelTag] = <span class="variable">$this</span>-&gt;keepUserChannelTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserChannelTag] = <span class="variable">$this</span>-&gt;userChannel;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserNameTag] = <span class="variable">$this</span>-&gt;keepUserNameTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserNameTag] = <span class="variable">$this</span>-&gt;userName;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserPurviewTag] = <span class="variable">$this</span>-&gt;keepUserPurviewTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserPurviewTag] = <span class="variable">$this</span>-&gt;userPurview;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepAdminStyleTag] = <span class="variable">$this</span>-&gt;keepAdminStyleTag;</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepAdminStyleTag] = <span class="variable">$adminstyle</span>;</span><br></pre></td></tr></table></figure>
+
+<p>364到368替换如下：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;keepUserIDTag);</span><br><span class="line"><span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;keepUserTypeTag);</span><br><span class="line"><span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;keepUserChannelTag);</span><br><span class="line"><span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;keepUserNameTag);</span><br><span class="line"><span class="keyword">unset</span>(<span class="keyword">$this</span>-&gt;keepUserPurviewTag);</span><br></pre></td></tr></table></figure>
+
+<h3 id="cookie伪造导致任意前台用户登录"><a href="#cookie伪造导致任意前台用户登录" class="headerlink" title="cookie伪造导致任意前台用户登录"></a><strong>cookie伪造导致任意前台用户登录</strong></h3><ul>
 <li><p>漏洞分析</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-13%20103333.png" alt="屏幕截图 2021-03-13 103333"></p>
 <p> 跟进<code>PutCookie</code>方法，在该方法中的第27行中将值与配置文件中的<code>$cfg_cookie_encode</code>进行拼接，然后进行MD5和截断处理<code>substr(md5($cfg_cookie_encode.$value),0,16)</code>，然后下发到客户端</p>
@@ -14,7 +29,7 @@
 <p> 而在文件<code>include/helpers/cookie.helper.php</code>中的第54-72行的GetCookie方法的代码块，其中第63行用于校验客户端cookie是否进行了伪造，因此要进行cookie就自然想到要获取<code>uploads/data/config.cache.inc.php</code>文件中的内容，需要存在任意文件读取或下载的漏洞，当然还有另外一种方式，就是控制<code>$uid</code>，利用PutCookie直接生成cookie，这样的cookie定会通过GetCookie方法。</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210313105340716.png" alt="image-20210313105340716"></p>
 </li>
-</ul><a id="more"></a>
+</ul>
 <p>   接着查看登录相关的代码，看它的cookie生成方法是否是PutCookie。在<code>include/memberlogin.class.php</code> 498行PutLoginInfo方法处理正确输入用户名和密码的情况</p>
 <p>   <img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210313112216221.png" alt="image-20210313112216221"></p>
 <p>   继续跟进PutLoginInfo方法，果然用的是PutCookie方法，存在cookie伪造漏洞</p>
@@ -3152,8 +3167,8 @@ Content-Type: multipart/from-data;boundary=xxx
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>WP</tag>
         <tag>PHP</tag>
+        <tag>WP</tag>
       </tags>
   </entry>
 </search>
