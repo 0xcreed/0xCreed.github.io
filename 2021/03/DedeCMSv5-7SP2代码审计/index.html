@@ -61,13 +61,13 @@
   };
 </script>
 
-  <meta name="description" content="开始学习代码审计">
+  <meta name="description" content="开始学习审计CMS">
 <meta name="keywords" content="代码审计,CMS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DedeCMSv5.7SP2代码审计">
 <meta property="og:url" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/index.html">
 <meta property="og:site_name" content="0xCreed">
-<meta property="og:description" content="开始学习代码审计">
+<meta property="og:description" content="开始学习审计CMS">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-13%20103333.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/image-20210313104510453.png">
@@ -107,10 +107,10 @@
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-14%20165328.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/image-20210314165944131.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/image-20210314170320939.png">
-<meta property="og:updated_time" content="2021-03-14T09:03:29.061Z">
+<meta property="og:updated_time" content="2021-03-14T09:11:27.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DedeCMSv5.7SP2代码审计">
-<meta name="twitter:description" content="开始学习代码审计">
+<meta name="twitter:description" content="开始学习审计CMS">
 <meta name="twitter:image" content="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-13%20103333.png">
   <link rel="canonical" href="https://0xcreed.jxustctf.top/2021/03/DedeCMSv5-7SP2代码审计/">
 
@@ -412,7 +412,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-14 17:03:29" itemprop="dateModified" datetime="2021-03-14T17:03:29+08:00">2021-03-14</time>
+                <time title="修改时间：2021-03-14 17:11:27" itemprop="dateModified" datetime="2021-03-14T17:11:27+08:00">2021-03-14</time>
               </span>
             
           
@@ -474,7 +474,7 @@
               <span>2 分钟</span>
             </span>
           
-            <div class="post-description">开始学习代码审计</div>
+            <div class="post-description">开始学习审计CMS</div>
           
 
         </div>
@@ -489,12 +489,12 @@
         <h3 id="cookie伪造导致任意前台用户登录"><a href="#cookie伪造导致任意前台用户登录" class="headerlink" title="cookie伪造导致任意前台用户登录"></a><strong>cookie伪造导致任意前台用户登录</strong></h3><ul>
 <li><p>漏洞分析</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-13%20103333.png" alt="屏幕截图 2021-03-13 103333"></p>
-<p> 跟进<code>PutCookie</code>方法，在该方法中的第27行中将值与配置文件中的$cfg_cookie_encode进行拼接，然后进行MD5和截断处理substr(md5($cfg_cookie_encode.$value),0,16)，然后下发到客户端</p>
+<p> 跟进<code>PutCookie</code>方法，在该方法中的第27行中将值与配置文件中的<code>$cfg_cookie_encode</code>进行拼接，然后进行MD5和截断处理<code>substr(md5($cfg_cookie_encode.$value),0,16)</code>，然后下发到客户端</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210313104510453.png" alt="image-20210313104510453"></p>
 <p> 而在<code>include/common.inc.php</code>使用的外部变量注册的方法进行变量声明，因此此处的$uid是用户可控的。</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-13%20104107.png" alt="屏幕截图 2021-03-13 104107"></p>
 <p> 这里我们就可以获取到任意用户的<code>last_vid</code> <code>last_vid__ckMd5</code></p>
-<p> 而在文件<code>include/helpers/cookie.helper.php</code>中的第54-72行的GetCookie方法的代码块，其中第63行用于校验客户端cookie是否进行了伪造，因此要进行cookie就自然想到要获取<code>uploads/data/config.cache.inc.php</code>文件中的内容，需要存在任意文件读取或下载的漏洞，当然还有另外一种方式，就是控制$uid,利用PutCookie直接生成cookie，这样的cookie定会通过GetCookie方法。</p>
+<p> 而在文件<code>include/helpers/cookie.helper.php</code>中的第54-72行的GetCookie方法的代码块，其中第63行用于校验客户端cookie是否进行了伪造，因此要进行cookie就自然想到要获取<code>uploads/data/config.cache.inc.php</code>文件中的内容，需要存在任意文件读取或下载的漏洞，当然还有另外一种方式，就是控制<code>$uid</code>，利用PutCookie直接生成cookie，这样的cookie定会通过GetCookie方法。</p>
 <p> <img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210313105340716.png" alt="image-20210313105340716"></p>
 </li>
 </ul><a id="more"></a>
@@ -575,9 +575,9 @@
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210314161257476.png" alt="image-20210314161257476"></p>
 <p>跟进<code>MemberUploads</code>方法，在<code>include/helpers/upload.helper.php</code> 118-240行，其中215-222行是关键在不上传缩略图的情况下会进入else分支，同时<code>MemberUploads</code>的<code>handname</code>参数默认为空。即返回值也为空。所以<code>$litpic</code>可控</p>
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210314161619071.png" alt="image-20210314161619071"></p>
-<p>最后全局搜索<code>DelArc</code>函数查找触发点，在<code>member/archives_do.php</code>，</p>
+<p>最后全局搜索<code>DelArc</code>函数查找触发点，在<code>member/archives_do.php</code>，有个<code>issystem</code>的判断</p>
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210314162605298.png" alt="image-20210314162605298"></p>
-<p>有个<code>issystem</code>的判断，数据库查询一下。默认情况下出了<code>infos</code>其他都会调用<code>DelArc</code>删除文件</p>
+<p>数据库查询一下，默认情况下出了<code>infos</code>其他都会调用<code>DelArc</code>删除文件。</p>
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210314162729095.png" alt="image-20210314162729095"></p>
 </li>
 <li><p>漏洞复现</p>
