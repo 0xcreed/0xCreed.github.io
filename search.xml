@@ -130,7 +130,29 @@
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210314170320939.png" alt="image-20210314170320939"></p>
 </li>
 </ul>
-<h3 id="后台任意文件上传"><a href="#后台任意文件上传" class="headerlink" title="后台任意文件上传"></a><strong>后台任意文件上传</strong></h3>]]></content>
+<h3 id="前台任意文件上传"><a href="#前台任意文件上传" class="headerlink" title="前台任意文件上传"></a><strong>前台任意文件上传</strong></h3><ul>
+<li><p>漏洞分析</p>
+<p>上传需要admin权限，有点鸡肋。但配合之前的cookie伪造也还行。</p>
+<p>问题在<code>include/dialog/select_images_post.php</code>对于后缀的处理逻辑有问题。在36行获取文件名,然后过滤。</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210316211925145.png" alt="image-20210316211925145"></p>
+<p>这个文件名就是我们上传的文件名，具体的调用是</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">select_images_post<span class="selector-class">.php</span> -&gt; config<span class="selector-class">.php</span> -&gt; common<span class="selector-class">.inc</span><span class="selector-class">.php</span> -&gt;  uploadsafe<span class="selector-class">.inc</span><span class="selector-class">.php</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-16%20212521.png" alt="屏幕截图 2021-03-16 212521"></p>
+<p>接着在58到64行进行后缀拼接和上传。直接通过<code>.</code>来分割文件名，将最后一个后缀作为文件后缀。</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-16%20212843.png" alt="屏幕截图 2021-03-16 212843"></p>
+<p>通过构造类似</p>
+<figure class="highlight erlang"><table><tr><td class="code"><pre><span class="line">p<span class="comment">%hp</span></span><br><span class="line">p*hp</span><br><span class="line">p&lt;hp</span><br><span class="line">p?hp</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>即可绕过上传。</p>
+</li>
+<li><p>漏洞利用</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-16%20213715.png" alt="屏幕截图 2021-03-16 213715"></p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-16%20215140.png" alt="屏幕截图 2021-03-16 215140"></p>
+</li>
+</ul>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210316215503126.png" alt="image-20210316215503126"></p>
+]]></content>
       <categories>
         <category>代码审计</category>
       </categories>
@@ -1622,8 +1644,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>复现</tag>
         <tag>CTF</tag>
+        <tag>复现</tag>
       </tags>
   </entry>
   <entry>
@@ -3167,8 +3189,8 @@ Content-Type: multipart/from-data;boundary=xxx
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>WP</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
 </search>
