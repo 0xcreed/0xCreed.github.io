@@ -26,7 +26,7 @@
 
 <p>创建虚拟目录  <code>/etc/apache2/sites-available/000-default.conf</code></p>
 <p><img src="/2021/03/Thinkphp5-SQL注入漏洞分析/image-20210320163405433.png" alt="image-20210320163405433"></p>
-<p>增加监听端口 <code>/etc/apache2/ports.iconf</code>  </p>
+<p>增加监听端口 <code>/etc/apache2/ports.conf</code>  </p>
 <p><img src="/2021/03/Thinkphp5-SQL注入漏洞分析/image-20210320163814936.png" alt="image-20210320163814936"></p>
 <p>创建日志目录(没有会导致apache服务重启失败)</p>
 <figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /<span class="built_in">var</span>/<span class="built_in">log</span>/apache2/tp5015</span><br><span class="line">systemctl <span class="built_in">restart</span> apache2</span><br></pre></td></tr></table></figure>
@@ -45,7 +45,7 @@
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">index</span>\<span class="title">controller</span>;</span></span><br><span class="line"><span class="php"></span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">Index</span></span></span></span><br><span class="line"><span class="php">&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">()</span></span></span></span><br><span class="line"><span class="php">    &#123;</span></span><br><span class="line"><span class="php">        $username = request()-&gt;get(<span class="string">'username/a'</span>);</span></span><br><span class="line"><span class="php">        db(<span class="string">'users'</span>)-&gt;insert([<span class="string">'username'</span> =&gt; $username]);</span></span><br><span class="line"><span class="php">        <span class="keyword">return</span> <span class="string">'Update success'</span>;</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>在 <strong>application/database.php</strong> 文件中配置数据库相关信息，并开启 <strong>application/config.php</strong> 中的 <strong>app_debug</strong> 和 <strong>app_trace</strong> 。创建数据库信息如下：</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> tpdemo;</span><br><span class="line"><span class="keyword">use</span> tpdemo;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span>(</span><br><span class="line">true<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">trueusername <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> tp5015demo;</span><br><span class="line"><span class="keyword">use</span> tp5015demo;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">users</span>(</span><br><span class="line">true<span class="keyword">id</span> <span class="built_in">int</span> primary <span class="keyword">key</span> auto_increment,</span><br><span class="line">trueusername <span class="built_in">varchar</span>(<span class="number">50</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -1936,8 +1936,8 @@ dir(builtins) //打印所有的内联函数可获取eval exec</code></pre><p><co
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>CTF</tag>
         <tag>复现</tag>
+        <tag>CTF</tag>
       </tags>
   </entry>
   <entry>

@@ -10,5 +10,5 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
 
-Sitemap: https://asscreed.github.io/search.xml
-Sitemap: https://asscreed.github.io/sitemap.xml
+Sitemap: https://0xcreed.github.io/search.xml
+Sitemap: https://0xcreed.github.io/sitemap.xml
