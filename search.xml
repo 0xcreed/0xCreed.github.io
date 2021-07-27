@@ -443,6 +443,10 @@
     <url>/2021/01/phpstrom-xdebug%E8%B0%83%E8%AF%95%E4%BB%A3%E7%A0%81/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>​        接下来想审计几个开源的cms，工欲善其事必先利其器，这里我用的是phpstrom+xdebug+phpstudy的组合。安装phpstrom和phpstudy这个不多说。</p><h3 id="phpstudy"><a href="#phpstudy" class="headerlink" title="phpstudy"></a>phpstudy</h3><p>​        注意这里不要使用apache作为中间件，这样会导致调试过程中会话丢失(大概1分钟不到)。</p><a id="more"></a>
 
+<p>后来发现其实是phpstudy的apache默认配置问题，修改一下就行</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/image-20210727084808790.png" alt="image-20210727084808790"></p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;IfModule</span> <span class="string">mod_fcgid.c&gt;</span></span><br><span class="line"><span class="comment">	# php-cgi进程的生存时间</span></span><br><span class="line">true<span class="attr">FcgidProcessLifeTime</span> <span class="string">9999</span></span><br><span class="line"><span class="comment">	# php-cgi进程IO超时时间</span></span><br><span class="line">    <span class="attr">FcgidIOTimeout</span> <span class="string">9999</span></span><br><span class="line"><span class="comment">	# php-cgi进程连接超时时间</span></span><br><span class="line">    <span class="attr">FcgidConnectTimeout</span> <span class="string">9999</span></span><br><span class="line"><span class="comment">	# 上传文件的最大尺寸 100MB</span></span><br><span class="line">true<span class="attr">FcgidMaxRequestLen</span> <span class="string">104857600</span></span><br><span class="line"><span class="comment">	# php-cgi最大的进程数</span></span><br><span class="line"><span class="comment">	# FcgidMaxProcesses 5</span></span><br><span class="line"><span class="attr">&lt;/IfModule&gt;</span></span><br></pre></td></tr></table></figure>
+
 <p>先启动nginx和mysql</p>
 <p><img src="/2021/01/phpstrom-xdebug调试代码/image-20210119185312944.png" alt="image-20210119185312944"></p>
 <p>再新建网站</p>
@@ -491,6 +495,8 @@
 <p>调试的网页也会报一个404错误，会影响后续的调试。</p>
 <p>各种切换版本，修改配置，搜索引擎等操作，还是找不到解决办法。(救救孩子</p>
 <p>所以打算弃了phpstudy，改用wsl2作为调试环境(我太难了)</p>
+<p>后面发现，别偷懒直接设置在脚本第一行调试即可</p>
+<p><img src="/2021/01/phpstrom-xdebug调试代码/image-20210727085451391.png" alt="image-20210727085451391"></p>
 <h3 id="WSL2管理多版本php"><a href="#WSL2管理多版本php" class="headerlink" title="WSL2管理多版本php"></a>WSL2管理多版本php</h3><p>作为一个调试环境，如果只有一个php版本无疑是失败的！</p>
 <figure class="highlight smali"><table><tr><td class="code"><pre><span class="line">sudo<span class="built_in"> add-apt-repository </span>ppa:ondrej/php    //添加仓库源</span><br><span class="line">sudo apt-get update						  //更新源</span><br><span class="line">sudo apt-get install php5.6				  //安装其他版本php</span><br><span class="line">sudo apt-get install php5.6-xdebug        //安装必须的插件</span><br><span class="line">sudo apt-get install php5.6-mysql</span><br><span class="line"><span class="keyword">.</span>..</span><br></pre></td></tr></table></figure>
 
