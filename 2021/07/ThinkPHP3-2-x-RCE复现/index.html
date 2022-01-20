@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="ThinkPHP3.2的远程代码执行漏洞">
+<meta name="keywords" content="复现,Thinkphp3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThinkPHP3.2.x RCE复现">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="ThinkPHP3.2的远程代码执行漏洞">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714130932384.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210909094308482.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714144552762.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145223478.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145158360.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145819669.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714150822344.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714151415868.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714151836840.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714152708275.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153315655.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153522998.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153704479.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154206984.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154445495.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210716163001792.png">
+<meta property="og:updated_time" content="2021-09-09T01:43:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ThinkPHP3.2.x RCE复现">
+<meta name="twitter:description" content="ThinkPHP3.2的远程代码执行漏洞">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714130932384.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>ThinkPHP3.2.x RCE复现 | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">35</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">ThinkPHP3.2.x RCE复现
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-14 11:39:25" itemprop="dateCreated datePublished" datetime="2021-07-14T11:39:25+08:00">2021-07-14</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-09 09:43:16" itemprop="dateModified" datetime="2021-09-09T09:43:16+08:00">2021-09-09</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/代码审计/" itemprop="url" rel="index"><span itemprop="name">代码审计</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/07/ThinkPHP3-2-x-RCE复现/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2021/07/ThinkPHP3-2-x-RCE复现/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.9k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+            <div class="post-description">ThinkPHP3.2的远程代码执行漏洞</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ThinkPHP3-2-x-RCE复现"><a href="#ThinkPHP3-2-x-RCE复现" class="headerlink" title="ThinkPHP3.2.x RCE复现"></a>ThinkPHP3.2.x RCE复现</h1><h2 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h2><p>该漏洞是在受影响的版本中，业务代码中如果模板赋值方法assign的第一个参数可控，则可导致模板文件路径变量被覆盖为携带攻击代码的文件路径，造成任意文件包含，执行任意代码。个人感觉这个漏洞虽然不如thinkphp本体的一些RCE漏洞影响范围大，但也算是提供了一个思路，对基于某些框架二次开发的系统，寻找其不规范的方法调用的思路还是值得学习的。</p><a id="more"></a>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p><a href="https://codeload.github.com/top-think/thinkphp/zip/refs/tags/3.2.3" target="_blank" rel="noopener">ThinkPHP3.2.3</a> Phpstudy8.1.1 PHP-5.6.9 Apache Windows10(<a href="https://www.kancloud.cn/manual/thinkphp/1678" target="_blank" rel="noopener">tp3手册</a>)</p>
+<p>如果是linux可以用composer拉取环境( composer create-project topthink/thinkphp=3.2.3 tp3)</p>
+<p>先访问<a href="http://xxx.xx/index.php" target="_blank" rel="noopener">http://xxx.xx/index.php</a> 生成项目文件</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714130932384.png" alt="image-20210714130932384"></p>
+<p>然后在<code>\Application\Home\Controller\IndexController.class.php</code>写入demo代码</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?php</span></span></span><br><span class="line"><span class="php"><span class="keyword">namespace</span> <span class="title">Home</span>\<span class="title">Controller</span>;</span></span><br><span class="line"><span class="php"><span class="keyword">use</span> <span class="title">Think</span>\<span class="title">Controller</span>;</span></span><br><span class="line"><span class="php"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span></span><br><span class="line"><span class="php">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">($value=<span class="string">''</span>)</span></span>&#123;</span></span><br><span class="line"><span class="php">        <span class="keyword">$this</span>-&gt;assign($value);</span></span><br><span class="line"><span class="php">        <span class="keyword">$this</span>-&gt;display();</span></span><br><span class="line"><span class="php">    &#125;</span></span><br><span class="line"><span class="php">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>因为该漏洞利用的assign函数需要模板渲染，所以需要对应的模板文件，与demo相对应的文件路径：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">\A</span>pplication<span class="symbol">\H</span>ome<span class="symbol">\V</span>iew<span class="symbol">\I</span>ndex<span class="symbol">\i</span>ndex.html</span><br><span class="line">/*此处的Index目录和index.html文件需自己创建</span><br><span class="line">index.html的内容任意</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h2><p>借用玄甲安全实验室的一张图，整体看一下程序的执行流程</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210909094308482.png" alt="image-20210909094308482"></p>
+<p>接下来分析具体的代码：</p>
+<p><code>Application/Home/Controller/IndexController.class.php</code></p>
+<p>assign方法中第一个变量可控</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714144552762.png" alt="image-20210714144552762"></p>
+<p>跟进assign函数</p>
+<p><code>ThinkPHP/Library/Think/Controller.class.php</code></p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145223478.png" alt="image-20210714145223478"></p>
+<p>调用的是<code>ThinkPHP/Library/Think/View.class.php</code>中的assign函数，此时进入else分支，我们传进去的<code>$value</code>被赋值给<code>$this-&gt;tVar</code></p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145158360.png" alt="image-20210714145158360"></p>
+<p>返回后进入display函数，注意这是一个无参调用</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714145819669.png" alt="image-20210714145819669"></p>
+<p>调用的是<code>ThinkPHP/Library/Think/View.class.php</code>的display函数，开始解析并获取模板文件内容，此时模板文件路径和内容为空</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714150822344.png" alt="image-20210714150822344"></p>
+<p>进入<code>ThinkPHP/Library/Think/View.class.php</code>的fetch函数后，会先判断模板存不存在，这也是为什么我们要创建模板文件的原因</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714151415868.png" alt="image-20210714151415868"></p>
+<p>接着判断是不是php类型模板，不是进入else分支。接着$params 被赋值，var即为为我们传进去的日志路径，file为模板文件的路径。</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714151836840.png" alt="image-20210714151836840"></p>
+<p>接着进入<code>ThinkPHP/Library/Think/Hook.class.php</code>的listen函数，经过一些判断，进入exec函数</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714152708275.png" alt="image-20210714152708275"></p>
+<p>接着exec函数把$params带进<code>ThinkPHP/Library/Behavior/ParseTemplateBehavior.class.php</code>的run函数处理</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153315655.png" alt="image-20210714153315655"></p>
+<p>进入<code>ThinkPHP/Library/Think/Template.class.php</code>的fetch函数</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153522998.png" alt="image-20210714153522998"></p>
+<p>进入最后的load函数，$var不为空则使用extract方法的EXTR_OVERWRITE默认描述对变量值进行覆盖，之后include该日志文件路径，造成文件包含。</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714153704479.png" alt="image-20210714153704479"></p>
+<h2 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h2><ul>
+<li><p>日志包含</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154206984.png" alt="image-20210714154206984"></p>
+<p>日志在<code>Application/Runtime/Logs/Home</code>目录下</p>
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210714154445495.png" alt="image-20210714154445495"></p>
+<p>开启debug</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请求不报错 日志文件在 Application<span class="regexp">/Runtime/</span>Logs/Home下</span><br><span class="line">请求会报错 日志文件在 Application<span class="regexp">/Runtime/</span>Logs/Common下</span><br></pre></td></tr></table></figure>
+
+<p>关闭debug</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请求不会报错 不会记录日志</span><br><span class="line">请求会报错 日志文件在 Application/Runtime/Logs/<span class="meta">Common</span>下</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>上传入口</p>
+<p>利用系统自带的上传功能，上传包含shell的文件</p>
+</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="link">http://x.x.x.x/index.php?m=Home&amp;c=Index&amp;a=index&amp;value</span>[<span class="string">_filename</span>]=./Application/Runtime/Logs/Common/21<span class="emphasis">_07_</span>14.log</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/07/ThinkPHP3-2-x-RCE复现/image-20210716163001792.png" alt="image-20210716163001792"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://mp.weixin.qq.com/s/_4IZe-aZ_3O2PmdQrVbpdQ?st=529DABB1BC6F651382C9135EB552827AD43F0288831BAC943C5A6CE32F45F1B9F423FD767BD30EB98F9C2C6D962C1268BBC7A694FE6B1157BC89FD16D8EAEB81A3BD642BDC08DB57567E4C7B327B7134882308F36A811B338901B511ABC8BC487356659B2CD0C8417DBCFD448DE79A0E6611FC7DAA7F5F806AED95180ADE0D979653805D9BE2818C36432C242C346C258EB569D4B4EC38ACD08C5E03A09D4FAA34F60913522071EB3BEEED7BDB667730296BE92C3B10E13BA48209051A216A1E&vid=1688851206182100&cst=53928845F30E881CE4702F30E4E78E655B605169B1BF71E0E963E97B3C21D4A26131701E074B2422DE3B7150338D0234&deviceid=de960c8d-258f-4e7d-a333-c1e3dc351b70&version=3.1.8.3015&platform=win" target="_blank" rel="noopener">ThinkPHP3.2.x RCE漏洞通报</a> </p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2019/11/2019湖湘杯web复现/" rel="bookmark">湖湘杯2019复现</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/05/NPUCTF2020-复现/" rel="bookmark">NPUCTF-复现</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/" title="ThinkPHP3.2.x RCE复现">https://0xcreed.jxustctf.top/2021/07/ThinkPHP3-2-x-RCE复现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/复现/" rel="tag"> <i class="fa fa-tag"></i> 复现</a>
+			   
+            
+              <a href="/tags/Thinkphp3/" rel="tag"> <i class="fa fa-tag"></i> Thinkphp3</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/03/Thinkphp5-SQL注入漏洞分析/" rel="next" title="Thinkphp5-SQL注入漏洞分析">
+                  <i class="fa fa-chevron-left"></i> Thinkphp5-SQL注入漏洞分析
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/09/IDEA远程调试JAR/" rel="prev" title="IDEA远程调试JAR">
+                  IDEA远程调试JAR <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ThinkPHP3-2-x-RCE复现"><span class="nav-number">1.</span> <span class="nav-text">ThinkPHP3.2.x RCE复现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞描述"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建"><span class="nav-number">1.2.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞分析"><span class="nav-number">1.3.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用"><span class="nav-number">1.4.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文章"><span class="nav-number">1.5.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">离别歌</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">242k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:40</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

